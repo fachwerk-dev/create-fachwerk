@@ -32,20 +32,20 @@
 
 ## Local variable
 
-<v-slider v-model="x" />
+<f-slider v-model="x" />
 
-<v-math>x = {{ x }}</v-math>
+<f-math>x = {{ x }}</f-math>
 
 ## Global variable
 
-<v-slider v-model="v.x" />
+<f-slider v-model="f.x" />
 
-<v-math>x = {{ v.x }}</v-math>
+<f-math>f.x = {{ v.x }}</f-math>
 `),
       };
 
       const app = createApp(App);
-      app.use(Visualia);
+      app.use(Fachwerk);
       app.mount("#app");
     </script>
   </body>
