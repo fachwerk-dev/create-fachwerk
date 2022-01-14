@@ -1,0 +1,14 @@
+{
+  "name": "fachwerk-vitepress",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "preview": "vitepress serve docs"
+  },
+  "dependencies": {
+    "fachwerk": "^0.0.2",
+    "vitepress": "^0.21.4"
+  }
+}
