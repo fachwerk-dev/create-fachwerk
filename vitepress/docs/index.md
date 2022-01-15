@@ -1,11 +1,9 @@
 <script setup>
-const x = $ref(50)
+const x = $ref(10);
 </script>
 
-# index.md
+## Local state
 
-> x = {{ x }}
+<f-slider v-model="x" />
 
-<f-slider v-model="v.x" />
-
-> v.x = {{ v.x }}
+<f-math>x = {{ x }}</f-math>
