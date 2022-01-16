@@ -2,4 +2,4 @@
 
 <f-slider v-model="f.x" />
 
-<f-math>v.x = {{ f.x }}</f-math>
+<f-math>f.x</f-math> is {{ f.x }}

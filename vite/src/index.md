@@ -10,6 +10,6 @@ const x = $ref(10);
 
 ## Global state
 
-<f-slider v-model="v.x" />
+<f-slider v-model="f.x" />
 
-<f-math>v.x = {{ v.x }}</f-math>
+<f-math>f.x = {{ f.x }}</f-math>

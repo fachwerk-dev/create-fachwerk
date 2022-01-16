@@ -6,4 +6,4 @@ const x = $ref(10);
 
 <f-slider v-model="x" />
 
-<f-math>x = {{ x }}</f-math>
+<f-math>x</f-math> is {{ x }}
