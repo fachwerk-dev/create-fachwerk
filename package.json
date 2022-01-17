@@ -1,0 +1,8 @@
+{
+  "name": "create-fachwerk",
+  "bin": "./index.mjs",
+  "dependencies": {
+    "prompts": "^2.4.2",
+    "zx": "^4.3.0"
+  }
+}

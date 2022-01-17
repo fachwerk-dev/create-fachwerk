@@ -2,7 +2,7 @@
   "name": "fachwerk-vite",
   "private": true,
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --open",
     "build": "vite build",
     "preview": "vite preview"
   },
