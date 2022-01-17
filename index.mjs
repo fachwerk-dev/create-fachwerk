@@ -50,19 +50,22 @@ try {
     await cd(targetDir);
     await $`npm install`;
   }
-  console.log(
-    `\n${chalk.gray(
-      `Successfully installed ${chalk.cyan(sourceDir)} template.`
-    )}`
-  );
 
   console.log(
     npm
-      ? `Now run \n\n${chalk.green(`cd ${targetDir}\nnpm run dev`)}`
+      ? chalk.gray(
+          `\nSuccessfully installed ${chalk.cyan(
+            sourceDir
+          )} template. Now run:\n\n${chalk.green(
+            `cd ${targetDir}\nnpm run dev\n`
+          )}`
+        )
       : chalk.gray(
-          `\nNow open the ${chalk.green(
+          `\nSuccessfully installed ${chalk.cyan(
+            sourceDir
+          )} template.\n\nNow open the ${chalk.green(
             `${targetDir}/index.html`
-          )} in the browser and start editing\n`
+          )} in the browser and start editing.\n`
         )
   );
 } catch (err) {
