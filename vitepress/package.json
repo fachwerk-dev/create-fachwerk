@@ -8,7 +8,7 @@
     "preview": "vitepress serve docs"
   },
   "dependencies": {
-    "fachwerk": "^0.0.5",
+    "fachwerk": "^0.0.6",
     "vitepress": "^0.21.4"
   }
 }
