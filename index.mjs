@@ -8,7 +8,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const { sourceDir } = await prompts({
   type: "select",
   name: "sourceDir",
-  message: "Pick a Fachwerk template",
+  message: "▦ Pick a Fachwerk template",
   choices: [
     {
       title: "Vite",
