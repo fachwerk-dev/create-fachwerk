@@ -7,7 +7,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "fachwerk": "^0.0.9",
+    "fachwerk": "^0.0.10",
     "vue": "^3.2.25"
   },
   "devDependencies": {
