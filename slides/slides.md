@@ -144,22 +144,35 @@ Lets set a variable `f.x` and control it with a slider:
 
 ## Reactive VueJS variables
 
+### Setting up
+
 When you need to do more complex data processing, you can set up the VueJS reactive and computed values in Javascript and pass the them to `createFachwerk()` function in `index.html`:
 
 ```js
 import { ref, computed } from "vue";
 const x = ref(0);
 const y = computed(() => x.value * 10);
-createFachwerk({ x, y });
+const reset = () => x.value = 0
+createFachwerk({ x, y, reset });
 ```
 
-You can access them as follows in Markdown:
+---
+
+## Reactive VueJS variables
+
+### Usage
+
+You can access VueJS variables in Markdown as follows:
 
 <pre v-pre>
 &lt;f-slider v-model="x" max="100" /> {{ y }}
+
+&lt;button v-on:click="reset">Reset&lt/button>
 </pre>
 
 <f-slider v-model="x" /> {{ y }}
+
+<button class="border-2 border-gray-600 px-3 py-1 rounded" v-on:click="reset">Reset</button>
 
 ---
 class: bg-[lightblue] grid place-items-center 

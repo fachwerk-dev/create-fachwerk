@@ -42,8 +42,8 @@
       // Add custom reactive and computed variables
       const x = ref(0);
       const y = computed(() => x.value * 10);
-
-      createFachwerk({ x, y });
+      const reset = () => (x.value = 0);
+      createFachwerk({ x, y, reset });
     </script>
   </body>
 </html>
