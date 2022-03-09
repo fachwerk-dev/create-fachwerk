@@ -107,14 +107,14 @@ class: grid place-content-center place-items-center
 
 ---
 class: prose-invert
-style: "background-image: url(https://designstem.github.io/fachwerk/images/example.jpg)"
+style: "background-image: url(https://designstem.github.io/fachwerk/images/example.jpg); background-size: cover;"
 ---
 
 ## Background images
 
 To add a background image, use style metadata:
 
-`style: "background-image: url(your-image-here.jpg)"`
+`style: "background-image: url(image.jpg); background-size: cover;"`
 
 
 ---
