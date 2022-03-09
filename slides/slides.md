@@ -68,7 +68,7 @@ class: bg-yellow-500
 
 To style the slides, add `class:` to the metadata with Tailwind classes.
 
-Here's how to make the background yellow:
+Here's how to make the background yellow using [color classes](https://tailwindcss.com/docs/background-color):
 
 
 ```
@@ -177,4 +177,4 @@ class: bg-[lightblue] grid place-items-center
   />
 </f-svg>
 
-See the source [here](https://github.com/fachwerk-dev/create-fachwerk/tree/main/slides)<br />More info at https://fachwerk.dev/
+See the source [in Github](https://github.com/fachwerk-dev/create-fachwerk/tree/main/slides)<br />More info at [fachwerk.dev](https://fachwerk.dev/)
