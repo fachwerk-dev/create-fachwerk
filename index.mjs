@@ -30,6 +30,11 @@ const { sourceDir } = await prompts({
       description: "Single JS file with globals",
       value: "global",
     },
+    {
+      title: "Slides (experimental)",
+      description: "With Tailwind support",
+      value: "slides",
+    },
   ],
   initial: 0,
 });
@@ -45,7 +50,7 @@ try {
   const source = path.resolve(__dirname, sourceDir);
   const target = path.resolve(process.cwd(), targetDir);
   await fs.copy(source, target);
-  let npm = !["esm", "global"].includes(sourceDir);
+  let npm = !["esm", "global", "slides"].includes(sourceDir);
   if (npm) {
     await cd(targetDir);
     await $`npm install`;
@@ -64,7 +69,7 @@ try {
           `\nSuccessfully installed ${chalk.cyan(
             sourceDir
           )} template.\n\nNow open the ${chalk.green(
-            `${targetDir}/index.html`
+            `${targetDir}`
           )} in the browser and start editing.\n`
         )
   );
