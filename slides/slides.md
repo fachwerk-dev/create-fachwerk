@@ -165,7 +165,7 @@ createFachwerk({ x, y, reset });
 You can access VueJS variables in Markdown as follows:
 
 <pre v-pre>
-&lt;f-slider v-model="x" max="100" /> {{ y }}
+&lt;f-slider v-model="x" /> {{ y }}
 
 &lt;button v-on:click="reset">Reset&lt/button>
 </pre>
