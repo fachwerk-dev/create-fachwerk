@@ -112,7 +112,7 @@ style: "background-image: url(https://designstem.github.io/fachwerk/images/examp
 
 ## Background images
 
-To add a background image, use style metadata:
+To add a background image, use `style:` metadata. Note that you need to use the quotes `""` around the styles.
 
 `style: "background-image: url(image.jpg); background-size: cover;"`
 
@@ -130,7 +130,7 @@ class: bg-gray-800 grid place-content-center place-items-center prose-invert
 
 ## Reactive Fachwerk variables
 
-To use reactive variables you can use Fachwerk's builtin `f` object that can contain any number of variables.
+To use reactive variables use Fachwerk's builtin `f` object that can contain any number of variables.
 
 Lets set a variable `f.x` and control it with a slider:
 
@@ -144,7 +144,7 @@ Lets set a variable `f.x` and control it with a slider:
 
 ## Reactive VueJS variables
 
-When you need to do more complex data processing you can set up the VueJS reactive and computed values pass the them to `createFachwerk()` function in `index.html`:
+When you need to do more complex data processing, you can set up the VueJS reactive and computed values pass the them to `createFachwerk()` function in `index.html`:
 
 ```js
 import { ref, computed } from "vue";
