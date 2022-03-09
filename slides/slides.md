@@ -83,7 +83,7 @@ class: bg-gray-900 prose-invert
 
 ## Dark theme
 
-To style the slide with dark background it is recommended to invert also the text colors with `prose-invert` class:
+To style the slide with dark background it is recommended to invert also the text colors with `prose-invert` class. See more at Tailwind [typography plugin](https://tailwindcss.com/docs/typography-plugin).
 
 ```yaml
 ---
@@ -144,7 +144,7 @@ Lets set a variable `f.x` and control it with a slider:
 
 ## Reactive VueJS variables
 
-When you need to do more complex data processing you can set up the reactive and computed values in VueJS API and pass the them to `createFachwerk()` function:
+When you need to do more complex data processing you can set up the VueJS reactive and computed values pass the them to `createFachwerk()` function in `index.html`:
 
 ```js
 import { ref, computed } from "vue";
@@ -177,4 +177,4 @@ class: bg-[lightblue] grid place-items-center
   />
 </f-svg>
 
-See the source [in Github](https://github.com/fachwerk-dev/create-fachwerk/tree/main/slides)<br />More info at [fachwerk.dev](https://fachwerk.dev/)
+See the [source in Github](https://github.com/fachwerk-dev/create-fachwerk/tree/main/slides)<br />More info at [fachwerk.dev](https://fachwerk.dev/)
