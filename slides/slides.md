@@ -177,6 +177,4 @@ class: bg-[lightblue] grid place-items-center
   />
 </f-svg>
 
-See the source [here](https://github.com/fachwerk-dev/create-fachwerk/tree/main/slides)
-
-More info at https://fachwerk.dev/
+See the source [here](https://github.com/fachwerk-dev/create-fachwerk/tree/main/slides)<br />More info at https://fachwerk.dev/
