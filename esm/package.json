@@ -1,4 +1,4 @@
 {
-  name: 'esm',
-  private: true
+  "name": "esm",
+  "private": true
 }
