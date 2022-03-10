@@ -2,7 +2,7 @@ import { createApp, ref } from "vue";
 import { Fachwerk } from "fachwerk";
 import { parse as parseMarkdown } from "marked";
 import { parse as parseSlides } from "@slidev/parser";
-import { useStorage, onKeyStroke } from "@vueuse/core";
+import { useStorage, onKeyStroke, onClickOutside } from "@vueuse/core";
 
 export async function createFachwerk(setup = {}) {
   const rawSlides = await fetch("./slides.md").then((res) => res.text());
@@ -26,7 +26,7 @@ export async function createFachwerk(setup = {}) {
 
   const template = `
   ${slidesTemplate.join("\n\n")}
-  <div v-show="menu" class="fixed top-0 left-0 bottom-0 w-[80vw] md:w-[20vw] p-6 bg-white shadow">
+  <div ref="menuRef" v-show="menu" class="fixed top-0 left-0 bottom-0 w-[80vw] md:w-[20vw] p-6 bg-white shadow">
     <div class="overflow-auto leading-8">
       <div class="cursor-pointer text-gray-700 hover:text-gray-900" v-for="slide in slides.filter(s => s.frontmatter?.title)" @click="goto(slide.frontmatter.title); menu = false">
         {{ slide.frontmatter?.title }}
@@ -45,7 +45,8 @@ export async function createFachwerk(setup = {}) {
 
   const App = {
     setup() {
-      const menu = useStorage("fachwerk_menu", false);
+      const menuRef = ref(null);
+      const menu = ref(false);
       const slide = useStorage("fachwerk_slide", 0);
       const next = () => {
         if (slide.value < slides.length - 1) slide.value++;
@@ -61,7 +62,8 @@ export async function createFachwerk(setup = {}) {
       };
       onKeyStroke("ArrowLeft", prev);
       onKeyStroke("ArrowRight", next);
-      return { slides, menu, slide, next, prev, goto, ...setup };
+      onClickOutside(menuRef, () => (menu.value = false));
+      return { slides, menuRef, menu, slide, next, prev, goto, ...setup };
     },
     template,
   };

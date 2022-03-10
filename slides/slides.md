@@ -29,41 +29,70 @@ Then choose `Slides (experimental)` as a template.
 title: Editing and metadata
 ---
 
-## Editing slides
+## Slide setup 
 
 Start with `slides.md` file. 
 
 To separate slides, use `---` as a separator:
 
 ```md
-# Hello
+# Frontpage
 
 ---
 
-# World
+# About
 
 ```
 
 ---
 
-## Slide metadata
+## Slide metadata and menus
 
-Slides can also have metadata or _frontmatter_. It is stored in YAML format can be added as follows:
+Slides can also have metadata or _frontmatter_. It is stored in YAML format.
+
+When adding `title:` metadata to pages, these pages show up in the menu. Click <span v-on:click="menu = true" class="cursor-pointer">≡</span> to toggle it.
 
 ```md
 ---
-title: Hello
+title: Frontpage
 ---
 
-# Hello
+# Frontpage
 
 ---
-title: world
+title: About
 ---
 
-# World
+# About
 
 ```
+
+---
+title: Navigation
+---
+
+## Navigation
+
+By default slide navigation is linear and can be controlled with `‹` `›` buttons on screen or keyboard.
+
+However, you can set non-linear navigation by providing buttons of jump to a specific page. You can use `prev()` and `next()` functions to jump between pages:
+
+```
+<button v-on:click="next()">Goto next slide ›</button>
+```
+
+<button v-on:click="next()">Goto next slide ›</button>
+
+---
+
+## Navigation
+
+You can also jump to a page with a specfic title using `goto()` function:
+
+<button v-on:click="goto('Styling')">Goto "Styling" page ›</button>
+
+Yes, it is also a next page.
+
 
 ---
 title: Styling
@@ -188,7 +217,7 @@ You can access VueJS variables in Markdown as follows:
 
 <f-slider v-model="x" /> {{ y }}
 
-<button class="border-2 border-gray-600 px-3 py-1 rounded" v-on:click="reset">Reset</button>
+<button v-on:click="reset">Reset</button>
 
 ---
 title: Changelog
@@ -201,11 +230,8 @@ class: bg-[#EFF8FA]
 
 - Remember last slide position
 - Safari support
-- Nicer mobile pager
+- Improved mobile pager
 - Exposing `prev()`, `next()` and `goto()` functions. Not yet documented
-
-#### 0.0.3
-
 - Basic menu support
 
 ---
