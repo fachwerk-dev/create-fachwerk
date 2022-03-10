@@ -17,13 +17,13 @@ Fachwerk Slides is an experimental distribution of Fachwerk library. It combines
 
 ## Getting started
 
-Run the following command:
+Run the following command and then choose `Slides (experimental)` as a template:
 
 ```
 npm init fachwerk
 ```
 
-Then choose `Slides (experimental)` as a template.
+ You can re-run this command for updating the library, it does not touch your work.
 
 ---
 title: Editing and metadata
