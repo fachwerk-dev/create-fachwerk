@@ -2,6 +2,7 @@ import { createApp, ref } from "vue";
 import { Fachwerk } from "fachwerk";
 import { parse as parseMarkdown } from "marked";
 import { parse as parseSlides } from "@slidev/parser";
+import { useStorage, onKeyStroke } from "@vueuse/core";
 
 export async function createFachwerk(setup = {}) {
   const slides = await fetch("./slides.md").then((res) => res.text());
@@ -16,7 +17,7 @@ export async function createFachwerk(setup = {}) {
           ${s.frontmatter?.class}
         "
         style="${s.frontmatter?.style}"
-        v-show="i === ${i}"
+        v-show="slide === ${i}"
       >
         ${parseMarkdown(s.content)}
       </div>`
@@ -32,18 +33,16 @@ export async function createFachwerk(setup = {}) {
 
   const App = {
     setup() {
-      const i = ref(0);
+      const slide = useStorage("fachwerk_slide", 0);
       const onNext = () => {
-        if (i.value < parsedSlides.length - 1) i.value++;
+        if (slide.value < parsedSlides.length - 1) slide.value++;
       };
       const onPrev = () => {
-        if (i.value > 0) i.value--;
+        if (slide.value > 0) slide.value--;
       };
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "ArrowRight") onNext();
-        if (e.key === "ArrowLeft") onPrev();
-      });
-      return { i, onNext, onPrev, ...setup };
+      onKeyStroke("ArrowLeft", onPrev);
+      onKeyStroke("ArrowRight", onNext);
+      return { slide, onNext, onPrev, ...setup };
     },
     template,
   };
