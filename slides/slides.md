@@ -191,14 +191,16 @@ Lets set a variable `f.x` and control it with a slider:
 
 ### Setting up
 
-When you need to do more complex data processing, you can set up the VueJS reactive and computed values in Javascript and pass the them to `createFachwerk()` function in `index.html`:
+When you need to do more complex data processing, you can set up the VueJS reactive and computed values in Javascript.
+
+To do so, edit the `slides.js` file:
 
 ```js
 import { ref, computed } from "vue";
 const x = ref(0);
 const y = computed(() => x.value * 10);
 const reset = () => x.value = 0
-createFachwerk({ x, y, reset });
+export { x, y , reset }
 ```
 
 ---
