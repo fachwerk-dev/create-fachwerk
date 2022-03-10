@@ -228,13 +228,12 @@ class: bg-[#EFF8FA]
 
 ## Fachwerk Slides changelog
 
-#### 0.0.2
+#### 0.0.3
 
-- Remember last slide position
-- Safari support
-- Improved mobile pager
-- Exposing `prev()`, `next()` and `goto()` functions. Not yet documented
-- Basic menu support
+- Basic menu ≡ support
+- Added navigation documentation
+- Re-running `npm init fachwerk` does not destroy your work
+- Separating user files to `slides.md` and `slides.js`
 
 ---
 title: Backpage
