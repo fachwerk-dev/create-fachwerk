@@ -1,5 +1,5 @@
 ---
-class: bg-[lightblue] grid place-content-center place-items-center	
+class: bg-[lightblue] grid place-content-center place-items-center text-center
 ---
 
 # ▦ Fachwerk Slides
@@ -92,10 +92,8 @@ class: bg-gray-900 prose-invert
 ```
 
 ---
-class: grid place-content-center place-items-center	
----
 
-# Centering
+## Centering
 
 To center the content, use CSS Grid centering:
 
@@ -104,6 +102,14 @@ To center the content, use CSS Grid centering:
 class: grid place-content-center place-items-center	
 ---
 ```
+
+---
+class: grid place-content-center place-items-center	text-center
+---
+
+# Hey I am centered!
+
+And I am too
 
 ---
 class: prose-invert

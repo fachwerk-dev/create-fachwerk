@@ -7,12 +7,14 @@ import { useStorage, onKeyStroke } from "@vueuse/core";
 export async function createFachwerk(setup = {}) {
   const slides = await fetch("./slides.md").then((res) => res.text());
 
-  const parsedSlides = parseSlides(slides).slides.map(
+  const parsedSlides = parseSlides(slides).slides;
+  const slidesTemplate = parsedSlides.map(
     (s, i) =>
       `<div
         class="
           prose md:prose-xl p-4 md:p-12 max-w-none min-h-screen 
-          prose-code:px-1 prose-code:before:content-none prose-code:after:content-none
+          prose-code:px-1
+          prose-code:before:content-none prose-code:after:content-none
           prose-p:max-w-[70ch]
           ${s.frontmatter?.class}
         "
@@ -24,11 +26,11 @@ export async function createFachwerk(setup = {}) {
   );
 
   const template = `
-  <div class="fixed top-0 right-2 flex text-xl">
-    <button class="p-3 outline-none" @click="onPrev">&lsaquo;</button>
-    <button class="p-3 outline-none" @click="onNext">&rsaquo;</button>
+  ${slidesTemplate.join("\n\n")}
+  <div class="fixed bottom-3 right-3 flex text-md bg-white rounded shadow">
+    <button class="px-2 outline-none" @click="onPrev">&lsaquo;</button>
+    <button class="px-2 outline-none" @click="onNext">&rsaquo;</button>
   </div>
-  ${parsedSlides.join("\n\n")}
   `;
 
   const App = {
