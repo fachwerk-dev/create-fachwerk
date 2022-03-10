@@ -35,15 +35,23 @@ export async function createFachwerk(setup = {}) {
   const App = {
     setup() {
       const slide = useStorage("fachwerk_slide", 0);
-      const onNext = () => {
+      const next = () => {
         if (slide.value < parsedSlides.length - 1) slide.value++;
       };
-      const onPrev = () => {
+      const prev = () => {
         if (slide.value > 0) slide.value--;
       };
-      onKeyStroke("ArrowLeft", onPrev);
-      onKeyStroke("ArrowRight", onNext);
-      return { slide, onNext, onPrev, ...setup };
+      const goto = (title) => {
+        const index = parsedSlides.findIndex(
+          (s) => s.frontmatter?.title === title
+        );
+        if (index > -1) {
+          slide.value = index;
+        }
+      };
+      onKeyStroke("ArrowLeft", prev);
+      onKeyStroke("ArrowRight", next);
+      return { slide, next, prev, goto, ...setup };
     },
     template,
   };

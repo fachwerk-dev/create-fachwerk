@@ -1,4 +1,5 @@
 ---
+title: Frontpage
 class: bg-[lightblue] grid place-content-center place-items-center text-center
 ---
 
@@ -6,6 +7,8 @@ class: bg-[lightblue] grid place-content-center place-items-center text-center
 
 Press `‹` `›` to navigate
 
+---
+title: About
 ---
 
 ## About
@@ -31,11 +34,11 @@ Start with `slides.md` file.
 To separate slides, use `---` as a separator:
 
 ```md
-# Slide 1
+# Hello
 
 ---
 
-# Slide 2
+# World
 
 ```
 
@@ -43,20 +46,20 @@ To separate slides, use `---` as a separator:
 
 ## Slide metadata
 
-Slides can also have metadata or _frontmatter_. It is stored in YAML format can be added as follows. Note that only `class:` and `style:` metadata is currently supported.
+Slides can also have metadata or _frontmatter_. It is stored in YAML format can be added as follows:
 
 ```md
 ---
-some: value
+title: Hello
 ---
 
-# Slide 1
+# Hello
 
 ---
-other: value
+title: world
 ---
 
-# Slide 2
+# World
 
 ```
 
@@ -181,14 +184,17 @@ You can access VueJS variables in Markdown as follows:
 <button class="border-2 border-gray-600 px-3 py-1 rounded" v-on:click="reset">Reset</button>
 
 ---
+class: bg-[#EFF8FA]
+---
 
-## Changelog
+## Fachwerk Slides changelog
 
 #### 0.0.2
 
 - Remember last slide position
 - Safari support
 - Nicer mobile pager
+- Exposing `prev()`, `next()` and `goto()` functions. Not yet documented
 
 ---
 class: bg-[lightblue] grid place-items-center 
