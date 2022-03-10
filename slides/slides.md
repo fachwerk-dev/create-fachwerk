@@ -10,7 +10,7 @@ Press `‹` `›` to navigate
 
 ## About
 
-Fachwerk Slides is an experimental distribution of Fachwerk library. It combines [Fachwerk](https://fachwerk.dev/) components and utilities, Tailwind [Play CDN](https://tailwindcss.com/docs/installation/play-cdn)  styling and is based on [Slidev](https://sli.dev/guide/syntax.html) presentation format (extended Markdown).
+Fachwerk Slides is an experimental distribution of Fachwerk library. It combines [Fachwerk](https://fachwerk.dev/) components and utilities, [Tailwind Play CDN](https://tailwindcss.com/docs/installation/play-cdn) styling and [Slidev presentation format](https://sli.dev/guide/syntax.html) (based on Markdown). All this is packaged just into a HTML, JS and MD file and no build tools are needed for slide authoring.
 
 ## Getting started
 
