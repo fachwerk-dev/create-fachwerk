@@ -26,6 +26,8 @@ npm init fachwerk
 Then choose `Slides (experimental)` as a template.
 
 ---
+title: Editing and metadata
+---
 
 ## Editing slides
 
@@ -64,6 +66,7 @@ title: world
 ```
 
 ---
+title: Styling
 class: bg-yellow-500
 ---
 
@@ -95,6 +98,8 @@ class: bg-gray-900 prose-invert
 ```
 
 ---
+title: Layout
+---
 
 ## Centering
 
@@ -115,6 +120,7 @@ class: grid place-content-center place-items-center	text-center
 And I am too
 
 ---
+title: Images
 class: prose-invert
 style: "background-image: url(https://designstem.github.io/fachwerk/images/example.jpg); background-size: cover;"
 ---
@@ -135,7 +141,8 @@ class: bg-gray-800 grid place-content-center place-items-center prose-invert
 <f-math>\begin{pmatrix} a & c & e \\\\ b & d & f \\\\ 0 & 0 & 1 \end{pmatrix}</f-math>
 
 ---
-
+title: Variables
+---
 
 ## Reactive Fachwerk variables
 
@@ -184,6 +191,7 @@ You can access VueJS variables in Markdown as follows:
 <button class="border-2 border-gray-600 px-3 py-1 rounded" v-on:click="reset">Reset</button>
 
 ---
+title: Changelog
 class: bg-[#EFF8FA]
 ---
 
@@ -196,7 +204,12 @@ class: bg-[#EFF8FA]
 - Nicer mobile pager
 - Exposing `prev()`, `next()` and `goto()` functions. Not yet documented
 
+#### 0.0.3
+
+- Basic menu support
+
 ---
+title: Backpage
 class: bg-[lightblue] grid place-items-center 
 ---
 
