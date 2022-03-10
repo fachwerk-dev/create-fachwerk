@@ -181,6 +181,16 @@ You can access VueJS variables in Markdown as follows:
 <button class="border-2 border-gray-600 px-3 py-1 rounded" v-on:click="reset">Reset</button>
 
 ---
+
+## Changelog
+
+#### 0.0.2
+
+- Remember last slide position
+- Safari support
+- Nicer mobile pager
+
+---
 class: bg-[lightblue] grid place-items-center 
 ---
 
