@@ -185,6 +185,32 @@ To add a background image, use `style:` metadata. Note that you need to use the 
 
 `style: "background-image: url(image.jpg); background-size: cover;"`
 
+---
+class: p-0 md:p-0 grid grid-cols-1 md:grid-cols-2
+---
+
+<div class="p-4 md:p-12">
+
+## Image layouts
+
+Here's how to create a responsive layout with an image:
+
+```
+---
+class: p-0 md:p-0 grid grid-cols-1 md:grid-cols-2
+---
+<div class="p-4 md:p-12">
+
+# Hello world
+
+</div>
+
+<img class="h-full object-cover" src="https://designstem.github.io/fachwerk/images/example.jpg" />
+```
+
+</div>
+
+<img class="h-full object-cover" src="https://designstem.github.io/fachwerk/images/example.jpg" />
 
 ---
 class: bg-gray-800 grid place-content-center place-items-center prose-invert
@@ -293,7 +319,7 @@ title: Loader
 
 ## Custom loader
 
-By default Fachwerk Slides loads the slide data using `fetch()` from `slides.md`. However you can override the loader function in `slides.js` to load the Markdown files from anywhere.
+By default Fachwerk Slide loads the slide data using `fetch()` from `slides.md`. However you can override the loader function in `slides.js` to load the Markdown files from anywhere.
 
 Here is an example to load two Markdown files, `first.md` and `second.md` and merge them together:
 

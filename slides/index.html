@@ -47,6 +47,17 @@
       .prose button:hover {
         @apply bg-black/5;
       }
+      .prose img {
+        @apply m-0 md:m-0;
+      }
+      .prose > * > h1:first-child,
+      .prose > * > h2:first-child,
+      .prose > * > h3:first-child,
+      .prose > * > h4:first-child,
+      .prose > * > h5:first-child,
+      .prose > * > h6:first-child {
+        @apply mt-0;
+      }
     </style>
     <script
       async
@@ -107,11 +118,11 @@
               prose-p:max-w-[70ch]
               prose-code:before:content-none
               prose-code:after:content-none
+              prose-img:p-0
             `,
             s.frontmatter?.global?.class,
             s.frontmatter?.class
           );
-          console.log(classes)
           return `<div
             class="${classes}"
             style="${s.frontmatter?.global?.style};${s.frontmatter?.style}"
