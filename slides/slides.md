@@ -175,15 +175,19 @@ And I am too
 
 ---
 title: Images
-class: prose-invert
-style: "background-image: url(https://designstem.github.io/fachwerk/images/example.jpg); background-size: cover;"
+class: prose-invert bg-cover bg-[url(https://designstem.github.io/fachwerk/images/example.jpg)]
 ---
 
 ## Background images
 
-To add a background image, use `style:` metadata. Note that you need to use the quotes `""` around the styles.
+To add a background image, use the following in the metadata:
 
-`style: "background-image: url(image.jpg); background-size: cover;"`
+```
+---
+class: prose-invert bg-cover bg-[url(https://your-image-here.jpg)]
+---
+```
+
 
 ---
 class: p-0 md:p-0 grid grid-cols-1 md:grid-cols-2
