@@ -1,8 +1,25 @@
-// Add your own reactive and computed variables
+// Add your own variables
+
 import { ref, computed } from "vue";
 
-const x = ref(0);
-const y = computed(() => x.value * 10);
-const reset = () => (x.value = 0);
+const customX = ref(0);
+const customY = computed(() => customX.value * 10);
+const customReset = () => (customX.value = 0);
 
-export { x, y, reset };
+export const setup = { customX, customY, customReset };
+
+// Add your own components
+
+import { f } from "fachwerk";
+
+const CustomComponent = {
+  setup() {
+    return { f };
+  },
+  template: `
+    <div class="opacity-50">I am CustomComponent using Fachwerk's f.x: {{ f.x }}</div>
+    `,
+};
+
+export const components = { CustomComponent };
+

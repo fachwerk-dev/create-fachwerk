@@ -57,11 +57,14 @@
       import { parse as parseSlides } from "@slidev/parser";
       import { useStorage, onKeyStroke, onClickOutside } from "@vueuse/core";
 
-      export async function createFachwerk(setup = {}) {
-        const rawSlides = await fetch("./slides.md").then((res) => res.text());
+      export async function createFachwerk({ setup = {}, components = {}, loader = null }) {
+        if (!loader) {
+          loader = fetch("./slides.md").then((res) => res.text());
+        }
+        const rawSlides = await loader;
         const slides = parseSlides(rawSlides).slides;
-
-        const slidesTemplate = slides.map(
+        
+      const slidesTemplate = slides.map(
           (s, i) =>
             `<div
         class="
@@ -79,15 +82,15 @@
 
         const template = `
   ${slidesTemplate.join("\n\n")}
-  <div ref="menuRef" v-show="menu" class="fixed top-0 left-0 bottom-0 w-[80vw] md:w-[20vw] p-6 bg-white shadow">
+  <div ref="menuRef" v-if="menu" class="fixed top-0 right-0 bottom-0 w-[80vw] md:w-[20vw] p-6 bg-white shadow">
     <div class="overflow-auto leading-8">
       <div class="cursor-pointer text-gray-700 hover:text-gray-900" v-for="slide in slides.filter(s => s.frontmatter?.title)" @click="goto(slide.frontmatter.title); menu = false">
         {{ slide.frontmatter?.title }}
       </div>
     </div>
   </div>
-  <div class="text-lg fixed left-3 bottom-3 flex text-md transition-opacity opacity-100 md:opacity-20 hover:md:opacity-100 bg-white md:bg-transparent rounded md:rounded-none shadow md:shadow-none">
-    <button class="px-2 outline-none" @click="menu = !menu">≡</button>
+  <div class="text-lg fixed right-3 bottom-3 flex text-md transition-opacity opacity-100 md:opacity-20 hover:md:opacity-100 bg-white md:bg-transparent rounded md:rounded-none shadow md:shadow-none">
+    <button class="px-2 outline-none" @click.prevent="menu = !menu">≡</button>
     <button class="px-2 outline-none" @click="prev">‹</button>
     <button class="px-2 outline-none" @click="next">›</button>
     </div>
@@ -97,9 +100,14 @@
   `;
 
         const App = {
+          components,
           setup() {
             const menuRef = ref(null);
             const menu = ref(false);
+            const toggleMenu = () => {
+              menu.value = !menu.value
+              console.log(menu.value)
+            }
             const slide = useStorage("fachwerk_slide", 0);
             const next = () => {
               if (slide.value < slides.length - 1) slide.value++;
@@ -117,7 +125,9 @@
             };
             onKeyStroke("ArrowLeft", prev);
             onKeyStroke("ArrowRight", next);
-            onClickOutside(menuRef, () => (menu.value = false));
+            onClickOutside(menuRef, e => {
+              menu.value = false
+            })
             return { slides, menuRef, menu, slide, next, prev, goto, ...setup };
           },
           template,
@@ -128,8 +138,8 @@
         app.mount("#app");
       }
 
-      import * as setup from "./slides.js";
-      createFachwerk(setup);
+      import * as config from "./slides.js";
+      createFachwerk(config);
     </script>
   </body>
 </html>

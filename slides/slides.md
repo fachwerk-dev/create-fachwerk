@@ -173,7 +173,7 @@ class: bg-gray-800 grid place-content-center place-items-center prose-invert
 title: Variables
 ---
 
-## Reactive Fachwerk variables
+## Fachwerk variables
 
 To use reactive variables use Fachwerk's builtin `f` object that can contain any number of variables.
 
@@ -187,11 +187,11 @@ Lets set a variable `f.x` and control it with a slider:
 
 ---
 
-## Reactive VueJS variables
+## Custom variables and functions
 
-### Setting up
+#### Setting up
 
-When you need to do more complex data processing, you can set up the VueJS reactive and computed values in Javascript.
+When you need to do more complex data processing, you can set up the VueJS variables and functions in Javascript.
 
 To do so, edit the `slides.js` file:
 
@@ -200,26 +200,82 @@ import { ref, computed } from "vue";
 const x = ref(0);
 const y = computed(() => x.value * 10);
 const reset = () => x.value = 0
-export { x, y , reset }
+
+export const setup = { customX, customY, customReset }
 ```
 
 ---
 
-## Reactive VueJS variables
+## Custom variables
 
-### Usage
+#### Usage in Markdown
 
 You can access VueJS variables in Markdown as follows:
 
 <pre v-pre>
-&lt;f-slider v-model="x" /> {{ y }}
+&lt;f-slider v-model="customX" /> {{ customY }}
 
-&lt;button v-on:click="reset">Reset&lt/button>
+&lt;button v-on:click="customReset">Reset&lt/button>
 </pre>
 
-<f-slider v-model="x" /> {{ y }}
+<f-slider v-model="customX" /> {{ customY }}
 
-<button v-on:click="reset">Reset</button>
+<button v-on:click="customReset">Reset</button>
+
+---
+
+## Custom components
+
+#### Defining a component
+
+You can also define custom components in `slides.js`:
+
+```js
+import { ref, computed } from "vue";
+import { f } from "fachwerk";
+
+const CustomComponent = {
+  setup() { return { f } },
+  template: `<div class="opacity-50">I am CustomComponent using Fachwerk's f.x: ﹛﹛ f.x ﹜﹜</div>`
+}
+
+export const components = { CustomComponent }
+```
+
+---
+
+## Custom components
+
+#### Usage in Markdown
+
+Here's how to use the component in `slides.md`:
+
+```
+<CustomComponent />
+
+<f-slider v-model="f.x" />
+```
+
+<CustomComponent />
+
+<f-slider v-model="f.x" />
+
+---
+title: Custom loader
+---
+
+## Custom loader
+
+By default Fachwerk Slider loads the slide data using `fetch()` from `slides.md`. However you can override the loader function in `slides.js` to load the Markdown files from anywhere.
+
+Here is an example to load two Markdown files, `first.md` and `second.md` and merge them together:
+
+```js
+const files = ["first.md", "second.md"]
+export const loader = Promise.all(
+  files.map((file) => fetch(file).then((res) => res.text()))
+).then((files) => files.join(""));
+```
 
 ---
 title: Changelog
@@ -228,12 +284,9 @@ class: bg-[#EFF8FA]
 
 ## Fachwerk Slides changelog
 
-#### 0.0.3
+#### 0.0.4
 
-- Basic menu ≡ support
-- Added navigation documentation
-- Re-running `npm init fachwerk` does not destroy your work
-- Separating user files to `slides.md` and `slides.js`
+- Allow defining `{ setup, components, slides }`
 
 ---
 title: Backpage
