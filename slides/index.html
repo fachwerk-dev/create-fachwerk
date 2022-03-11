@@ -62,7 +62,9 @@
           "@slidev/parser": "https://unpkg.com/@slidev/parser/dist/index.mjs",
           "vue-demi": "https://unpkg.com/vue-demi/lib/index.mjs",
           "@vueuse/shared": "https://unpkg.com/@vueuse/shared/index.mjs",
-          "@vueuse/core": "https://unpkg.com/@vueuse/core/index.mjs"
+          "@vueuse/core": "https://unpkg.com/@vueuse/core/index.mjs",
+          "hashlru": "https://esm.sh/hashlru",
+          "tailwind-merge": "https://unpkg.com/tailwind-merge/dist/index.mjs"
         }
       }
     </script>
@@ -72,6 +74,7 @@
       import { parse as parseMarkdown } from "marked";
       import { parse as parseSlides } from "@slidev/parser";
       import { useStorage, onKeyStroke, onClickOutside } from "@vueuse/core";
+      import { twMerge } from "tailwind-merge";
 
       export async function createFachwerk({
         setup = {},
@@ -82,50 +85,60 @@
           loader = fetch("./slides.md").then((res) => res.text());
         }
         const rawSlides = await loader;
-        let global = {}
-        const slides = parseSlides(rawSlides).slides.map(s => {
+        let global = {};
+        const slides = parseSlides(rawSlides).slides.map((s) => {
           if (s.frontmatter?.global) {
-            global = {...global, ...s.frontmatter.global}
+            global = { ...global, ...s.frontmatter.global };
           }
-          s.frontmatter.global = global
-          return s
-        })
+          s.frontmatter.global = global;
+          return s;
+        });
 
-        const slidesTemplate = slides.map(
-          (s, i) =>
-            `<div
-        class="
-          prose md:prose-xl p-4 md:p-12 max-w-none min-h-screen 
-          prose-code:px-1 prose-p:max-w-[70ch]
-          prose-code:before:content-none prose-code:after:content-none
-          ${s.frontmatter?.global?.class}
-          ${s.frontmatter?.class}
-        "
-        style="${s.frontmatter?.global?.style};${s.frontmatter?.style}"
-        v-show="slide === ${i}"
-      >
-        ${parseMarkdown(s.content)}
-      </div>`
-        );
+        const slidesTemplate = slides.map((s, i) => {
+          const classes = twMerge(
+            `
+              p-4
+              md:p-12
+              max-w-none
+              min-h-screen
+              prose
+              md:prose-xl
+              prose-code:px-1
+              prose-p:max-w-[70ch]
+              prose-code:before:content-none
+              prose-code:after:content-none
+            `,
+            s.frontmatter?.global?.class,
+            s.frontmatter?.class
+          );
+          console.log(classes)
+          return `<div
+            class="${classes}"
+            style="${s.frontmatter?.global?.style};${s.frontmatter?.style}"
+            v-show="slide === ${i}"
+          >
+            ${parseMarkdown(s.content)}
+          </div>`;
+        });
 
         const template = `
-  ${slidesTemplate.join("\n\n")}
-  <div ref="menuRef" v-if="menu" class="fixed top-0 right-0 bottom-0 w-[80vw] md:w-[25vw] p-6 bg-white shadow">
-    <div class="overflow-auto leading-8">
-      <div class="cursor-pointer text-gray-700 hover:text-gray-900" v-for="slide in slides.filter(s => s.frontmatter?.title)" @click="goto(slide.frontmatter.title); menu = false">
-        {{ slide.frontmatter?.title }}
+      ${slidesTemplate.join("\n\n")}
+      <div ref="menuRef" v-if="menu" class="fixed top-0 right-0 bottom-0 w-[80vw] md:w-[25vw] p-6 bg-white shadow">
+        <div class="overflow-auto leading-8">
+          <div class="cursor-pointer text-gray-700 hover:text-gray-900" v-for="slide in slides.filter(s => s.frontmatter?.title)" @click="goto(slide.frontmatter.title); menu = false">
+            {{ slide.frontmatter?.title }}
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="text-lg md:text-2xl fixed right-3 bottom-3 flex text-md transition-opacity opacity-100 md:opacity-20 hover:md:opacity-100 bg-white md:bg-transparent rounded md:rounded-none shadow md:shadow-none">
-    <button ref="menuIgnoreRef" class="px-2 outline-none" @click="menu = !menu">≡</button>
-    <button class="px-3 outline-none" @click="prev">‹</button>
-    <button class="px-3 outline-none" @click="next">›</button>
-    </div>
-  <div class="text-lg fixed right-3 bottom-3 flex text-md transition-opacity opacity-100 md:opacity-20 hover:md:opacity-100 bg-white md:bg-transparent rounded md:rounded-none shadow md:shadow-none">
+      <div class="text-lg md:text-2xl fixed right-3 bottom-3 flex text-md transition-opacity opacity-100 md:opacity-20 hover:md:opacity-100 bg-white md:bg-transparent rounded md:rounded-none shadow md:shadow-none">
+        <button ref="menuIgnoreRef" class="px-2 outline-none" @click="menu = !menu">≡</button>
+        <button class="px-3 outline-none" @click="prev">‹</button>
+        <button class="px-3 outline-none" @click="next">›</button>
+        </div>
+      <div class="text-lg fixed right-3 bottom-3 flex text-md transition-opacity opacity-100 md:opacity-20 hover:md:opacity-100 bg-white md:bg-transparent rounded md:rounded-none shadow md:shadow-none">
 
-  </div>
-  `;
+      </div>
+      `;
 
         const App = {
           components,

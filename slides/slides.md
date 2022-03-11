@@ -1,8 +1,6 @@
 ---
 title: Frontpage
 class: bg-[lightblue] grid place-content-center place-items-center text-center
-global:
-  class: "!p-32"
 ---
 
 # ▦ Fachwerk Slides
@@ -103,7 +101,9 @@ class: bg-yellow-500
 
 ## Styling slides
 
-To style the slides, add `class:` to the metadata with Tailwind classes.
+#### Local styles
+
+To style the the _current slide_, add `class:` to the metadata with Tailwind classes.
 
 Here's how to make the background yellow using [color classes](https://tailwindcss.com/docs/background-color):
 
@@ -113,6 +113,13 @@ Here's how to make the background yellow using [color classes](https://tailwindc
 class: bg-yellow-500
 ---
 ```
+
+---
+
+## Styling slides
+
+#### Global styles
+
 
 ---
 class: bg-gray-900 prose-invert
