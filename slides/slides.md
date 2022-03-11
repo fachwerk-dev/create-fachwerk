@@ -293,7 +293,7 @@ title: Loader
 
 ## Custom loader
 
-By default Fachwerk Slider loads the slide data using `fetch()` from `slides.md`. However you can override the loader function in `slides.js` to load the Markdown files from anywhere.
+By default Fachwerk Slides loads the slide data using `fetch()` from `slides.md`. However you can override the loader function in `slides.js` to load the Markdown files from anywhere.
 
 Here is an example to load two Markdown files, `first.md` and `second.md` and merge them together:
 
