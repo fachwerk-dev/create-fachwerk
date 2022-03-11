@@ -1,6 +1,8 @@
 ---
 title: Frontpage
-class: bg-[lightblue] grid place-content-center place-items-center text-center
+class: bg-lightblue-500 grid place-content-center place-items-center text-center
+# global:
+#   class: bg-lightblue-300 md:text-2xl
 ---
 
 # ▦ Fachwerk Slides
@@ -103,7 +105,7 @@ class: bg-yellow-500
 
 #### Local styles
 
-To style the the _current slide_, add `class:` to the metadata with Tailwind classes.
+To style the the _current_ slide, add `class:` to the metadata with Tailwind classes.
 
 Here's how to make the background yellow using [color classes](https://tailwindcss.com/docs/background-color):
 
@@ -115,11 +117,25 @@ class: bg-yellow-500
 ```
 
 ---
+class: bg-amber-500
+---
 
 ## Styling slides
 
 #### Global styles
 
+To style the the _all_ slides, add a `global:` section to the metadata.
+
+Here's how to make background amber for all slides. 
+
+```
+---
+global:
+  class: bg-amber-500
+---
+```
+
+It is recommended to add this to the first slide, otherwise subsequent global metadata will override the previous data.
 
 ---
 class: bg-gray-900 prose-invert
@@ -297,7 +313,8 @@ class: bg-lightblue-100
 
 #### 0.0.4
 
-- Allow defining `{ setup, components, loader }` in `slides.js`
+- feat: Allow defining `{ setup, components, loader }` in `slides.js`
+- Allow define `global:` metadata
 - Fixing menu opening / closing
 - Bigger navigation controls
 
