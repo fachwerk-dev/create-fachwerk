@@ -206,7 +206,7 @@ export const setup = { customX, customY, customReset }
 
 ---
 
-## Custom variables
+## Custom variables and functions
 
 #### Usage in Markdown
 
@@ -222,6 +222,8 @@ You can access VueJS variables in Markdown as follows:
 
 <button v-on:click="customReset">Reset</button>
 
+---
+title: Components
 ---
 
 ## Custom components
@@ -261,7 +263,7 @@ Here's how to use the component in `slides.md`:
 <f-slider v-model="f.x" />
 
 ---
-title: Custom loader
+title: Loader
 ---
 
 ## Custom loader
@@ -286,7 +288,9 @@ class: bg-[#EFF8FA]
 
 #### 0.0.4
 
-- Allow defining `{ setup, components, slides }`
+- Allow defining `{ setup, components, loader }` in `slides.js`
+- Fixing menu opening / closing
+- Bigger navigation controls
 
 ---
 title: Backpage
