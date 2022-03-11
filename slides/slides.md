@@ -281,7 +281,7 @@ export const loader = Promise.all(
 
 ---
 title: Changelog
-class: bg-[#EFF8FA]
+class: bg-lightblue-100
 ---
 
 ## Fachwerk Slides changelog
