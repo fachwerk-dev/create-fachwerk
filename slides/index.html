@@ -82,7 +82,14 @@
           loader = fetch("./slides.md").then((res) => res.text());
         }
         const rawSlides = await loader;
-        const slides = parseSlides(rawSlides).slides;
+        let global = {}
+        const slides = parseSlides(rawSlides).slides.map(s => {
+          if (s.frontmatter?.global) {
+            global = {...global, ...s.frontmatter.global}
+          }
+          s.frontmatter.global = global
+          return s
+        })
 
         const slidesTemplate = slides.map(
           (s, i) =>
@@ -91,9 +98,10 @@
           prose md:prose-xl p-4 md:p-12 max-w-none min-h-screen 
           prose-code:px-1 prose-p:max-w-[70ch]
           prose-code:before:content-none prose-code:after:content-none
+          ${s.frontmatter?.global?.class}
           ${s.frontmatter?.class}
         "
-        style="${s.frontmatter?.style}"
+        style="${s.frontmatter?.global?.style};${s.frontmatter?.style}"
         v-show="slide === ${i}"
       >
         ${parseMarkdown(s.content)}
