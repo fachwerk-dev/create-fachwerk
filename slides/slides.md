@@ -1,8 +1,8 @@
 ---
 title: Frontpage
 class: bg-lightblue-500 grid place-content-center place-items-center text-center
-# global:
-#   class: bg-lightblue-300 md:text-2xl
+global:
+  class: bg-lightblue-300 md:text-2xl
 ---
 
 # ▦ Fachwerk Slides
@@ -15,7 +15,7 @@ title: About
 
 ## About
 
-Fachwerk Slides is an experimental distribution of Fachwerk library. It combines [Fachwerk](https://fachwerk.dev/) components and utilities, [Tailwind Play CDN](https://tailwindcss.com/docs/installation/play-cdn) styling and [Slidev presentation format](https://sli.dev/guide/syntax.html) (based on Markdown). All this is packaged just into a HTML, JS and MD file and no build tools are needed for slide authoring.
+Fachwerk Slides is an experimental distribution of Fachwerk library. It combines [Fachwerk](https://fachwerk.dev/) components and utilities, [Tailwind Play CDN](https://tailwindcss.com/docs/installation/play-cdn) styling and [Slidev presentation format](https://sli.dev/guide/syntax.html) (based on Markdown). All this is packaged just into a HTML, JS, CSS and MD file and no build tools are needed for slide authoring.
 
 ## Getting started
 
@@ -101,7 +101,7 @@ title: Styling
 class: bg-yellow-500
 ---
 
-## Styling slides
+## Styling
 
 #### Local styles
 
@@ -120,7 +120,7 @@ class: bg-yellow-500
 class: bg-amber-500
 ---
 
-## Styling slides
+## Styling
 
 #### Global styles
 
@@ -174,11 +174,35 @@ class: grid place-content-center place-items-center	text-center
 And I am too
 
 ---
+title: Custom CSS
+---
+
+## Custom CSS
+
+Adding huge number of elemement classes can be repetitive. To overcome this, add custom CSS classes to `slides.css` with Tailwind `@apply` directive.
+
+Here is a custom `.center` class that centers elements on the slide:
+
+```
+.center {
+    @apply grid place-content-center place-items-center text-center;	
+}
+```
+
+Here is how to use it in slide metadata:
+
+```
+---
+class: center
+---
+```
+
+---
 title: Images
 class: prose-invert bg-cover bg-[url(https://designstem.github.io/fachwerk/images/example.jpg)]
 ---
 
-## Background images
+## Images
 
 #### Full background
 

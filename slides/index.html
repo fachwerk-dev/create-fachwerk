@@ -41,12 +41,6 @@
       };
     </script>
     <style type="text/tailwindcss">
-      .prose button {
-        @apply border-2 border-gray-600 px-4 py-1 rounded;
-      }
-      .prose button:hover {
-        @apply bg-black/5;
-      }
       .prose > * > h1:first-child,
       .prose > * > h2:first-child,
       .prose > * > h3:first-child,
@@ -130,7 +124,7 @@
 
         const template = `
       ${slidesTemplate.join("\n\n")}
-      <div ref="menuRef" v-if="menu" class="fixed top-0 right-0 bottom-0 w-[80vw] md:w-[25vw] p-6 bg-white shadow">
+      <div ref="menuRef" v-if="menu" class="not-prose fixed top-0 right-0 bottom-0 w-[80vw] md:w-[25vw] p-6 bg-white shadow">
         <div class="overflow-auto leading-8">
           <div class="cursor-pointer text-gray-700 hover:text-gray-900" v-for="slide in slides.filter(s => s.frontmatter?.title)" @click="goto(slide.frontmatter.title); menu = false">
             {{ slide.frontmatter?.title }}
@@ -138,12 +132,9 @@
         </div>
       </div>
       <div class="text-lg md:text-2xl fixed right-3 bottom-3 flex text-md transition-opacity opacity-100 md:opacity-20 hover:md:opacity-100 bg-white md:bg-transparent rounded md:rounded-none shadow md:shadow-none">
-        <button ref="menuIgnoreRef" class="px-2 outline-none" @click="menu = !menu">≡</button>
-        <button class="px-3 outline-none" @click="prev">‹</button>
-        <button class="px-3 outline-none" @click="next">›</button>
-        </div>
-      <div class="text-lg fixed right-3 bottom-3 flex text-md transition-opacity opacity-100 md:opacity-20 hover:md:opacity-100 bg-white md:bg-transparent rounded md:rounded-none shadow md:shadow-none">
-
+        <button ref="menuIgnoreRef" class="border-none px-2 outline-none" @click="menu = !menu">≡</button>
+        <button class="border-none px-3 outline-none" @click="prev">‹</button>
+        <button class="border-none px-3 outline-none" @click="next">›</button>
       </div>
       `;
 
@@ -197,6 +188,12 @@
         app.use(Fachwerk);
         app.mount("#app");
       }
+
+      const styles = await fetch('./slides.css').then(res => res.text())
+      const styleEl = document.createElement("style");
+      styleEl.setAttribute("type", "text/tailwindcss");
+      styleEl.textContent = styles;
+      document.head.append(styleEl);
 
       import * as config from "./slides.js";
       createFachwerk(config);
