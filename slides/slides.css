@@ -1,6 +1,6 @@
 .center {
   @apply grid place-content-center place-items-center;
 }
-button {
-  @apply border-2 border-gray-600 px-4 py-1 rounded;
+.prose button {
+  @apply border-2 border-gray-600 px-4 py-1 lg:px-6 lg:py-3 rounded;
 }
