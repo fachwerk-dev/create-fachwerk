@@ -1,8 +1,8 @@
 ---
 title: Frontpage
 class: bg-lightblue-500 grid place-content-center place-items-center text-center
-global:
-  class: bg-lightblue-300 md:text-2xl
+#global:
+#  class: bg-lightblue-300 md:text-2xl
 ---
 
 # ▦ Fachwerk Slides
@@ -219,7 +219,7 @@ class: prose-invert bg-cover bg-[url(https://your-image-here.jpg)]
 class: p-0 md:p-0 grid grid-cols-1 md:grid-cols-2
 ---
 
-<div class="p-4 md:p-12">
+<div class="p-4 md:p-[5vw]">
 
 ## Background images
 
@@ -231,7 +231,7 @@ Here's how to create a responsive layout with an image background:
 ---
 class: p-0 md:p-0 grid grid-cols-1 md:grid-cols-2
 ---
-<div class="p-4 md:p-12">
+<div class="p-4 md:p-[5vw]">
 
 # Hello world
 

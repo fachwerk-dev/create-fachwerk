@@ -15,6 +15,14 @@
     <div id="app"></div>
     <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
     <script>
+      const round = (num) =>
+        num
+          .toFixed(7)
+          .replace(/(\.[0-9]+?)0+$/, "$1")
+          .replace(/\.0$/, "");
+      const rem = (px) => `${round(px / 16)}rem`;
+      const em = (px, base) => `${round(px / base)}em`;
+
       tailwind.config = {
         theme: {
           fontFamily: {
@@ -22,6 +30,9 @@
             mono: ["Cousine", "monospace"],
           },
           extend: {
+            screens: {
+              "2xl": "1600px",
+            },
             colors: {
               lightblue: {
                 50: "#F7FBFD",
@@ -100,17 +111,30 @@
           const classes = twMerge(
             `
               p-4
-              md:p-12
+              md:p-[10vw]
               max-w-none
               min-h-screen
               prose
-              md:prose-xl
-              prose-code:px-1
+              md:prose-lg
+              xl:prose-2xl
               prose-p:max-w-[70ch]
               prose-code:before:content-none
               prose-code:after:content-none
-              prose-img:p-0
-            `,
+              prose-code:px-1
+              2xl:prose-p:text-3xl
+              2xl:prose-p:leading-relaxed
+              2x:prose-p:my-[2.5vw]
+              2xl:prose-h1:text-8xl
+              2xl:prose-h2:text-6xl
+              2xl:prose-h3:text-4xl
+              2xl:prose-h4:text-3xl
+              2xl:prose-h5:text-2xl
+              2xl:prose-code:text-2xl
+              2xl:prose-code:leading-[2.5em]
+              2xl:prose-pre:p-[2.5vw]
+              2xl:prose-pre:max-w-[120ch]
+              2xl:prose-li:text-3xl
+              `,
             s.frontmatter?.global?.class,
             s.frontmatter?.class
           );
@@ -189,7 +213,7 @@
         app.mount("#app");
       }
 
-      const styles = await fetch('./slides.css').then(res => res.text())
+      const styles = await fetch("./slides.css").then((res) => res.text());
       const styleEl = document.createElement("style");
       styleEl.setAttribute("type", "text/tailwindcss");
       styleEl.textContent = styles;

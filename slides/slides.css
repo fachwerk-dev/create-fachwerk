@@ -1,6 +1,6 @@
 .center {
-    @apply grid place-content-center place-items-center;	
+  @apply grid place-content-center place-items-center;
 }
 button {
-    @apply border-2 border-gray-600 px-4 py-1 rounded;
+  @apply border-2 border-gray-600 px-4 py-1 rounded;
 }
