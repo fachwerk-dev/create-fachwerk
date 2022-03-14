@@ -219,7 +219,7 @@ class: prose-invert bg-cover bg-[url(https://your-image-here.jpg)]
 class: p-0 md:p-0 grid grid-cols-1 md:grid-cols-2
 ---
 
-<div class="p-4 md:p-[5vw]">
+<div class="p-4 md:p-[4vw]">
 
 ## Background images
 
