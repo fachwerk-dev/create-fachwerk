@@ -14,44 +14,20 @@
   <body>
     <div id="app"></div>
     <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
-    <script>
-      const round = (num) =>
-        num
-          .toFixed(7)
-          .replace(/(\.[0-9]+?)0+$/, "$1")
-          .replace(/\.0$/, "");
-      const rem = (px) => `${round(px / 16)}rem`;
-      const em = (px, base) => `${round(px / base)}em`;
-
-      tailwind.config = {
-        theme: {
-          fontFamily: {
-            sans: ["IBM Plex Sans", "sans-serif"],
-            mono: ["Cousine", "monospace"],
-          },
-          extend: {
-            screens: {
-              "2xl": "1600px",
-            },
-            colors: {
-              lightblue: {
-                50: "#F7FBFD",
-                100: "#EFF8FA",
-                200: "#E0F0F5",
-                300: "#CCE7F0",
-                400: "#BDDFEB",
-                500: "#ADD8E6",
-                600: "#67B6D1",
-                700: "#338BA8",
-                800: "#1F5466",
-                900: "#0A1A1F",
-              },
-            },
-          },
-        },
-      };
-    </script>
+    <script></script>
     <style type="text/tailwindcss">
+      input {
+        @apply w-full;
+      }
+      input[type="range"] {
+        @apply [appearance:none] h-0.5 bg-gray-500 rounded-full w-full md:max-w-lg outline-none border-none -translate-y-1;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        @apply [appearance:none] outline-none bg-white rounded-full shadow-xl h-6 w-6 border-2 border-solid hover:ring-2 active:ring-4 hover:ring-gray-900/10 active:ring-gray-900/10 transition-all;
+      }
+      button {
+        @apply border-2 border-gray-500 px-4 py-1 lg:px-6 lg:py-3 rounded border-2 hover:ring-2 active:ring-4 hover:ring-gray-900/5 active:ring-gray-900/10 transition-all;
+      }
       .prose > * > h1:first-child,
       .prose > * > h2:first-child,
       .prose > * > h3:first-child,
@@ -89,6 +65,42 @@
       import { useStorage, onKeyStroke, onClickOutside } from "@vueuse/core";
       import { twMerge } from "tailwind-merge";
 
+      const round = (num) =>
+        num
+          .toFixed(7)
+          .replace(/(\.[0-9]+?)0+$/, "$1")
+          .replace(/\.0$/, "");
+      const rem = (px) => `${round(px / 16)}rem`;
+      const em = (px, base) => `${round(px / base)}em`;
+
+      tailwind.config = {
+        theme: {
+          fontFamily: {
+            sans: ["IBM Plex Sans", "sans-serif"],
+            mono: ["Cousine", "monospace"],
+          },
+          extend: {
+            screens: {
+              "2xl": "1600px",
+            },
+            colors: {
+              lightblue: {
+                50: "#F7FBFD",
+                100: "#EFF8FA",
+                200: "#E0F0F5",
+                300: "#CCE7F0",
+                400: "#BDDFEB",
+                500: "#ADD8E6",
+                600: "#67B6D1",
+                700: "#338BA8",
+                800: "#1F5466",
+                900: "#0A1A1F",
+              },
+            },
+          },
+        },
+      };
+
       export async function createFachwerk({
         setup = {},
         components = {},
@@ -118,6 +130,8 @@
               md:prose-lg
               xl:prose-2xl
               prose-p:max-w-[70ch]
+              md:prose-h1:text-6xl
+              md:prose-h1:tracking-tight
               prose-code:before:content-none
               prose-code:after:content-none
               prose-code:px-1
