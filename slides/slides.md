@@ -363,20 +363,6 @@ export const loader = Promise.all(
 ```
 
 ---
-title: Changelog
-class: bg-lightblue-100
----
-
-## Fachwerk Slides changelog
-
-#### 0.0.4
-
-- feat: Allow defining `{ setup, components, loader }` in `slides.js`
-- Allow define `global:` metadata
-- Fixing menu opening / closing
-- Bigger navigation controls
-
----
 title: Backpage
 class: bg-[lightblue] grid place-items-center 
 ---

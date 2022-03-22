@@ -17,9 +17,8 @@ const CustomComponent = {
     return { f };
   },
   template: `
-    <div class="opacity-50">I am CustomComponent using Fachwerk's f.x: {{ f.x }}</div>
+    <div class="opacity-50">I am CustomComponent and I can change {{ f.x }}</div>
     `,
 };
 
 export const components = { CustomComponent };
-
