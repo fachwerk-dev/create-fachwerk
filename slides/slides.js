@@ -17,7 +17,7 @@ const CustomComponent = {
     return { f };
   },
   template: `
-    <div class="opacity-50">I am CustomComponent and I can change {{ f.x }}</div>
+    <div class="opacity-50">I am CustomComponent and f.x is {{ f.x }}</div>
     `,
 };
 

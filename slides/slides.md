@@ -80,10 +80,10 @@ By default slide navigation is linear and can be controlled with `‹` `›` but
 However, you can set non-linear navigation by providing buttons of jump to a specific page. You can use `prev()` and `next()` functions to jump between pages:
 
 ```
-<button v-on:click="next()">Goto next slide ›</button>
+<button v-on:click="next()">Goto next slide</button>
 ```
 
-<button v-on:click="next()">Goto next slide ›</button>
+<button v-on:click="next()">Goto next slide</button>
 
 ---
 
@@ -91,9 +91,11 @@ However, you can set non-linear navigation by providing buttons of jump to a spe
 
 You can also jump to a page with a specfic title using `goto()` function:
 
-<button v-on:click="goto('Styling')">Goto "Styling" page ›</button>
+```
+<button v-on:click="goto('Styling')">Goto Styling page</button>
+```
 
-Yes, it is also a next page.
+<button v-on:click="goto('Styling')">Goto Styling page</button>
 
 
 ---
@@ -103,7 +105,7 @@ class: bg-yellow-500
 
 ## Styling
 
-#### Local styles
+#### Slide styles
 
 To style the the _current_ slide, add `class:` to the metadata with Tailwind classes.
 
@@ -143,11 +145,23 @@ class: bg-gray-900 prose-invert
 
 ## Dark theme
 
+#### Slide styling
+
 To style the slide with dark background it is recommended to invert also the text colors with `prose-invert` class. See more at Tailwind [typography plugin](https://tailwindcss.com/docs/typography-plugin).
 
 ```yaml
 ---
 class: bg-gray-900 prose-invert
+---
+```
+
+#### Global styling
+
+To make all the slides into dark theme, use a `global:` metadata:
+```yaml
+---
+global:
+  class: bg-gray-900 prose-invert
 ---
 ```
 
@@ -161,7 +175,7 @@ To center the content, use CSS Grid centering:
 
 ```yaml
 ---
-class: grid place-content-center place-items-center	
+class: grid place-content-center place-items-center text-center
 ---
 ```
 
@@ -179,7 +193,7 @@ title: Custom CSS
 
 ## Custom CSS
 
-Adding huge number of elemement classes can be repetitive. To overcome this, add custom CSS classes to `slides.css` with Tailwind `@apply` directive.
+Adding many specific classes to slides is sometimes hard to memorize. To overcome this, add custom CSS classes to `slides.css` with Tailwind `@apply` directive and re-use them later.
 
 Here is a custom `.center` class that centers elements on the slide:
 
@@ -248,10 +262,11 @@ class: p-0 md:p-0 grid grid-cols-1 md:grid-cols-2
 class: bg-gray-800 grid place-content-center place-items-center prose-invert
 ---
 
-<f-math>Oh\ yes, math</f-math>
+<f-math>Oh\ yes, there\ is\ math</f-math>
 
 <f-math>\begin{pmatrix} a & c & e \\\\ b & d & f \\\\ 0 & 0 & 1 \end{pmatrix}</f-math>
 
+See more at Fachwerk [math documentation](https://fachwerk.dev/components/f-math)
 ---
 title: Variables
 ---
@@ -357,9 +372,11 @@ Here is an example to load two Markdown files, `first.md` and `second.md` and me
 
 ```js
 const files = ["first.md", "second.md"]
+
 export const loader = Promise.all(
   files.map((file) => fetch(file).then((res) => res.text()))
-).then((files) => files.join(""));
+)
+.then((files) => files.join(""));
 ```
 
 ---
