@@ -266,7 +266,7 @@ class: bg-gray-800 grid place-content-center place-items-center prose-invert
 
 <f-math>\begin{pmatrix} a & c & e \\\\ b & d & f \\\\ 0 & 0 & 1 \end{pmatrix}</f-math>
 
-See more at Fachwerk [math documentation](https://fachwerk.dev/components/f-math)
+See more at https://fachwerk.dev/components/f-math
 ---
 title: Variables
 ---
@@ -289,7 +289,7 @@ Lets set a variable `f.x` and control it with a slider:
 
 #### Setting up
 
-When you need to do more complex data processing, you can set up the VueJS variables and functions in Javascript.
+When you need to do more complex data processing, you can set up the VueJS [reactive variables](https://vuejs.org/guide/extras/reactivity-transform.html) and functions.
 
 To do so, edit the `slides.js` file:
 
