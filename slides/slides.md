@@ -1,8 +1,8 @@
 ---
 title: Frontpage
-class: bg-lightblue-500 grid place-content-center place-items-center text-center
+class: bg-[lightblue] grid place-content-center place-items-center text-center
 #global:
-#  class: bg-lightblue-300 md:text-2xl
+#  class:bg-[lightblue] md:text-2xl
 ---
 
 # ▦ Fachwerk Slides

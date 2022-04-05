@@ -15,12 +15,6 @@
     <div id="app"></div>
     <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
     <style type="text/tailwindcss">
-      input {
-        @apply w-full;
-      }
-      input[type="range"] {
-        @apply w-full accent-lightblue-700 md:w-1/2;
-      }
       button {
         @apply border-2 border-gray-500 px-4 py-1 lg:px-6 lg:py-3 rounded border-2 hover:border-gray-700 transition-all;
       }
@@ -74,25 +68,6 @@
           fontFamily: {
             sans: ["IBM Plex Sans", "sans-serif"],
             mono: ["Cousine", "monospace"],
-          },
-          extend: {
-            screens: {
-              "2xl": "1600px",
-            },
-            colors: {
-              lightblue: {
-                50: "#F7FBFD",
-                100: "#EFF8FA",
-                200: "#E0F0F5",
-                300: "#CCE7F0",
-                400: "#BDDFEB",
-                500: "#ADD8E6",
-                600: "#67B6D1",
-                700: "#338BA8",
-                800: "#1F5466",
-                900: "#0A1A1F",
-              },
-            },
           },
         },
       };
@@ -172,8 +147,26 @@
       </div>
       `;
 
+        const Icon = {
+          props: ["id"],
+          setup(props) {
+            const icon = ref("");
+            const [collection, name] = props.id.split(":");
+            fetch(`https://unpkg.com/@iconify/json/json/${collection}.json`)
+              .then((res) => res.json())
+              .then(({ icons }) => {
+                icon.value = icons[name].body;
+              });
+            return { icon };
+          },
+          template: `
+          <svg class="w-5 h-5 inline-block align-middle" viewBox="0 0 24 24">
+            <g :class="[icon ? 'opacity-100' : 'opacity-0']" class="transition-all" v-html="icon" />
+          </svg>`,
+        };
+
         const App = {
-          components,
+          components: { Icon, ...components },
           setup() {
             const menuRef = ref(null);
             const menuIgnoreRef = ref(null);
