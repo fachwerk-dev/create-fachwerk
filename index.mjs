@@ -55,7 +55,9 @@ try {
   const choice = choices.filter((c) => c.value === sourceDir)[0];
 
   const filter = (src) => {
-    if (choice.protect?.includes(path.basename(src))) {
+    const filename = path.basename(src);
+    const targetPath = path.join(target, filename);
+    if (fs.pathExistsSync(targetPath) && choice.protect?.includes(filename)) {
       return false;
     }
     return true;
