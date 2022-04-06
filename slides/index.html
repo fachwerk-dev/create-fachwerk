@@ -23,8 +23,9 @@
       .prose > * > h3:first-child,
       .prose > * > h4:first-child,
       .prose > * > h5:first-child,
-      .prose > * > h6:first-child {
-        @apply mt-0;
+      .prose > * > h6:first-child,
+      .prose > * > * {
+        @apply !mt-0;
       }
     </style>
     <script
@@ -159,10 +160,7 @@
               });
             return { icon };
           },
-          template: `
-          <svg class="w-5 h-5 inline-block align-middle" viewBox="0 0 24 24">
-            <g :class="[icon ? 'opacity-100' : 'opacity-0']" class="transition-all" v-html="icon" />
-          </svg>`,
+          template: `<svg class="w-5 h-5 inline-block align-middle" viewBox="0 0 24 24" v-html="icon" />`,
         };
 
         const App = {

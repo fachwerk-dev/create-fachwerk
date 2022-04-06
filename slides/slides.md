@@ -1,8 +1,8 @@
 ---
 title: Frontpage
 class: bg-[lightblue] grid place-content-center place-items-center text-center
-#global:
-#  class:bg-[lightblue] md:text-2xl
+global:
+  class: bg-[lightblue]
 ---
 
 # ▦ Fachwerk Slides
@@ -210,6 +210,58 @@ Here is how to use it in slide metadata:
 class: center
 ---
 ```
+
+---
+title: Icons
+---
+
+## Icons
+
+Fachwerk support using custom icons powered by [Icônes](https://icones.js.org). Here's how to use them.
+
+First pick an icon from a collection. We prefer [Tabler](https://icones.js.org/collection/tabler) icons but you can choose from any collection. Click on an icon and take the note of the ID of the icon, such as `tabler:peace` and use the following markup:
+
+```
+<Icon id="tabler:peace" />
+```
+
+<Icon id="tabler:peace" />
+
+To customize the icon, use Tailwind classes:
+
+```
+<Icon id="tabler:peace" class="w-32 h-32 text-yellow-400 hover:scale-150 transition" />
+```
+
+<Icon id="tabler:peace" class="w-32 h-32 text-blue-500 hover:scale-150 transition" />
+
+---
+title: Icons
+---
+
+## Icons and layout
+
+There is also a way to combine Tailwind layout classes and icons:
+
+```
+<div class="grid grid-cols-[auto_1fr] gap-2">
+  <Icon id="tabler:circle-1" class="w-8 h-8" />
+  Add a div with layout classes
+  <Icon id="tabler:circle-2" class="w-8 h-8" />
+  Pick some icons
+  <Icon id="tabler:circle-3" class="w-8 h-8" />
+  Profit!
+</div>
+```
+
+<div class="grid grid-cols-[auto_1fr] gap-2">
+  <Icon id="tabler:circle-1" class="w-8 h-8" />
+  Add a div with layout classes
+  <Icon id="tabler:circle-2" class="w-8 h-8" />
+  Pick some icons
+  <Icon id="tabler:circle-3" class="w-8 h-8" />
+  Profit!
+</div>
 
 ---
 title: Images
