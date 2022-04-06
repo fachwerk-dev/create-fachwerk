@@ -233,7 +233,7 @@ To customize the icon, use Tailwind classes:
 <Icon id="tabler:peace" class="w-32 h-32 text-yellow-400 hover:scale-150 transition" />
 ```
 
-<Icon id="tabler:peace" class="w-32 h-32 text-blue-500 hover:scale-150 transition" />
+<Icon id="tabler:peace" class="w-32 h-32 text-cyan-500 hover:scale-150 transition" />
 
 ---
 title: Icons
@@ -245,21 +245,21 @@ There is also a way to combine Tailwind layout classes and icons:
 
 ```
 <div class="grid grid-cols-[auto_1fr] gap-2">
-  <Icon id="tabler:circle-1" class="w-8 h-8" />
+  <Icon id="tabler:circle-1" class="w-10 h-10" />
   Add a div with layout classes
-  <Icon id="tabler:circle-2" class="w-8 h-8" />
+  <Icon id="tabler:circle-2" class="w-10 h-10" />
   Pick some icons
-  <Icon id="tabler:circle-3" class="w-8 h-8" />
+  <Icon id="tabler:circle-3" class="w-10 h-10" />
   Profit!
 </div>
 ```
 
 <div class="grid grid-cols-[auto_1fr] gap-2">
-  <Icon id="tabler:circle-1" class="w-8 h-8" />
+  <Icon id="tabler:circle-1" class="w-10 h-10" />
   Add a div with layout classes
-  <Icon id="tabler:circle-2" class="w-8 h-8" />
+  <Icon id="tabler:circle-2" class="w-10 h-10" />
   Pick some icons
-  <Icon id="tabler:circle-3" class="w-8 h-8" />
+  <Icon id="tabler:circle-3" class="w-10 h-10" />
   Profit!
 </div>
 
