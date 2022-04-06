@@ -37,7 +37,7 @@
         "imports": {
           "vue": "https://unpkg.com/vue/dist/vue.esm-browser.prod.js",
           "fachwerk": "https://unpkg.com/fachwerk/dist/fachwerk.mjs",
-          "marked": "https://unpkg.com/marked/lib/marked.esm.js",
+          "fachwerk/internal": "https://unpkg.com/fachwerk/dist/internal.mjs",
           "js-yaml": "https://unpkg.com/js-yaml/dist/js-yaml.mjs",
           "@slidev/parser": "https://unpkg.com/@slidev/parser/dist/index.mjs",
           "vue-demi": "https://unpkg.com/vue-demi/lib/index.mjs",
@@ -51,7 +51,7 @@
     <script type="module">
       import { createApp, ref } from "vue";
       import { Fachwerk } from "fachwerk";
-      import { parse as parseMarkdown } from "marked";
+      import { compileMarkdown } from "fachwerk/internal";
       import { parse as parseSlides } from "@slidev/parser";
       import { useStorage, onKeyStroke, onClickOutside } from "@vueuse/core";
       import { twMerge } from "tailwind-merge";
@@ -128,7 +128,7 @@
             class="${classes}"
             v-show="slide === ${i}"
           >
-            ${parseMarkdown(s.content)}
+            ${compileMarkdown(s.content)}
           </div>`;
         });
 
