@@ -319,22 +319,82 @@ class: bg-gray-800 grid place-content-center place-items-center prose-invert
 <f-math>\begin{pmatrix} a & c & e \\\\ b & d & f \\\\ 0 & 0 & 1 \end{pmatrix}</f-math>
 
 See more at https://fachwerk.dev/components/f-math
+
 ---
-title: Variables
+class: center bg-[lightblue]
 ---
 
-## Fachwerk variables
+# Working with data
 
-To use reactive variables use Fachwerk's builtin `f` object that can contain any number of variables.
+---
+title: Defining data
+data: 
+  names:
+    - Romy Schneider
+    - Klaus Kinski
+---
 
-Lets set a variable `f.x` and control it with a slider:
+## Defining data
+
+Sometimes it is useful to separate the markup and the data. You can define the data in the frontmatter:
+
+```
+---
+data: 
+  names:
+    - Romy Schneider
+    - Klaus Kinski
+---
+```
+
+You can access the data with `data.names`:
+
+```
+❴❴ data.names ❵❵
+```
+
+{{ data.names }}
+---
+
+## Displaying data
+
+It is more useful to actually loop over the data to display it:
+
+```
+<div class="grid gap-4">
+  <div
+    v-for="name in data.names"
+    class="p-4 bg-yellow-500 rounded"
+  >
+    ❴❴ name ❵❵
+  </div>
+</div>
+```
+
+<div class="flex gap-4">
+  <div
+    v-for="name in data.names"
+    class="p-4 bg-yellow-500 rounded"
+  >
+    {{ name }}
+  </div>
+</div>
+
+---
+
+## Reactive data
+
+The data does not have to be static, it can also be dynamically modified or _reactive_.
+
+Lets set a variable `data.x` and control it with a slider:
 
 <pre v-pre>
-&lt;f-slider v-model="f.x" />  {{ f.x }}
+&lt;f-slider v-model="data.x" />  {{ data.x }}
 </pre>
 
-<f-slider v-model="f.x" /> {{ f.x }}
+<f-slider v-model="data.x" /> {{ data.x }}
 
+<Info>Not that we did not worked here at all</Info>
 ---
 
 ## Custom variables and functions
@@ -388,7 +448,7 @@ import { f } from "fachwerk";
 
 const CustomComponent = {
   setup() { return { f } },
-  template: `<div class="opacity-50">I am CustomComponent using Fachwerk's f.x: ﹛﹛ f.x ﹜﹜</div>`
+  template: `<div class="opacity-50">I am CustomComponent using Fachwerk's data.x: ﹛﹛ data.x ﹜﹜</div>`
 }
 
 export const components = { CustomComponent }
@@ -405,12 +465,12 @@ Here's how to use the component in `slides.md`:
 ```
 <CustomComponent />
 
-<f-slider v-model="f.x" />
+<f-slider v-model="data.x" />
 ```
 
 <CustomComponent />
 
-<f-slider v-model="f.x" />
+<f-slider v-model="data.x" />
 
 ---
 title: Loader

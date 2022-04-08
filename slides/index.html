@@ -46,7 +46,7 @@
     </script>
     <script type="module">
       import { createApp, ref } from "vue";
-      import { Fachwerk, f } from "fachwerk";
+      import { Fachwerk, data } from "fachwerk";
       import { compileMarkdown } from "fachwerk/internal";
       import { parse as parseSlides } from "@slidev/parser";
       import { useStorage, onKeyStroke, onClickOutside } from "@vueuse/core";
@@ -77,6 +77,15 @@
         template: `<svg class="w-5 h-5 inline-block align-middle" viewBox="0 0 24 24" v-html="icon" />`,
       };
 
+      const Info = {
+        inheritAttrs: false,
+        template: `
+        <div class="grid grid-cols-[auto,1fr] gap-2">
+          <Icon id="tabler:info-circle" class="w-6 h-6 translate-y-1" />
+          <div v-bind="$attrs" class="text-gray-500"><slot /></div>
+        </div>`,
+      };
+
       export async function createFachwerk({
         setup = {},
         components = {},
@@ -88,9 +97,9 @@
         const rawSlides = await loader;
         let global = {};
         const slides = parseSlides(rawSlides).slides.map((s) => {
-          if (s.frontmatter?.f) {
-            Object.entries(s.frontmatter.f).forEach(([key, value]) => {
-              f[key] = value;
+          if (s.frontmatter?.data) {
+            Object.entries(s.frontmatter.data).forEach(([key, value]) => {
+              data[key] = value;
             });
           }
           if (s.frontmatter?.global) {
@@ -116,9 +125,17 @@
                 prose-code:before:content-none
                 prose-code:after:content-none
                 prose-code:px-1
+                prose-p:before:content-none
+                prose-p:after:content-none
+                prose-blockquote:border-l-4
+                prose-blockquote:border-yellow-400
+                prose-blockquote:pl-6
+                prose-blockquote:font-normal
+                prose-blockquote:not-italic
+                prose-blockquote:text-gray-600
                 2xl:prose-p:text-3xl
                 2xl:prose-p:leading-relaxed
-                2x:prose-p:my-[2.5vw]
+                2xl:prose-p:my-[2.5vw]
                 2xl:prose-h1:text-8xl
                 2xl:prose-h2:text-6xl
                 2xl:prose-h3:text-4xl
@@ -206,6 +223,7 @@
         const app = createApp(App);
         app.use(Fachwerk);
         app.component("Icon", Icon);
+        app.component("Info", Info);
         app.mount("#app");
       }
 
