@@ -5,10 +5,12 @@ export const fonts =
 
 // Customize theme
 
-export const theme = {
-  fontFamily: {
-    sans: ["IBM Plex Sans", "sans-serif"],
-    mono: ["Cousine", "monospace"],
+export const tailwind = {
+  theme: {
+    fontFamily: {
+      sans: ["IBM Plex Sans", "sans-serif"],
+      mono: ["Cousine", "monospace"],
+    },
   },
 };
 
