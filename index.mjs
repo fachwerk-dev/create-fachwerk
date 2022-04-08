@@ -30,7 +30,7 @@ const choices = [
     title: "Slides (experimental)",
     description: "With Tailwind support",
     value: "slides",
-    protect: ["slides.md", "slides.js"],
+    protect: ["slides.md", "slides.js", "slides.css"],
   },
 ];
 

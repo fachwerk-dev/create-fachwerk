@@ -73,6 +73,21 @@
         },
       };
 
+      const Icon = {
+        props: ["id"],
+        setup(props) {
+          const icon = ref("");
+          const [collection, name] = props.id.split(":");
+          fetch(`https://unpkg.com/@iconify/json/json/${collection}.json`)
+            .then((res) => res.json())
+            .then(({ icons }) => {
+              icon.value = icons[name].body;
+            });
+          return { icon };
+        },
+        template: `<svg class="w-5 h-5 inline-block align-middle" viewBox="0 0 24 24" v-html="icon" />`,
+      };
+
       export async function createFachwerk({
         setup = {},
         components = {},
@@ -148,23 +163,8 @@
       </div>
       `;
 
-        const Icon = {
-          props: ["id"],
-          setup(props) {
-            const icon = ref("");
-            const [collection, name] = props.id.split(":");
-            fetch(`https://unpkg.com/@iconify/json/json/${collection}.json`)
-              .then((res) => res.json())
-              .then(({ icons }) => {
-                icon.value = icons[name].body;
-              });
-            return { icon };
-          },
-          template: `<svg class="w-5 h-5 inline-block align-middle" viewBox="0 0 24 24" v-html="icon" />`,
-        };
-
         const App = {
-          components: { Icon, ...components },
+          components,
           setup() {
             const menuRef = ref(null);
             const menuIgnoreRef = ref(null);
@@ -211,6 +211,7 @@
 
         const app = createApp(App);
         app.use(Fachwerk);
+        app.component("Icon", Icon);
         app.mount("#app");
       }
 
