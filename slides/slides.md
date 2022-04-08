@@ -282,7 +282,7 @@ class: prose-invert bg-cover bg-[url(https://your-image-here.jpg)]
 
 
 ---
-class: p-0 md:p-0 grid grid-cols-1 md:grid-cols-2
+class: p-0 md:p-0 md:grid md:grid-cols-2
 ---
 
 <div class="p-4 md:p-[4vw]">
@@ -308,7 +308,7 @@ class: p-0 md:p-0 grid grid-cols-1 md:grid-cols-2
 
 </div>
 
-<div class="bg-cover bg-[url(https://designstem.github.io/fachwerk/images/example.jpg)]" />
+<div class="bg-cover h-screen bg-[url(https://designstem.github.io/fachwerk/images/example.jpg)]" />
 
 ---
 class: bg-gray-800 grid place-content-center place-items-center prose-invert

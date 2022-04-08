@@ -1,4 +1,4 @@
 @import url("https://unpkg.com/fachwerk/dist/style.css");
 .center {
-  @apply grid place-content-center place-items-center;
+  @apply grid place-content-center place-items-center text-center;
 }

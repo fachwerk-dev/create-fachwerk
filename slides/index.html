@@ -6,10 +6,6 @@
     <link href="https://unpkg.com/fachwerk/dist/style.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cousine&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap"
-      rel="stylesheet"
-    />
   </head>
   <body>
     <div id="app"></div>
@@ -50,11 +46,13 @@
     </script>
     <script type="module">
       import { createApp, ref } from "vue";
-      import { Fachwerk } from "fachwerk";
+      import { Fachwerk, f } from "fachwerk";
       import { compileMarkdown } from "fachwerk/internal";
       import { parse as parseSlides } from "@slidev/parser";
       import { useStorage, onKeyStroke, onClickOutside } from "@vueuse/core";
       import { twMerge } from "tailwind-merge";
+
+      import * as config from "./slides.js";
 
       const round = (num) =>
         num
@@ -63,15 +61,6 @@
           .replace(/\.0$/, "");
       const rem = (px) => `${round(px / 16)}rem`;
       const em = (px, base) => `${round(px / base)}em`;
-
-      tailwind.config = {
-        theme: {
-          fontFamily: {
-            sans: ["IBM Plex Sans", "sans-serif"],
-            mono: ["Cousine", "monospace"],
-          },
-        },
-      };
 
       const Icon = {
         props: ["id"],
@@ -99,6 +88,11 @@
         const rawSlides = await loader;
         let global = {};
         const slides = parseSlides(rawSlides).slides.map((s) => {
+          if (s.frontmatter?.f) {
+            Object.entries(s.frontmatter.f).forEach(([key, value]) => {
+              f[key] = value;
+            });
+          }
           if (s.frontmatter?.global) {
             global = { ...global, ...s.frontmatter.global };
           }
@@ -109,59 +103,59 @@
         const slidesTemplate = slides.map((s, i) => {
           const classes = twMerge(
             `
-              p-4
-              md:p-[5vw]
-              max-w-none
-              min-h-screen
-              prose
-              md:prose-lg
-              xl:prose-2xl
-              prose-p:max-w-[70ch]
-              md:prose-h1:text-6xl
-              md:prose-h1:tracking-tight
-              prose-code:before:content-none
-              prose-code:after:content-none
-              prose-code:px-1
-              2xl:prose-p:text-3xl
-              2xl:prose-p:leading-relaxed
-              2x:prose-p:my-[2.5vw]
-              2xl:prose-h1:text-8xl
-              2xl:prose-h2:text-6xl
-              2xl:prose-h3:text-4xl
-              2xl:prose-h4:text-3xl
-              2xl:prose-h5:text-2xl
-              2xl:prose-code:text-2xl
-              2xl:prose-code:leading-[2.5em]
-              2xl:prose-pre:p-[2.5vw]
-              2xl:prose-pre:max-w-[120ch]
-              2xl:prose-li:text-3xl
-              `,
+                p-4
+                md:p-[5vw]
+                max-w-none
+                min-h-screen
+                prose
+                md:prose-lg
+                xl:prose-2xl
+                prose-p:max-w-[70ch]
+                md:prose-h1:text-6xl
+                md:prose-h1:tracking-tight
+                prose-code:before:content-none
+                prose-code:after:content-none
+                prose-code:px-1
+                2xl:prose-p:text-3xl
+                2xl:prose-p:leading-relaxed
+                2x:prose-p:my-[2.5vw]
+                2xl:prose-h1:text-8xl
+                2xl:prose-h2:text-6xl
+                2xl:prose-h3:text-4xl
+                2xl:prose-h4:text-3xl
+                2xl:prose-h5:text-2xl
+                2xl:prose-code:text-2xl
+                2xl:prose-code:leading-[2.5em]
+                2xl:prose-pre:p-[2.5vw]
+                2xl:prose-pre:max-w-[120ch]
+                2xl:prose-li:text-3xl
+                `,
             s.frontmatter?.global?.class,
             s.frontmatter?.class
           );
           return `<div
-            class="${classes}"
-            v-show="slide === ${i}"
-          >
-            ${compileMarkdown(s.content)}
-          </div>`;
+              class="${classes}"
+              v-show="slide === ${i}"
+            >
+              ${compileMarkdown(s.content)}
+            </div>`;
         });
 
         const template = `
-      ${slidesTemplate.join("\n\n")}
-      <div ref="menuRef" v-if="menu" class="not-prose fixed top-0 right-0 bottom-0 w-[80vw] md:w-[25vw] p-6 bg-white shadow">
-        <div class="overflow-auto leading-8">
-          <div class="cursor-pointer text-gray-700 hover:text-gray-900" v-for="slide in slides.filter(s => s.frontmatter?.title)" @click="goto(slide.frontmatter.title); menu = false">
-            {{ slide.frontmatter?.title }}
+        ${slidesTemplate.join("\n\n")}
+        <div ref="menuRef" v-if="menu" class="not-prose fixed top-0 right-0 bottom-0 w-[80vw] md:w-[25vw] p-6 bg-white shadow">
+          <div class="overflow-auto leading-8">
+            <div class="cursor-pointer text-gray-700 hover:text-gray-900" v-for="slide in slides.filter(s => s.frontmatter?.title)" @click="goto(slide.frontmatter.title); menu = false">
+              {{ slide.frontmatter?.title }}
+            </div>
           </div>
         </div>
-      </div>
-      <div class="text-lg md:text-2xl fixed right-3 bottom-3 flex text-md transition-opacity opacity-100 md:opacity-20 hover:md:opacity-100 bg-white md:bg-transparent rounded md:rounded-none shadow md:shadow-none">
-        <button ref="menuIgnoreRef" class="border-none px-2 outline-none" @click="menu = !menu">≡</button>
-        <button class="border-none px-3 outline-none" @click="prev">‹</button>
-        <button class="border-none px-3 outline-none" @click="next">›</button>
-      </div>
-      `;
+        <div class="text-lg md:text-2xl fixed right-3 bottom-3 flex text-md transition-opacity opacity-100 md:opacity-20 hover:md:opacity-100 bg-white md:bg-transparent rounded md:rounded-none shadow md:shadow-none">
+          <button ref="menuIgnoreRef" class="border-none px-2 outline-none" @click="menu = !menu">≡</button>
+          <button class="border-none px-3 outline-none" @click="prev">‹</button>
+          <button class="border-none px-3 outline-none" @click="next">›</button>
+        </div>
+        `;
 
         const App = {
           components,
@@ -215,13 +209,27 @@
         app.mount("#app");
       }
 
+      // Add fonts
+
+      const fonts =
+        "https://fonts.googleapis.com/css2?family=Cousine&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap";
+
+      const fontsEl = document.createElement("link");
+      fontsEl.setAttribute("rel", "stylesheet");
+      fontsEl.setAttribute("href", config.fonts);
+      document.head.append(fontsEl);
+
+      tailwind.config.theme = config.theme;
+
+      // Add styles
+
       const styles = await fetch("./slides.css").then((res) => res.text());
+
       const styleEl = document.createElement("style");
       styleEl.setAttribute("type", "text/tailwindcss");
       styleEl.textContent = styles;
       document.head.append(styleEl);
 
-      import * as config from "./slides.js";
       createFachwerk(config);
     </script>
   </body>
