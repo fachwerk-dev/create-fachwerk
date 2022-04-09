@@ -74,16 +74,7 @@
             });
           return { icon };
         },
-        template: `<svg class="w-5 h-5 inline-block align-middle" viewBox="0 0 24 24" v-html="icon" />`,
-      };
-
-      const Info = {
-        inheritAttrs: false,
-        template: `
-        <div class="grid grid-cols-[auto,1fr] gap-2">
-          <Icon id="tabler:info-circle" class="w-6 h-6 translate-y-1" />
-          <div v-bind="$attrs" class="text-gray-500"><slot /></div>
-        </div>`,
+        template: `<svg class="w-5 h-5 inline-block align-middle text-gray-900" viewBox="0 0 24 24" v-html="icon" />`,
       };
 
       export async function createFachwerk({
@@ -223,7 +214,6 @@
         const app = createApp(App);
         app.use(Fachwerk);
         app.component("Icon", Icon);
-        app.component("Info", Info);
         app.mount("#app");
       }
 

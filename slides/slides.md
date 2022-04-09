@@ -212,56 +212,64 @@ class: center
 ```
 
 ---
+class: center bg-[lightblue]
+---
+ 
+<Icon id="bx:cloud" class="w-24 h-24" />
+
+<br />
+
+# Using icons
+
+---
 title: Icons
 ---
 
-## Icons
+## Using icons
 
-Fachwerk support using custom icons powered by [Icônes](https://icones.js.org). Here's how to use them.
+Fachwerk support using custom icons powered by [Icônes](https://icones.js.org). 
 
-First pick an icon from a collection. We prefer [Tabler](https://icones.js.org/collection/tabler) icons but you can choose from any collection. Click on an icon and take the note of the ID of the icon, such as `tabler:peace` and use the following markup:
+1. First pick an icon from a collection. We prefer [Boxicons](https://icones.js.org/collection/bx) but you can choose any collection. 
+
+2. Then click on an icon and take the note of the ID of the icon, such as `bx:smile`.
+
+3. Finally use the following markup in the slide:
 
 ```
-<Icon id="tabler:peace" />
+<Icon id="bx:smile" />
 ```
 
-<Icon id="tabler:peace" />
+<Icon id="bx:cloud" />
+
+---
+
+## Customizing icons
 
 To customize the icon, use Tailwind classes:
 
 ```
-<Icon id="tabler:peace" class="w-32 h-32 text-yellow-400 hover:scale-150 transition" />
+<Icon id="bx:cloud" class="w-24 h-24 text-gray-400 hover:scale-150 transition" />
+
+<Icon id="bx:cloud-snow" class="w-24 h-24 text-gray-600 hover:scale-150 transition" />
+
+<Icon id="bx:cloud-lightning" class="w-24 h-24 text-gray-800 hover:scale-150 transition" />
 ```
 
-<Icon id="tabler:peace" class="w-32 h-32 text-cyan-500 hover:scale-150 transition" />
+<Icon id="bx:cloud" class="w-24 h-24 text-gray-400 hover:scale-150 transition" />
+
+<Icon id="bx:cloud-snow" class="w-24 h-24 text-gray-600 hover:scale-150 transition" />
+
+<Icon id="bx:cloud-lightning" class="w-24 h-24 text-gray-800 hover:scale-150 transition" />
 
 ---
-title: Icons
+class: center bg-[lightblue]
 ---
+ 
+<Icon id="bx:image-alt" class="w-24 h-24" />
 
-## Icons and layout
+<br />
 
-There is also a way to combine Tailwind layout classes and icons:
-
-```
-<div class="grid grid-cols-[auto_1fr] gap-2">
-  <Icon id="tabler:circle-1" class="w-10 h-10" />
-  Add a div with layout classes
-  <Icon id="tabler:circle-2" class="w-10 h-10" />
-  Pick some icons
-  <Icon id="tabler:circle-3" class="w-10 h-10" />
-  Profit!
-</div>
-```
-
-<div class="grid grid-cols-[auto_1fr] gap-2">
-  <Icon id="tabler:circle-1" class="w-10 h-10" />
-  Add a div with layout classes
-  <Icon id="tabler:circle-2" class="w-10 h-10" />
-  Pick some icons
-  <Icon id="tabler:circle-3" class="w-10 h-10" />
-  Profit!
-</div>
+# Adding images
 
 ---
 title: Images
@@ -324,6 +332,10 @@ See more at https://fachwerk.dev/components/f-math
 class: center bg-[lightblue]
 ---
 
+<Icon id="bx:slider-alt" class="w-24 h-24" />
+
+<br />
+
 # Working with data
 
 ---
@@ -381,6 +393,9 @@ It is more useful to actually loop over the data to display it:
 </div>
 
 ---
+data: 
+  x: 50
+---
 
 ## Reactive data
 
@@ -388,49 +403,54 @@ The data does not have to be static, it can also be dynamically modified or _rea
 
 Lets set a variable `data.x` and control it with a slider:
 
+```
+---
+data: 
+  x: 50
+---
+```
 <pre v-pre>
-&lt;f-slider v-model="data.x" />  {{ data.x }}
+&lt;input type="range" v-model.number="data.x" />  {{ data.x }}
 </pre>
 
-<f-slider v-model="data.x" /> {{ data.x }}
+<input type="range" v-model.number="data.x" /> {{ data.x }}
 
-<Info>Not that we did not worked here at all</Info>
+
+> When variable's default value is 0, you can skip the frontmatter definition part
+
 ---
 
-## Custom variables and functions
+## Custom data
 
-#### Setting up
-
-When you need to do more complex data processing, you can set up the VueJS [reactive variables](https://vuejs.org/guide/extras/reactivity-transform.html) and functions.
-
-To do so, edit the `slides.js` file:
+When you need to do more complex data manipulation, you can define custom variables and functions in `slides.js` file that will be available in Markdown:
 
 ```js
 import { ref, computed } from "vue";
 const x = ref(0);
 const y = computed(() => x.value * 10);
 const reset = () => x.value = 0
-
 export const setup = { customX, customY, customReset }
 ```
 
----
-
-## Custom variables and functions
-
-#### Usage in Markdown
-
-You can access VueJS variables in Markdown as follows:
+You can access custom data in `slides.md` as follows:
 
 <pre v-pre>
-&lt;f-slider v-model="customX" /> {{ customY }}
-
-&lt;button v-on:click="customReset">Reset&lt/button>
+&lt;f-slider v-model="customX" /> {{ customX }} {{ customY }}
+&lt;button v-on:click="customReset">Reset&lt/button> &lt;a v-on:click="customReset">Reset&lt;/a>
 </pre>
 
-<f-slider v-model="customX" /> {{ customY }}
+<input type="range" v-model.number="customX" /> {{ customX }} {{ customY }} <a v-on:click="customReset">Reset</a>
 
-<button v-on:click="customReset">Reset</button>
+---
+class: center bg-[lightblue]
+---
+
+<Icon id="bx:category" class="w-16 h-16 md:w-24 md:h-24" />
+
+<br />
+
+# Bring your components
+
 
 ---
 title: Components

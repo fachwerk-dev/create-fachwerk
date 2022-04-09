@@ -26,14 +26,14 @@ export const setup = { customX, customY, customReset };
 
 // Add your own components
 
-import { f } from "fachwerk";
+import { data } from "fachwerk";
 
 const CustomComponent = {
   setup() {
-    return { f };
+    return { data };
   },
   template: `
-    <div class="opacity-50">I am CustomComponent and f.x is {{ f.x }}</div>
+    <div class="opacity-50">I am CustomComponent and data.x is {{ data.x }}</div>
     `,
 };
 
