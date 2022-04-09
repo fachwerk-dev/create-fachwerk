@@ -1,4 +1,6 @@
-@import url("https://unpkg.com/fachwerk/dist/style.css");
+button {
+  @apply border-2 border-gray-500 px-4 py-1 lg:px-6 lg:py-3 rounded border-2 hover:border-gray-700 transition-all;
+}
 .center {
   @apply grid place-content-center place-items-center text-center;
 }
