@@ -99,41 +99,47 @@ You can also jump to a page with a specfic title using `goto()` function:
 
 
 ---
+class: center bg-[lightblue]
+---
+ 
+<Icon id="bx:paint-roll" class="w-24 h-24" />
+
+<br />
+
+# Add some style
+
+---
 title: Styling
-class: bg-yellow-500
+class: bg-yellow-100
 ---
 
-## Styling
-
-#### Slide styles
+## Style the slide
 
 To style the the _current_ slide, add `class:` to the metadata with Tailwind classes.
 
-Here's how to make the background yellow using [color classes](https://tailwindcss.com/docs/background-color):
+Here's how to make the background light yellow using [Tailwind color classes](https://tailwindcss.com/docs/background-color):
 
 
 ```
+---
+class: bg-yellow-100
+---
+```
+
 ---
 class: bg-yellow-500
 ---
-```
 
----
-class: bg-amber-500
----
-
-## Styling
-
-#### Global styles
+## Style all slides
 
 To style the the _all_ slides, add a `global:` section to the metadata.
 
-Here's how to make background amber for all slides. 
+Here's how to make background yellow for all slides. 
 
 ```
 ---
 global:
-  class: bg-amber-500
+  class: bg-yellow-500
 ---
 ```
 
@@ -143,9 +149,7 @@ It is recommended to add this to the first slide, otherwise subsequent global me
 class: bg-gray-900 prose-invert
 ---
 
-## Dark theme
-
-#### Slide styling
+## Dark style
 
 To style the slide with dark background it is recommended to invert also the text colors with `prose-invert` class. See more at Tailwind [typography plugin](https://tailwindcss.com/docs/typography-plugin).
 
@@ -155,15 +159,23 @@ class: bg-gray-900 prose-invert
 ---
 ```
 
-#### Global styling
-
-To make all the slides into dark theme, use a `global:` metadata:
+To make all the slides dark, use `global:`
 ```yaml
 ---
 global:
   class: bg-gray-900 prose-invert
 ---
 ```
+
+---
+class: center bg-[lightblue]
+---
+ 
+<Icon id="bx:layout" class="w-24 h-24" />
+
+<br />
+
+# Change layouts
 
 ---
 title: Layout
@@ -215,11 +227,25 @@ class: center
 class: center bg-[lightblue]
 ---
  
+<Icon id="bx:font-family" class="w-24 h-24" />
+
+<br />
+
+# Bring your fonts
+
+---
+
+## Bring your fonts
+
+---
+class: center bg-[lightblue]
+---
+
 <Icon id="bx:cloud" class="w-24 h-24" />
 
 <br />
 
-# Using icons
+# Add icons
 
 ---
 title: Icons
@@ -456,7 +482,7 @@ class: center bg-[lightblue]
 title: Components
 ---
 
-## Custom components
+## Bring your components
 
 #### Defining a component
 
