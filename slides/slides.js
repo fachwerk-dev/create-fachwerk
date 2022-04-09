@@ -28,13 +28,13 @@ export const setup = { customX, customY, customReset };
 
 import { data } from "fachwerk";
 
-const CustomComponent = {
-  setup() {
-    return { data };
-  },
+const Info = {
+  inheritAttrs: false,
   template: `
-    <div class="opacity-50">I am CustomComponent and data.x is {{ data.x }}</div>
-    `,
+  <div class="grid grid-cols-[auto,1fr] gap-2">
+    <Icon id="bx:info-circle" class="w-6 h-6 translate-y-1" />
+    <div v-bind="$attrs" class="text-gray-500"><slot /></div>
+  </div>`,
 };
 
-export const components = { CustomComponent };
+export const components = { Info };

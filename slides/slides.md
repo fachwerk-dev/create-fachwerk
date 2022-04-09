@@ -5,7 +5,11 @@ class: bg-[lightblue] grid place-content-center place-items-center text-center
 #   class: bg-[lightblue]
 ---
 
-# ▦ Fachwerk Slides
+<div class="text-8xl text-gray-800">▦</div>
+
+<br />
+
+# Fachwerk Slides
 
 Press `‹` `›` to navigate
 
@@ -22,16 +26,27 @@ Fachwerk Slides is an experimental distribution of Fachwerk library. It combines
 Run the following command and then choose `Slides (experimental)` as a template:
 
 ```
-npm init fachwerk
+npm init fachwerk@latest
 ```
 
  You can re-run this command for updating the library, it does not touch your work.
 
 ---
-title: Editing and metadata
+class: center bg-[lightblue]
+---
+ 
+<Icon id="bx:slideshow" class="w-24 h-24" />
+
+<br />
+
+# Creating slides
+
+
+---
+title: Creating slides
 ---
 
-## Slide setup 
+## Creating slides
 
 Start with `slides.md` file. 
 
@@ -50,9 +65,9 @@ To separate slides, use `---` as a separator:
 
 ## Slide metadata and menus
 
-Slides can also have metadata or _frontmatter_. It is stored in YAML format.
+Slides can also have metadata or _frontmatter_. It is stored in [YAML format](https://dev.to/paulasantamaria/introduction-to-yaml-125f).
 
-When adding `title:` metadata to pages, these pages show up in the menu. Click <span v-on:click="menu = true" class="cursor-pointer">≡</span> to toggle it.
+When adding `title:` metadata to pages, these pages show up in the menu. Click `≡` to toggle it.
 
 ```md
 ---
@@ -92,10 +107,14 @@ However, you can set non-linear navigation by providing buttons of jump to a spe
 You can also jump to a page with a specfic title using `goto()` function:
 
 ```
-<button v-on:click="goto('Styling')">Goto Styling page</button>
+<button v-on:click="next()">Go to next page</button>
+
+<button v-on:click="goto('Style the sldie')">Go to "Style the slide" page</button>
 ```
 
-<button v-on:click="goto('Styling')">Goto Styling page</button>
+<button v-on:click="next()">Go to next page</button>
+
+<button v-on:click="goto('Style the slide')">Go to "Style the slide" page</button>
 
 
 ---
@@ -109,37 +128,37 @@ class: center bg-[lightblue]
 # Add some style
 
 ---
-title: Styling
-class: bg-yellow-100
+title: Style the slide
+class: bg-amber-100
 ---
 
 ## Style the slide
 
 To style the the _current_ slide, add `class:` to the metadata with Tailwind classes.
 
-Here's how to make the background light yellow using [Tailwind color classes](https://tailwindcss.com/docs/background-color):
+Here's how to make the background light amber using [Tailwind color classes](https://tailwindcss.com/docs/customizing-colors):
 
 
 ```
 ---
-class: bg-yellow-100
+class: bg-amber-100
 ---
 ```
 
 ---
-class: bg-yellow-500
+class: bg-amber-200
 ---
 
 ## Style all slides
 
 To style the the _all_ slides, add a `global:` section to the metadata.
 
-Here's how to make background yellow for all slides. 
+Here's how to make background amber for all slides:
 
 ```
 ---
 global:
-  class: bg-yellow-500
+  class: bg-amber-200
 ---
 ```
 
@@ -149,21 +168,23 @@ It is recommended to add this to the first slide, otherwise subsequent global me
 class: bg-gray-900 prose-invert
 ---
 
-## Dark style
+## Going dark
 
-To style the slide with dark background it is recommended to invert also the text colors with `prose-invert` class. See more at Tailwind [typography plugin](https://tailwindcss.com/docs/typography-plugin).
+To style the slide with dark background add a darker version of the color with `bg-gray-900` or similar 
+
+To invert the text color, use `prose-invert` class. See more at Tailwind [typography plugin](https://tailwindcss.com/docs/typography-plugin).
 
 ```yaml
 ---
-class: bg-gray-900 prose-invert
+class: dark:bg-gray-900 prose-invert
 ---
 ```
 
-To make all the slides dark, use `global:`
+To make all the slides dark when user is in dark mode use the following global class:
 ```yaml
 ---
 global:
-  class: bg-gray-900 prose-invert
+  class: dark:bg-gray-900 dark:prose-invert
 ---
 ```
 
@@ -175,7 +196,7 @@ class: center bg-[lightblue]
 
 <br />
 
-# Change layouts
+# Work with layouts
 
 ---
 title: Layout
@@ -231,11 +252,11 @@ class: center bg-[lightblue]
 
 <br />
 
-# Bring your fonts
+# Customize fonts
 
 ---
 
-## Bring your fonts
+## Customize fonts
 
 ---
 class: center bg-[lightblue]
@@ -295,16 +316,14 @@ class: center bg-[lightblue]
 
 <br />
 
-# Adding images
+# Add images
 
 ---
 title: Images
 class: prose-invert bg-cover bg-[url(https://designstem.github.io/fachwerk/images/example.jpg)]
 ---
 
-## Images
-
-#### Full background
+## Add full image background
 
 To add a background image to a full slide, use the following class in the metadata:
 
@@ -321,15 +340,13 @@ class: p-0 md:p-0 md:grid md:grid-cols-2
 
 <div class="p-4 md:p-[4vw]">
 
-## Background images
+## Add partial image background
 
-#### Partial background
-
-Here's how to create a responsive layout with an image background:
+Here's how to create a responsive layout with a partial image background:
 
 ```
 ---
-class: p-0 md:p-0 grid grid-cols-1 md:grid-cols-2
+class: p-0 md:p-0 md:grid md:grid-cols-2
 ---
 <div class="p-4 md:p-[5vw]">
 
@@ -362,7 +379,7 @@ class: center bg-[lightblue]
 
 <br />
 
-# Working with data
+# Work with data
 
 ---
 title: Defining data
@@ -482,41 +499,40 @@ class: center bg-[lightblue]
 title: Components
 ---
 
-## Bring your components
+## Defining a component
 
-#### Defining a component
+You can  define custom components in `slides.js` that will be accessible in Markdown.
 
-You can also define custom components in `slides.js`:
+Here is a simple `Info` component:
 
 ```js
-import { ref, computed } from "vue";
-import { f } from "fachwerk";
 
-const CustomComponent = {
-  setup() { return { f } },
-  template: `<div class="opacity-50">I am CustomComponent using Fachwerk's data.x: ﹛﹛ data.x ﹜﹜</div>`
-}
+const Info = {
+  inheritAttrs: false,
+  template: `
+  <div class="grid grid-cols-[auto,1fr] gap-2">
+    <Icon id="tabler:info-circle" class="w-6 h-6 translate-y-1" />
+    <div v-bind="$attrs" class="text-gray-500"><slot /></div>
+  </div>
+  `,
+};
 
-export const components = { CustomComponent }
+export const components = { Info }
 ```
 
 ---
 
-## Custom components
+## Using a component
 
 #### Usage in Markdown
 
-Here's how to use the component in `slides.md`:
+Here's how to use the `Info` component in Markdown:
 
 ```
-<CustomComponent />
-
-<f-slider v-model="data.x" />
+<Info>Here is a simple info box</Info>
 ```
 
-<CustomComponent />
-
-<f-slider v-model="data.x" />
+<Info>Here is a simple info box</Info>
 
 ---
 title: Loader
