@@ -19,7 +19,7 @@ title: Get started
 
 ## About
 
-Fachwerk Slides is an experimental distribution of Fachwerk library. It combines [Fachwerk](https://fachwerk.dev/) components and utilities, [Tailwind Play CDN](https://tailwindcss.com/docs/installation/play-cdn) styling and [Slidev presentation format](https://sli.dev/guide/syntax.html) (based on Markdown). All this is packaged just into a HTML, JS, CSS and MD file and no build tools are needed for slide authoring.
+Fachwerk Slides is an experimental distribution of the Fachwerk library. It combines [Fachwerk](https://fachwerk.dev/) components and utilities, [Tailwind Play CDN](https://tailwindcss.com/docs/installation/play-cdn) styling and [Slidev presentation format](https://sli.dev/guide/syntax.html) (based on Markdown). All this is packaged just into an HTML, JS, CSS, and MD file, and no build tools are needed for slide authoring.
 
 ## Get started
 
@@ -29,7 +29,7 @@ Run the following command and then choose `Slides (experimental)` as a template:
 npm init fachwerk@latest
 ```
 
- You can re-run this command for updating the library, it does not touch your work.
+ You can re-run this command for updating the library, and it does not touch your work.
 
 ---
 class: center bg-[lightblue]
@@ -67,7 +67,7 @@ To separate slides, use `---` as a separator:
 
 Slides can also have metadata or _frontmatter_. It is stored in [YAML format](https://dev.to/paulasantamaria/introduction-to-yaml-125f).
 
-When adding `title:` metadata to pages, these pages show up in the menu. Click `≡` to toggle it.
+When adding `title:` metadata to pages, these pages appear in the menu. Click `≡` to toggle it.
 
 ```md
 ---
@@ -99,9 +99,9 @@ title: Add navigation
 
 ## Add navigation buttons
 
-By default slide navigation is linear and can be controlled with `‹` `›` buttons on screen or keyboard.
+By default, slide navigation is linear and can be controlled with `‹` `›` buttons on the screen or keyboard.
 
-However, you can set non-linear navigation by providing buttons of jump to a specific page. You can use `prev()` and `next()` functions to jump between pages:
+However, you can set non-linear navigation by providing buttons to jump to a specific page. You can use `prev()` and `next()` functions to jump between pages:
 
 ```
 <button v-on:click="next()">Goto next slide</button>
@@ -111,9 +111,9 @@ However, you can set non-linear navigation by providing buttons of jump to a spe
 
 ---
 
-## Go to next page
+## Go to the next page
 
-You can also jump to a page with a specfic title using `goto()` function:
+You can also jump to a page with a specific title using `goto()` function:
 
 ```
 <button v-on:click="next()">Go to next page</button>
@@ -143,7 +143,7 @@ class: bg-amber-100
 
 ## Style current slide
 
-To style the the _current_ slide, add `class:` to the metadata with Tailwind classes.
+To style the _current_ slide, add `class:` to the metadata with Tailwind classes.
 
 Here's how to make the background light amber using [Tailwind color classes](https://tailwindcss.com/docs/customizing-colors):
 
@@ -160,7 +160,7 @@ class: bg-amber-200
 
 ## Style all slides
 
-To style the the _all_ slides, add a `global:` section to the metadata.
+To style _all_ slides, add a `global:` section to the metadata.
 
 Here's how to make background amber for all slides:
 
@@ -171,7 +171,7 @@ global:
 ---
 ```
 
-It is recommended to add this to the first slide, otherwise subsequent global metadata will override the previous data.
+It is recommended to add this to the first slide; otherwise, subsequent global metadata will override the previous data.
 
 ---
 class: bg-gray-900 prose-invert
@@ -179,9 +179,9 @@ class: bg-gray-900 prose-invert
 
 ## Go dark
 
-To style the slide with dark background add a darker version of the color with `bg-gray-900` or similar 
+To style the slide with a dark background, add a darker version of the color with `bg-gray-900` or similar. 
 
-To invert the text color, use `prose-invert` class. See more at Tailwind [typography plugin](https://tailwindcss.com/docs/typography-plugin).
+To invert the text color, use the `prose-invert` class. See more at Tailwind [typography plugin](https://tailwindcss.com/docs/typography-plugin).
 
 ```yaml
 ---
@@ -189,7 +189,7 @@ class: dark:bg-gray-900 prose-invert
 ---
 ```
 
-To make all the slides dark when user is in dark mode use the following global class:
+To make all the slides dark when the user is in dark mode, use the following global class:
 ```yaml
 ---
 global:
@@ -222,10 +222,10 @@ class: grid place-content-center place-items-center text-center
 ```
 
 ---
-class: grid place-content-center place-items-center	text-center
+class: grid place-content-center place-items-center text-center
 ---
 
-# Hey I am centered!
+# Hey, I am centered!
 
 And I am too
 
@@ -241,7 +241,7 @@ Here is a custom `.center` class that centers elements on the slide:
 
 ```
 .center {
-    @apply grid place-content-center place-items-center text-center;	
+    @apply grid place-content-center place-items-center text-center;  
 }
 ```
 
@@ -269,7 +269,7 @@ title: Change fonts
 
 ## Change fonts
 
-Fachwerk Slides uses [IBM Plex Sans](https://fonts.google.com/specimen/IBM+Plex+Sans) for serifs and [Cousine](https://fonts.google.com/specimen/Cousine) for monospaced typography but you can use any font available in Google Fonts.
+Fachwerk Slides uses [IBM Plex Sans](https://fonts.google.com/specimen/IBM+Plex+Sans) for serifs and [Cousine](https://fonts.google.com/specimen/Cousine) for monospaced typography, but you can use any font available in Google Fonts.
 
 Here's how to change the defaults to [Inter](https://fonts.google.com/specimen/Inter) and [Roboto Mono](https://fonts.google.com/specimen/Roboto+Mono) in `slides.js`:
 
@@ -304,11 +304,11 @@ title: Use icons
 
 Fachwerk support using custom icons powered by [Icônes](https://icones.js.org). 
 
-1. First pick an icon from a collection. We prefer [Boxicons](https://icones.js.org/collection/bx) but you can choose any collection. 
+1. First, pick an icon from a collection. We prefer [Boxicons](https://icones.js.org/collection/bx), but you can choose any collection. 
 
-2. Then click on an icon and take the note of the ID of the icon, such as `bx:smile`.
+2. Then click on an icon and take note of the ID of the icon, such as `bx:smile`.
 
-3. Finally use the following markup in the slide:
+3. Finally, use the following markup in the slide:
 
 ```
 <Icon id="bx:smile" />
@@ -353,7 +353,7 @@ class: prose-invert bg-cover bg-[url(https://designstem.github.io/fachwerk/image
 
 ## Add full image background
 
-To add a background image to a full slide, use the following class in the metadata:
+To add a background image to an entire slide, use the following class in the metadata:
 
 ```
 ---
@@ -428,7 +428,7 @@ data:
 
 ## Define data
 
-Sometimes it is useful to separate the markup and the data. You can define the data in the frontmatter:
+Sometimes it is helpful to separate the markup and the data. For example, you can define the data in the frontmatter:
 
 ```
 ---
@@ -450,7 +450,7 @@ You can access the data with `data.names`:
 
 ## Display data
 
-It is more useful to actually loop over the data to display it:
+It is more useful to loop over the data to display it:
 
 ```
 <div class="grid gap-4">
@@ -479,7 +479,7 @@ data:
 
 ## Add reactive data
 
-The data does not have to be static, it can also be dynamically modified or _reactive_.
+The data does not have to be static. It can also be dynamically modified or _reactive_.
 
 Lets set a variable `data.x` and control it with a slider:
 
@@ -496,13 +496,13 @@ data:
 <input type="range" v-model.number="data.x" /> {{ data.x }}
 
 
-<Info>When variable's default value is 0, you can skip the frontmatter definition</Info>
+<Info>When the variable's default value is 0, you can skip the frontmatter definition</Info>
 
 ---
 
 ## Add custom data
 
-When you need to do more complex data manipulation, you can define custom variables and functions in `slides.js` file that will be available in Markdown:
+When you need to do more complex data manipulation, you can define custom variables and functions in the `slides.js` file that will be available in Markdown:
 
 ```js
 import { ref, computed } from "vue";
@@ -537,7 +537,7 @@ title: Add components
 
 ## Add custom component
 
-You can  define custom components in `slides.js`. Here is a simple `Info` component:
+You can define custom components in `slides.js`. For example, here is a simple `Info` component:
 
 ```js
 const Info = {
@@ -581,9 +581,9 @@ title: Customize loader
 
 ## Customize loader
 
-By default Fachwerk Slides loads the slide data using `fetch()` from `slides.md`. However you can override the loader function in `slides.js` to load the Markdown files from anywhere.
+By default, Fachwerk Slides loads the slide data using `fetch()` from `slides.md`. However, you can override the loader function in `slides.js` to load the Markdown files from anywhere.
 
-Here is an example to load two Markdown files, `first.md` and `second.md` and merge them together:
+Here is an example of loading two Markdown files, `first.md` and `second.md`, and merging them:
 
 ```js
 const files = ["first.md", "second.md"]
