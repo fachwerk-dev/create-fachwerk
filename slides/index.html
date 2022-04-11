@@ -104,6 +104,10 @@
         const slidesTemplate = slides.map((s, i) => {
           const classes = twMerge(
             `
+            absolute
+            top-0
+            right-0
+            left-0
             p-4
             md:p-[5vw]
             max-w-none
@@ -142,12 +146,25 @@
             s.frontmatter?.global?.class,
             s.frontmatter?.class
           );
-          return `<div
-                    class="${classes}"
-                    v-show="slide === ${i}"
-                  >
-                    ${compileMarkdown(s.content)}
-                  </div>`;
+          const mainSlide = `
+          <div
+            class="${classes}"
+            v-show="slide === ${i}"
+          >
+            ${compileMarkdown(s.content)}
+          </div>`;
+          const bgSlide = s.frontmatter?.bg
+            ? `
+            <div
+              class="
+                fixed inset-0
+                ${s.frontmatter?.bg.class}
+              "
+              v-show="slide === ${i}"
+            />
+          `
+            : "";
+          return bgSlide + mainSlide;
         });
 
         const template = `
