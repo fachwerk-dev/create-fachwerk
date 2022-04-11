@@ -258,7 +258,7 @@ class: center bg-[lightblue]
 
 ## Change fonts
 
-Fachwerk Slides uses [IBM Plex Sans](https://fonts.google.com/specimen/IBM+Plex+Sans) for serifs and [Cousine](https://fonts.google.com/specimen/Cousine) for monospaced for typography but you can use any font available in Google Fonts.
+Fachwerk Slides uses [IBM Plex Sans](https://fonts.google.com/specimen/IBM+Plex+Sans) for serifs and [Cousine](https://fonts.google.com/specimen/Cousine) for monospaced typography but you can use any font available in Google Fonts.
 
 Here's how to change the defaults to [Inter](https://fonts.google.com/specimen/Inter) and [Roboto Mono](https://fonts.google.com/specimen/Roboto+Mono) in `slides.js`:
 
