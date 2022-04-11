@@ -109,12 +109,12 @@ You can also jump to a page with a specfic title using `goto()` function:
 ```
 <button v-on:click="next()">Go to next page</button>
 
-<button v-on:click="goto('Style the sldie')">Go to "Style the slide" page</button>
+<button v-on:click="goto('Style current slide')">Go to "Style the slide" page</button>
 ```
 
 <button v-on:click="next()">Go to next page</button>
 
-<button v-on:click="goto('Style the slide')">Go to "Style the slide" page</button>
+<button v-on:click="goto('Style current slide')">Go to "Style the slide" page</button>
 
 
 ---
@@ -132,7 +132,7 @@ title: Style the slide
 class: bg-amber-100
 ---
 
-## Style the slide
+## Style current slide
 
 To style the the _current_ slide, add `class:` to the metadata with Tailwind classes.
 
@@ -141,7 +141,7 @@ Here's how to make the background light amber using [Tailwind color classes](htt
 
 ```
 ---
-class: bg-amber-100
+class: bg-amber-200
 ---
 ```
 
@@ -221,10 +221,10 @@ class: grid place-content-center place-items-center	text-center
 And I am too
 
 ---
-title: Custom CSS
+title: Custom layouts
 ---
 
-## Custom CSS
+## Custom layouts
 
 Adding many specific classes to slides is sometimes hard to memorize. To overcome this, add custom CSS classes to `slides.css` with Tailwind `@apply` directive and re-use them later.
 
@@ -252,11 +252,28 @@ class: center bg-[lightblue]
 
 <br />
 
-# Customize fonts
+# Change fonts
 
 ---
 
-## Customize fonts
+## Change fonts
+
+Fachwerk Slides uses [IBM Plex Sans](https://fonts.google.com/specimen/IBM+Plex+Sans) for serifs and [Cousine](https://fonts.google.com/specimen/Cousine) for monospaced for typography but you can use any font available in Google Fonts.
+
+Here's how to change the defaults to [Inter](https://fonts.google.com/specimen/Inter) and [Roboto Mono](https://fonts.google.com/specimen/Roboto+Mono) in `slides.js`:
+
+```
+export const fonts =
+  "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Mono&display=swap";
+
+export const theme = {
+  fontFamily: {
+    sans: ["Inter", "sans-serif"],
+    mono: ["Roboto Mono", "monospace"],
+  },
+}
+
+```
 
 ---
 class: center bg-[lightblue]
@@ -266,13 +283,13 @@ class: center bg-[lightblue]
 
 <br />
 
-# Add icons
+# Use icons
 
 ---
 title: Icons
 ---
 
-## Using icons
+## Use icons
 
 Fachwerk support using custom icons powered by [Icônes](https://icones.js.org). 
 
@@ -362,10 +379,18 @@ class: p-0 md:p-0 md:grid md:grid-cols-2
 <div class="bg-cover h-screen bg-[url(https://designstem.github.io/fachwerk/images/example.jpg)]" />
 
 ---
-class: bg-gray-800 grid place-content-center place-items-center prose-invert
+class: center bg-[lightblue]
 ---
 
-<f-math>Oh\ yes, there\ is\ math</f-math>
+<Icon id="bx:math" class="w-24 h-24" />
+
+<br />
+
+# Add or subtract math
+
+---
+class: center bg-gray-900 prose-invert
+---
 
 <f-math>\begin{pmatrix} a & c & e \\\\ b & d & f \\\\ 0 & 0 & 1 \end{pmatrix}</f-math>
 
@@ -492,21 +517,18 @@ class: center bg-[lightblue]
 
 <br />
 
-# Bring your components
+# Add components
 
 
 ---
 title: Components
 ---
 
-## Defining a component
+## Add custom component
 
-You can  define custom components in `slides.js` that will be accessible in Markdown.
-
-Here is a simple `Info` component:
+You can  define custom components in `slides.js`. Here is a simple `Info` component:
 
 ```js
-
 const Info = {
   inheritAttrs: false,
   template: `
@@ -522,9 +544,7 @@ export const components = { Info }
 
 ---
 
-## Using a component
-
-#### Usage in Markdown
+## Use custom component
 
 Here's how to use the `Info` component in Markdown:
 
@@ -535,10 +555,20 @@ Here's how to use the `Info` component in Markdown:
 <Info>Here is a simple info box</Info>
 
 ---
+class: center bg-[lightblue]
+---
+
+<Icon id="bx:cog" class="w-24 h-24" />
+
+<br />
+
+# Customize loader
+
+---
 title: Loader
 ---
 
-## Custom loader
+## Customize loader
 
 By default Fachwerk Slide loads the slide data using `fetch()` from `slides.md`. However you can override the loader function in `slides.js` to load the Markdown files from anywhere.
 
