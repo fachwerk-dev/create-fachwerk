@@ -14,14 +14,14 @@ class: bg-[lightblue] grid place-content-center place-items-center text-center
 Press `‹` `›` to navigate
 
 ---
-title: About
+title: Get started
 ---
 
 ## About
 
 Fachwerk Slides is an experimental distribution of Fachwerk library. It combines [Fachwerk](https://fachwerk.dev/) components and utilities, [Tailwind Play CDN](https://tailwindcss.com/docs/installation/play-cdn) styling and [Slidev presentation format](https://sli.dev/guide/syntax.html) (based on Markdown). All this is packaged just into a HTML, JS, CSS and MD file and no build tools are needed for slide authoring.
 
-## Getting started
+## Get started
 
 Run the following command and then choose `Slides (experimental)` as a template:
 
@@ -39,14 +39,14 @@ class: center bg-[lightblue]
 
 <br />
 
-# Creating slides
+# Create slides
 
 
 ---
-title: Creating slides
+title: Create slides
 ---
 
-## Creating slides
+## Create slides
 
 Start with `slides.md` file. 
 
@@ -81,14 +81,23 @@ title: About
 ---
 
 # About
-
 ```
 
 ---
-title: Navigation
+class: center bg-[lightblue]
+---
+ 
+<Icon id="bx:right-arrow-circle" class="w-24 h-24" />
+
+<br />
+
+# Add navigation
+
+---
+title: Add navigation
 ---
 
-## Navigation
+## Add navigation buttons
 
 By default slide navigation is linear and can be controlled with `‹` `›` buttons on screen or keyboard.
 
@@ -102,7 +111,7 @@ However, you can set non-linear navigation by providing buttons of jump to a spe
 
 ---
 
-## Navigation
+## Go to next page
 
 You can also jump to a page with a specfic title using `goto()` function:
 
@@ -125,10 +134,10 @@ class: center bg-[lightblue]
 
 <br />
 
-# Add some style
+# Style slides
 
 ---
-title: Style the slide
+title: Add some style
 class: bg-amber-100
 ---
 
@@ -168,7 +177,7 @@ It is recommended to add this to the first slide, otherwise subsequent global me
 class: bg-gray-900 prose-invert
 ---
 
-## Going dark
+## Go dark
 
 To style the slide with dark background add a darker version of the color with `bg-gray-900` or similar 
 
@@ -199,10 +208,10 @@ class: center bg-[lightblue]
 # Work with layouts
 
 ---
-title: Layout
+title: Work with layouts
 ---
 
-## Centering
+## Center the content
 
 To center the content, use CSS Grid centering:
 
@@ -224,7 +233,7 @@ And I am too
 title: Custom layouts
 ---
 
-## Custom layouts
+## Add custom layouts
 
 Adding many specific classes to slides is sometimes hard to memorize. To overcome this, add custom CSS classes to `slides.css` with Tailwind `@apply` directive and re-use them later.
 
@@ -254,6 +263,8 @@ class: center bg-[lightblue]
 
 # Change fonts
 
+---
+title: Change fonts
 ---
 
 ## Change fonts
@@ -286,7 +297,7 @@ class: center bg-[lightblue]
 # Use icons
 
 ---
-title: Icons
+title: Use icons
 ---
 
 ## Use icons
@@ -336,7 +347,7 @@ class: center bg-[lightblue]
 # Add images
 
 ---
-title: Images
+title: Add images
 class: prose-invert bg-cover bg-[url(https://designstem.github.io/fachwerk/images/example.jpg)]
 ---
 
@@ -389,6 +400,7 @@ class: center bg-[lightblue]
 # Add or subtract math
 
 ---
+title: Add or subtract math
 class: center bg-gray-900 prose-invert
 ---
 
@@ -407,14 +419,14 @@ class: center bg-[lightblue]
 # Work with data
 
 ---
-title: Defining data
+title: Work with data
 data: 
   names:
     - Romy Schneider
     - Klaus Kinski
 ---
 
-## Defining data
+## Define data
 
 Sometimes it is useful to separate the markup and the data. You can define the data in the frontmatter:
 
@@ -436,7 +448,7 @@ You can access the data with `data.names`:
 {{ data.names }}
 ---
 
-## Displaying data
+## Display data
 
 It is more useful to actually loop over the data to display it:
 
@@ -465,7 +477,7 @@ data:
   x: 50
 ---
 
-## Reactive data
+## Add reactive data
 
 The data does not have to be static, it can also be dynamically modified or _reactive_.
 
@@ -484,11 +496,11 @@ data:
 <input type="range" v-model.number="data.x" /> {{ data.x }}
 
 
-> When variable's default value is 0, you can skip the frontmatter definition part
+<Info>When variable's default value is 0, you can skip the frontmatter definition</Info>
 
 ---
 
-## Custom data
+## Add custom data
 
 When you need to do more complex data manipulation, you can define custom variables and functions in `slides.js` file that will be available in Markdown:
 
@@ -519,9 +531,8 @@ class: center bg-[lightblue]
 
 # Add components
 
-
 ---
-title: Components
+title: Add components
 ---
 
 ## Add custom component
@@ -565,7 +576,7 @@ class: center bg-[lightblue]
 # Customize loader
 
 ---
-title: Loader
+title: Customize loader
 ---
 
 ## Customize loader
