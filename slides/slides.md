@@ -306,12 +306,12 @@ Fachwerk support using custom icons powered by [Icônes](https://icones.js.org).
 
 1. First, pick an icon from a collection. We prefer [Boxicons](https://icones.js.org/collection/bx), but you can choose any collection. 
 
-2. Then click on an icon and take note of the ID of the icon, such as `bx:smile`.
+2. Then click on an icon and take note of the ID of the icon, such as `bx:cloud`.
 
 3. Finally, use the following markup in the slide:
 
 ```
-<Icon id="bx:smile" />
+<Icon id="bx:cloud" />
 ```
 
 <Icon id="bx:cloud" />
