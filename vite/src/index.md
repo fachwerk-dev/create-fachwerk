@@ -2,14 +2,16 @@
 const x = $ref(10);
 </script>
 
-## Local state
+# Hello Fachwerk
+
+## Local data
 
 <f-slider v-model="x" />
 
 <f-math>x = {{ x }}</f-math>
 
-## Global state
+## Global data
 
-<f-slider v-model="f.x" />
+<f-slider v-model="data.x" />
 
-<f-math>f.x = {{ f.x }}</f-math>
+<f-math>data.x = {{ data.x }}</f-math>
