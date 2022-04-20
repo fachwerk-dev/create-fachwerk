@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://unpkg.com/fachwerk/dist/style.css" rel="stylesheet" />
+    <link
+      href="https://unpkg.com/fachwerk/dist/fachwerk.css"
+      rel="stylesheet"
+    />
     <style>
       body {
         margin: 0;
@@ -17,36 +20,36 @@
     <script type="importmap">
       {
         "imports": {
-          "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js",
+          "vue": "https://unpkg.com/vue/dist/vue.esm-browser.prod.js",
           "fachwerk": "https://unpkg.com/fachwerk/dist/fachwerk.mjs",
-          "marked": "https://unpkg.com/marked/lib/marked.esm.js"
+          "fachwerk/internal": "https://unpkg.com/fachwerk/dist/internal.mjs"
         }
       }
     </script>
     <script type="module">
       import { createApp, ref } from "vue";
       import { Fachwerk } from "fachwerk";
-      import { parse } from "marked";
+      import { compileMarkdown } from "fachwerk/internal";
 
       const App = {
         setup() {
           const x = ref(0);
           return { x };
         },
-        template: parse(`
-# Hello Facherk
+        template: compileMarkdown(`
+# Hello Fachwerk
 
-## Local variable
+## Local data
 
 <f-slider v-model="x" />
 
 <f-math>x = {{ x }}</f-math>
 
-## Global variable
+## Global data
 
 <f-slider v-model="f.x" />
 
-<f-math>x = {{ f.x }}</f-math>
+<f-math>data.x = {{ data.x }}</f-math>
         `),
       };
 
