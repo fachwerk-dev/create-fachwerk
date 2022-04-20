@@ -1,6 +1,7 @@
 import DefaultTheme from "vitepress/theme";
 import { Fachwerk } from "fachwerk";
-import "fachwerk/style.css";
+import "fachwerk/fachwerk.css";
+import "./style.css";
 
 export default {
   ...DefaultTheme,

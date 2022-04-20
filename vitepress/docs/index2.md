@@ -1,5 +1,7 @@
-## Global state
+# Hello Fachwerk
 
-<f-slider v-model="f.x" />
+### Global data
 
-<f-math>f.x</f-math> is {{ f.x }}
+<f-slider v-model="data.x" />
+
+<f-math>data.x</f-math> is {{ data.x }}
