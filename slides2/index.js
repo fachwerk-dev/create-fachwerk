@@ -19,6 +19,21 @@ export const Compiler = {
   },
 };
 
+export const Icon = {
+  props: ["id"],
+  setup(props) {
+    const icon = ref("");
+    const [collection, name] = props.id.split(":");
+    fetch(`https://unpkg.com/@iconify/json/json/${collection}.json`)
+      .then((res) => res.json())
+      .then(({ icons }) => {
+        icon.value = icons[name].body;
+      });
+    return { icon };
+  },
+  template: `<svg class="w-5 h-5 inline-block align-middle text-gray-900" viewBox="0 0 24 24" v-html="icon" />`,
+};
+
 function parseSlides(code) {
   let global = {};
   try {

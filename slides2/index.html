@@ -23,7 +23,13 @@
       import { Fachwerk } from "fachwerk";
       import { useStorage } from "@vueuse/core";
 
-      import { Compiler, useLoader, useEditor, useSlides } from "./index.js";
+      import {
+        Icon,
+        Compiler,
+        useLoader,
+        useEditor,
+        useSlides,
+      } from "./index.js";
 
       const App = {
         components: { Compiler },
@@ -86,6 +92,7 @@
 
       const app = createApp(App);
       app.use(Fachwerk);
+      app.component("Icon", Icon);
       app.mount("#app");
     </script>
     <div id="app"></div>
