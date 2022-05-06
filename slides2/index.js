@@ -123,7 +123,7 @@ export const App = {
   setup() {
     const loader = () => fetch("./slides.md").then((res) => res.text());
     const { current, save, reset } = useLoader("slides_code", loader);
-    watch(current, save);
+    //watch(current, save);
 
     const editor = useEditor();
 
@@ -207,12 +207,12 @@ export const App = {
       </div>
     </div>
     <div v-show="edit" class="fixed left-4 bottom-4 flex gap-4 text-xs text-white opacity-50">
-      <button @click="reset">Reset</button>
+      <div class="cursor-pointer" @click="reset">Reset</div>
     </div>
     <div class="fixed right-4 bottom-4 flex gap-4 text-xs text-black opacity-50">
-      <button @click="edit = !edit">{{ edit ? 'Preview' : 'Edit'}}</button>
-      <button @click="prev">‹</button>
-      <button @click="next">›</button>
+      <div class="cursor-pointer" @click="edit = !edit">{{ edit ? 'Preview' : 'Edit'}}</div>
+      <div class="cursor-pointer" @click="prev">‹</div>
+      <div class="cursor-pointer" @click="next">›</div>
     </div>
   `,
 };
