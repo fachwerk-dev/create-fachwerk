@@ -2,6 +2,22 @@
 <html lang="en">
   <head>
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cousine&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          fontFamily: {
+            sans: ["IBM Plex Sans", "sans-serif"],
+            mono: ["Cousine", "monospace"],
+          },
+        },
+      };
+    </script>
   </head>
   <body>
     <script type="importmap">
@@ -22,6 +38,16 @@
       import { createApp } from "vue";
       import { App } from "./index.js";
       const app = createApp(App);
+
+      // Add your components:
+      //   import { MyComponent } from './MyComponent.js'
+      //   app.component('MyComponent', MyComponent)
+
+      // Add your variables and functions:
+      //   import { myVariable, myFunction } from './myUtils.js'
+      //   app.config.globalProperties.myVariable = myVariable
+      //   app.config.globalProperties.myFunction = myFunction
+
       app.mount("#app");
     </script>
     <div id="app"></div>

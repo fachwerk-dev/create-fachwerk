@@ -6,7 +6,6 @@ import {
   watch,
   watchEffect,
   getCurrentInstance,
-  nextTick,
 } from "vue";
 import { Fachwerk, data } from "fachwerk";
 import { compileMarkdown, compileTemplate } from "fachwerk/internal";
@@ -165,7 +164,41 @@ export const App = {
         <template v-for="slide in slides">
           <div
             v-show="slide.index === slideIndex"
-            class="prose max-w-none min-h-screen p-12"
+            class="
+              p-12
+              max-w-none
+              min-h-screen
+              prose
+              md:prose-lg
+              xl:prose-2xl
+              prose-p:max-w-[70ch]
+              md:prose-h1:text-6xl
+              md:prose-h1:tracking-tight
+              prose-code:before:content-none
+              prose-code:after:content-none
+              prose-code:px-1
+              prose-p:before:content-none
+              prose-p:after:content-none
+              prose-blockquote:border-l-4
+              prose-blockquote:border-yellow-400
+              prose-blockquote:pl-6
+              prose-blockquote:font-normal
+              prose-blockquote:not-italic
+              prose-blockquote:text-gray-600
+              2xl:prose-p:text-3xl
+              2xl:prose-p:leading-relaxed
+              2xl:prose-p:my-[2.5vw]
+              2xl:prose-h1:text-8xl
+              2xl:prose-h2:text-6xl
+              2xl:prose-h3:text-4xl
+              2xl:prose-h4:text-3xl
+              2xl:prose-h5:text-2xl
+              2xl:prose-code:text-2xl
+              2xl:prose-code:leading-[2.5em]
+              2xl:prose-pre:p-[2.5vw]
+              2xl:prose-pre:max-w-[120ch]
+              2xl:prose-li:text-3xl
+            "
             :class="[slide.frontmatter?.global.class,slide.frontmatter?.class]"
           >
             <Compiler :code="slide.content" />
