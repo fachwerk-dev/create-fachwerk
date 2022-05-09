@@ -1,8 +1,6 @@
 ---
 title: Frontpage
-class: bg-[lightblue] grid place-content-center place-items-center text-center
-# global:
-#   class: bg-[lightblue]
+class: bg-[lightblue] center
 ---
 
 <div class="text-8xl text-gray-800">▦</div>
@@ -11,7 +9,7 @@ class: bg-[lightblue] grid place-content-center place-items-center text-center
 
 # Fachwerk Slides
 
-Press `‹` `›` to navigate
+Press `Control` and <code><Icon id="bx:left-arrow-alt" /></code> <code><Icon id="bx:right-arrow-alt" /></code> to navigate
 
 ---
 title: Get started
@@ -35,7 +33,7 @@ npm init fachwerk@latest
 class: center bg-[lightblue]
 ---
  
-<Icon id="bx:slideshow" class="w-24 h-24" />
+<Icon id="bx:slideshow" class="w-24 h-24 text-gray-900 text-gray-900" />
 
 <br />
 
@@ -81,7 +79,7 @@ title: About
 class: center bg-[lightblue]
 ---
  
-<Icon id="bx:right-arrow-circle" class="w-24 h-24" />
+<Icon id="bx:right-arrow-circle" class="w-24 h-24 text-gray-900" />
 
 <br />
 
@@ -93,38 +91,39 @@ title: Add navigation
 
 ## Add navigation buttons
 
-By default, slide navigation is linear and can be controlled with `‹` `›` buttons on the screen or keyboard.
+You can provide on-page buttons to jump to a specific page. 
 
-However, you can set non-linear navigation by providing buttons to jump to a specific page. You can use `prev()` and `next()` functions to jump between pages:
+There are `prev()` and `next()` functions to jump to previous or next page:
 
 ```
-<button v-on:click="next()">Goto next slide</button>
+<button v-on:click="next()" next slide <Icon id="bx:right-arrow-alt" /></button>
 ```
 
-<button v-on:click="next()">Goto next slide</button>
+
+<button v-on:click="next()">Goto next slide <Icon id="bx:right-arrow-alt" /></button>
 
 ---
 
-## Go to the next page
+## Go to any page
 
-You can also jump to a page with a specific title using `goto()` function:
+You can also jump to a page _with a specific title_ using `go()` function:
 
 ```
-<button v-on:click="next()">Go to next page</button>
-
-<button v-on:click="goto('Style current slide')">Go to "Style the slide" page</button>
+---
+title: Frontpage
+---
+...in a later slide...
+<button v-on:click="go('Frontpage')"><Icon id="bx:arrow-to-left" /> Go back to frontpage</button>
 ```
 
-<button v-on:click="next()">Go to next page</button>
-
-<button v-on:click="goto('Style current slide')">Go to "Style the slide" page</button>
+<button v-on:click="go('Frontpage')"><Icon id="bx:arrow-to-left" /> Go back to frontpage</button>
 
 
 ---
 class: center bg-[lightblue]
 ---
  
-<Icon id="bx:paint-roll" class="w-24 h-24" />
+<Icon id="bx:paint-roll" class="w-24 h-24 text-gray-900" />
 
 <br />
 
@@ -195,7 +194,7 @@ global:
 class: center bg-[lightblue]
 ---
  
-<Icon id="bx:layout" class="w-24 h-24" />
+<Icon id="bx:layout" class="w-24 h-24 text-gray-900" />
 
 <br />
 
@@ -251,7 +250,7 @@ class: center
 class: center bg-[lightblue]
 ---
  
-<Icon id="bx:font-family" class="w-24 h-24" />
+<Icon id="bx:font-family" class="w-24 h-24 text-gray-900" />
 
 <br />
 
@@ -284,7 +283,7 @@ export const theme = {
 class: center bg-[lightblue]
 ---
 
-<Icon id="bx:cloud" class="w-24 h-24" />
+<Icon id="bx:cloud" class="w-24 h-24 text-gray-900" />
 
 <br />
 
@@ -317,24 +316,24 @@ Fachwerk support using custom icons powered by [Icônes](https://icones.js.org).
 To customize the icon, use Tailwind classes:
 
 ```
-<Icon id="bx:cloud" class="w-24 h-24 text-gray-400 hover:scale-150 transition" />
+<Icon id="bx:cloud" class="w-24 h-24 text-gray-900 text-gray-400 hover:scale-150 transition" />
 
-<Icon id="bx:cloud-snow" class="w-24 h-24 text-gray-600 hover:scale-150 transition" />
+<Icon id="bx:cloud-snow" class="w-24 h-24 text-gray-900 text-gray-600 hover:scale-150 transition" />
 
-<Icon id="bx:cloud-lightning" class="w-24 h-24 text-gray-800 hover:scale-150 transition" />
+<Icon id="bx:cloud-lightning" class="w-24 h-24 text-gray-900 text-gray-800 hover:scale-150 transition" />
 ```
 
-<Icon id="bx:cloud" class="w-24 h-24 text-gray-400 hover:scale-150 transition" />
+<Icon id="bx:cloud" class="w-24 h-24 text-gray-900 text-gray-400 hover:scale-150 transition" />
 
-<Icon id="bx:cloud-snow" class="w-24 h-24 text-gray-600 hover:scale-150 transition" />
+<Icon id="bx:cloud-snow" class="w-24 h-24 text-gray-900 text-gray-600 hover:scale-150 transition" />
 
-<Icon id="bx:cloud-lightning" class="w-24 h-24 text-gray-800 hover:scale-150 transition" />
+<Icon id="bx:cloud-lightning" class="w-24 h-24 text-gray-900 text-gray-800 hover:scale-150 transition" />
 
 ---
 class: center bg-[lightblue]
 ---
  
-<Icon id="bx:image-alt" class="w-24 h-24" />
+<Icon id="bx:image-alt" class="w-24 h-24 text-gray-900" />
 
 <br />
 
@@ -387,7 +386,7 @@ class: p-0 md:p-0 md:grid md:grid-cols-2
 class: center bg-[lightblue]
 ---
 
-<Icon id="bx:math" class="w-24 h-24" />
+<Icon id="bx:math" class="w-24 h-24 text-gray-900" />
 
 <br />
 
@@ -406,7 +405,7 @@ See more at https://fachwerk.dev/components/f-math
 class: center bg-[lightblue]
 ---
 
-<Icon id="bx:slider-alt" class="w-24 h-24" />
+<Icon id="bx:slider-alt" class="w-24 h-24 text-gray-900" />
 
 <br />
 
@@ -563,7 +562,7 @@ Here's how to use the `Info` component in Markdown:
 class: center bg-[lightblue]
 ---
 
-<Icon id="bx:cog" class="w-24 h-24" />
+<Icon id="bx:cog" class="w-24 h-24 text-gray-900" />
 
 <br />
 

@@ -24,7 +24,7 @@ export const Icon = {
       });
     return { icon };
   },
-  template: `<svg class="w-5 h-5 inline-block align-middle text-gray-900" viewBox="0 0 24 24" v-html="icon" />`,
+  template: `<svg class="w-5 h-5 inline-block align-middle" viewBox="0 0 24 24" v-html="icon" />`,
 };
 
 const Compiler = {
@@ -94,7 +94,6 @@ export function useLoader(key, loader) {
     if (saved.value && original !== saved.value) {
       current.value = saved.value;
     } else {
-      saved.value = original;
       current.value = original;
     }
   });
@@ -110,12 +109,18 @@ export function useSlides(key, content) {
   const prev = () => {
     if (slideIndex.value > 0) slideIndex.value--;
   };
-  const { shift, left, right } = useMagicKeys();
+  const go = (title) => {
+    const index = slides.value.findIndex((s) => s.frontmatter?.title === title);
+    if (index > -1) {
+      slideIndex.value = index;
+    }
+  };
+  const { control, shift, left, right } = useMagicKeys();
   watchEffect(() => {
     if (left.value && shift.value) prev();
     if (right.value && shift.value) next();
   });
-  return { slides, slideIndex, prev, next };
+  return { slides, slideIndex, prev, next, go };
 }
 
 export const App = {
@@ -126,7 +131,7 @@ export const App = {
 
     const editor = useEditor();
 
-    const { slides, slideIndex, prev, next } = useSlides(
+    const { slides, slideIndex, prev, next, go } = useSlides(
       "slides_index",
       current
     );
@@ -138,6 +143,7 @@ export const App = {
     app.component("Icon", Icon);
     app.config.globalProperties.prev = prev;
     app.config.globalProperties.next = next;
+    app.config.globalProperties.go = go;
 
     return {
       editor,
@@ -152,7 +158,7 @@ export const App = {
     };
   },
   template: `
-    <div class="grid grid-cols-1" :class="[edit ? 'grid-cols-[1fr_2fr]' : 'grid-cols-1']">
+    <div class="grid grid-cols-1" :class="[edit ? 'grid-cols-[1fr_minmax(0,2fr)]' : 'grid-cols-1']">
       <div v-show="edit" class="relative h-screen sticky top-0">
       <textarea
         ref="editor"
@@ -173,14 +179,21 @@ export const App = {
               max-w-none
               min-h-screen
               prose
+              prose:body:text-gray-800
               md:prose-lg
               xl:prose-2xl
+              xl:prose-code:text-md
               prose-p:max-w-[70ch]
               md:prose-h1:text-6xl
               md:prose-h1:tracking-tight
               prose-code:before:content-none
               prose-code:after:content-none
               prose-code:px-1
+              prose-code:bg-sky-100
+              prose-code:rounded
+              prose-code:text-sky-700
+              prose-code:pt-[0.1em]
+              prose-pre:bg-sky-100
               prose-p:before:content-none
               prose-p:after:content-none
               prose-blockquote:border-l-4
