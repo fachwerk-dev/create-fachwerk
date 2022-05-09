@@ -115,7 +115,7 @@ export function useSlides(key, content) {
       slideIndex.value = index;
     }
   };
-  const { control, shift, left, right } = useMagicKeys();
+  const { shift, left, right } = useMagicKeys();
   watchEffect(() => {
     if (left.value && shift.value) prev();
     if (right.value && shift.value) next();
@@ -124,7 +124,7 @@ export function useSlides(key, content) {
 }
 
 export const App = {
-  components: { Compiler },
+  components: { Compiler, Icon },
   setup() {
     const loader = () => fetch("./slides.md").then((res) => res.text());
     const { current, save, reset } = useLoader("slides_code", loader);
@@ -223,10 +223,11 @@ export const App = {
         </template>
       </div>
     </div>
-    <div class="fixed right-3 bottom-3 flex gap-4 text-xs text-black opacity-50">
-      <div class="cursor-pointer" @click="edit = !edit">{{ edit ? 'Preview' : 'Edit'}}</div>
-      <div class="cursor-pointer" @click="prev">‹</div>
-      <div class="cursor-pointer" @click="next">›</div>
+    <div class="fixed right-3 bottom-3 flex text-xs text-black opacity-50">
+      <Icon id="bx:pencil" class="cursor-pointer" @click="edit = !edit" />
+      &emsp;
+      <Icon id="bx:left-arrow-alt" class="cursor-pointer" @click="prev" />
+      <Icon id="bx:right-arrow-alt" class="cursor-pointer" @click="next" />
     </div>
   `,
 };

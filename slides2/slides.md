@@ -9,7 +9,7 @@ class: bg-[lightblue] center
 
 # Fachwerk Slides
 
-Press `Control` and <code><Icon id="bx:left-arrow-alt" /></code> <code><Icon id="bx:right-arrow-alt" /></code> to navigate
+Press `Shift` and <code><Icon id="bx:left-arrow-alt" /></code> <code><Icon id="bx:right-arrow-alt" /></code> to navigate
 
 ---
 title: Get started
@@ -46,7 +46,7 @@ title: Create slides
 
 ## Create slides
 
-Start with `slides.md` file. 
+Start editing `slides.md` file or press <Icon id="bx:pencil" v-on:click="edit = true" />  button. 
 
 To separate slides, use `---` as a separator:
 
