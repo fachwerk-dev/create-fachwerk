@@ -29,20 +29,31 @@ export const Icon = {
 };
 
 const Compiler = {
-  props: ["code", "setup"],
+  props: ["code"],
   setup(props) {
     const Output = computed(() => {
       return {
         setup() {
-          //console.log(compileMarkdown(props.code));
-          return props.setup;
+          const app = getCurrentInstance().appContext.app;
+          return { ...app.config.globalProperties };
         },
-        render: compileTemplate(compileMarkdown(props.code, { breaks: false }))
+        render: compileTemplate(compileMarkdown(props.code, { breaks: true }))
           .code,
       };
     });
     return () => h(Output.value);
   },
+};
+
+export const Info = {
+  inheritAttrs: false,
+  props: { icon: { default: "bx:info-circle" } },
+  template: `
+  <div class="flex gap-2 md:gap-3">
+    <Icon :id="icon" class=" md:w-6 md:h-6 xl:w-8 xl:h-8 text-gray-400 shrink-0" v-bind="$attrs" />
+    <div class="text-gray-400 -mt-1"><slot /></div>
+  </div>
+  `,
 };
 
 function parseSlides(code) {
@@ -144,6 +155,7 @@ export const App = {
     const app = getCurrentInstance().appContext.app;
     app.use(Fachwerk);
     app.component("Icon", Icon);
+    app.component("Info", Info);
     app.config.globalProperties.prev = prev;
     app.config.globalProperties.next = next;
     app.config.globalProperties.go = go;
@@ -225,9 +237,9 @@ export const App = {
       <Icon id="bx:x" v-if="edit" class="cursor-pointer text-white/50" @click="edit = !edit" />
       <Icon id="bx:pencil" v-if="!edit" class="cursor-pointer text-black/50" @click="edit = !edit" />
     </icon>
-    <div class="fixed right-3 bottom-3 flex text-xs text-black/50">
-      <Icon id="bx:left-arrow-alt" class="cursor-pointer" @click="prev" />
-      <Icon id="bx:right-arrow-alt" class="cursor-pointer" @click="next" />
+    <div class="fixed right-3 bottom-3 flex text-xs gap-1">
+      <Icon id="bx:left-arrow-alt" class="cursor-pointer text-black/25 hover:text-black/50" @click="prev" />
+      <Icon id="bx:right-arrow-alt" class="cursor-pointer text-black/25 hover:text-black/50" @click="next" />
     </div>
   `,
 };

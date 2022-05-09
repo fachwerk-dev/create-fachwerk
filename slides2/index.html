@@ -25,9 +25,6 @@
       };
     </script>
     <style type="text/tailwindcss">
-      * > h2 {
-        @apply !mt-0;
-      }
       mark {
         @apply bg-yellow-100 text-gray-800 px-2 rounded;
       }
@@ -60,13 +57,18 @@
       import { App } from "./index.js";
       const app = createApp(App);
 
-      // Add your components:
-      //   import { MyComponent } from './MyComponent.js'
-      //   app.component('MyComponent', MyComponent)
+      // Add custom variables and functions:
 
-      // Add your variables or functions:
-      //   import { myVariable } from './myVariable.js'
-      //   app.config.globalProperties.myVariable = myVariable
+      // import * as slides from "./slides.js";
+      // app.config.globalProperties = {
+      //   ...app.config.globalProperties,
+      //   ...utils,
+      // };
+
+      // Add custom components:
+
+      // import { MyComponent } from "./MyComponent.js";
+      // app.component("MyComponent", MyComponent);
 
       app.mount("#app");
     </script>

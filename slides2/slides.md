@@ -515,14 +515,24 @@ data:
 
 ## Add custom data
 
-When you need to do more complex data manipulation, you can define custom variables and functions in the `slides.js` file that will be available in Markdown:
+When you need to do more complex data manipulation, you can define custom variables and functions in Javascript.
+
+Create a JS file, say `slides.js` and add your code there:
 
 ```js
 import { ref, computed } from "vue";
-const x = ref(0);
-const y = computed(() => x.value * 10);
-const reset = () => x.value = 0
-export const setup = { customX, customY, customReset }
+export const myX = ref(100);
+export const myY = computed(() => myX.value * 10);
+export const myReset = () => {
+  myX.value = 0;
+};
+```
+
+Next import the variables in `index.html` and assign them to Vue app instance:
+
+```js
+import * as slides from './slides.js
+app.config.globalProperties = {...app.config.globalProperties, ...slides}
 ```
 
 You can access custom data in `slides.md` as follows:
@@ -532,7 +542,7 @@ You can access custom data in `slides.md` as follows:
 &lt;button v-on:click="customReset">Reset&lt/button> &lt;a v-on:click="customReset">Reset&lt;/a>
 </pre>
 
-<input type="range" v-model.number="customX" /> {{ customX }} {{ customY }} <a v-on:click="customReset">Reset</a>
+<input type="range" v-model="x"> {{ x }} {{ y }} <button v-on:click="reset">Reset</button>
 
 ---
 class: center bg-[lightblue]
@@ -548,35 +558,47 @@ class: center bg-[lightblue]
 title: Add components
 ---
 
-## Add custom component
+## Create component
 
-You can define custom components in `slides.js`. For example, here is a simple `Info` component:
+You can define custom components Javascript. For example, here is a `Info.js` component, similar to Vitepress [containers](https://vitepress.vuejs.org/guide/markdown.html#custom-containers):
 
 ```js
-const Info = {
+export const Info = {
   inheritAttrs: false,
+  props: { icon: { default: "bx:info-circle" } },
   template: `
-  <div class="grid grid-cols-[auto,1fr] gap-2">
-    <Icon id="tabler:info-circle" class="w-6 h-6 translate-y-1" />
-    <div v-bind="$attrs" class="text-gray-500"><slot /></div>
+  <div class="flex gap-2 md:gap-3">
+    <Icon :id="icon" class="text-gray-500 shrink-0" v-bind="$attrs" />
+    <div class="text-gray-500 -mt-1"><slot /></div>
   </div>
   `,
 };
-
-export const components = { Info }
 ```
-
 ---
 
-## Use custom component
+## Register component
+
+Next, you need to import and register the component in `index.html`:
+
+```js
+import { Info } from "./Info.js";
+app.component("Info", Info);
+```
+---
+
+## Use component
 
 Here's how to use the `Info` component in Markdown:
 
-```
-<Info>Here is a simple info box</Info>
+```md
+<Info>Here is the default info box</Info>
+
+<Info icon="bx:train" class="text-red-500">Kraftwerk are a German...</Info>
 ```
 
-<Info>Here is a simple info box</Info>
+<Info>Here is the default info box</Info>
+
+<Info icon="bx:train" class="text-red-500">Kraftwerk are a German band formed in Düsseldorf in 1969 by Ralf Hütter and Florian Schneider. Widely considered innovators and pioneers of electronic music, Kraftwerk were among the first successful acts to popularize the genre.</Info>
 
 ---
 class: center bg-[lightblue]
