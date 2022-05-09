@@ -52,13 +52,10 @@ Start with `slides.md` file.
 
 To separate slides, use `---` as a separator:
 
-```md
+```
 # Frontpage
-
 ---
-
 # About
-
 ```
 
 ---

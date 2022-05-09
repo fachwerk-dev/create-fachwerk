@@ -123,7 +123,6 @@ export const App = {
   setup() {
     const loader = () => fetch("./slides.md").then((res) => res.text());
     const { current, save, reset } = useLoader("slides_code", loader);
-    //watch(current, save);
 
     const editor = useEditor();
 
@@ -153,13 +152,18 @@ export const App = {
     };
   },
   template: `
-    <div class="grid h-screen grid-cols-1" :class="[edit ? 'grid-cols-[1fr_2fr]' : 'grid-cols-1']">
+    <div class="grid grid-cols-1" :class="[edit ? 'grid-cols-[1fr_2fr]' : 'grid-cols-1']">
+      <div v-show="edit" class="relative h-screen sticky top-0">
       <textarea
         ref="editor"
-        v-show="edit"
         v-model="current"
-        class="text-sm leading-6 text-gray-100 bg-gray-900 p-4 text-white font-mono border-none outline-none focus:outline-none"
+        class="w-full h-full leading-6 text-gray-100 bg-gray-900 p-4 text-white font-mono border-none outline-none focus:outline-none"
       />
+        <div v-show="edit" class="absolute left-0 bottom-0 right-0 flex justify-between gap-4 text-xs pb-3 pt-8 px-4 bg-gradient-to-t via-gray-900 from-gray-900">
+          <div class="text-white/50 cursor-pointer" @click="reset">Reset</div>
+          <div class="text-white/50 cursor-pointer" @click="save">Save</div>
+        </div>
+      </div>
       <div>
         <template v-for="slide in slides">
           <div
@@ -206,10 +210,7 @@ export const App = {
         </template>
       </div>
     </div>
-    <div v-show="edit" class="fixed left-4 bottom-4 flex gap-4 text-xs text-white opacity-50">
-      <div class="cursor-pointer" @click="reset">Reset</div>
-    </div>
-    <div class="fixed right-4 bottom-4 flex gap-4 text-xs text-black opacity-50">
+    <div class="fixed right-3 bottom-3 flex gap-4 text-xs text-black opacity-50">
       <div class="cursor-pointer" @click="edit = !edit">{{ edit ? 'Preview' : 'Edit'}}</div>
       <div class="cursor-pointer" @click="prev">‹</div>
       <div class="cursor-pointer" @click="next">›</div>
