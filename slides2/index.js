@@ -37,7 +37,7 @@ const Compiler = {
           //console.log(compileMarkdown(props.code));
           return props.setup;
         },
-        render: compileTemplate(compileMarkdown(props.code, { breaks: true }))
+        render: compileTemplate(compileMarkdown(props.code, { breaks: false }))
           .code,
       };
     });
@@ -185,18 +185,13 @@ export const App = {
               prose:body:text-gray-800
               md:prose-lg
               xl:prose-2xl
-              xl:prose-code:text-md
               prose-p:max-w-[70ch]
               md:prose-h1:text-6xl
               md:prose-h1:tracking-tight
               prose-code:before:content-none
               prose-code:after:content-none
               prose-code:px-1
-              prose-code:bg-sky-100
               prose-code:rounded
-              prose-code:text-sky-700
-              prose-code:pt-[0.1em]
-              prose-pre:bg-sky-100
               prose-p:before:content-none
               prose-p:after:content-none
               prose-blockquote:border-l-4

@@ -106,17 +106,17 @@ There are `prev()` and `next()` functions to jump to previous or next page:
 
 ## Go to any page
 
-You can also jump to a page _with a specific title_ using `go()` function:
+You can also jump to a page with a specific `title:` using `go()` function:
 
 ```
 ---
 title: Frontpage
 ---
 ...in a later slide...
-<button v-on:click="go('Frontpage')"><Icon id="bx:arrow-to-left" /> Go back to frontpage</button>
+<button v-on:click="go('Frontpage')"><Icon id="bx:arrow-to-left" /> Go to frontpage</button>
 ```
 
-<button v-on:click="go('Frontpage')"><Icon id="bx:arrow-to-left" /> Go back to frontpage</button>
+<button v-on:click="go('Frontpage')"><Icon id="bx:arrow-to-left" /> Go to frontpage</button>
 
 
 ---
@@ -131,31 +131,21 @@ class: center bg-[lightblue]
 
 ---
 title: Add some style
-class: bg-amber-100
+class: bg-yellow-300
 ---
 
-## Style current slide
+## Add background color
 
-To style the _current_ slide, add `class:` to the metadata with Tailwind classes.
-
-Here's how to make the background light amber using [Tailwind color classes](https://tailwindcss.com/docs/customizing-colors):
+To style the _current_ slide, add `class:` to the frontmatter. Here's how to make the background yellow using [Tailwind color classes](https://tailwindcss.com/docs/background-color#setting-the-background-colors):
 
 
 ```
 ---
-class: bg-amber-200
+class: bg-yellow-300
 ---
 ```
 
----
-class: bg-amber-200
----
-
-## Style all slides
-
-To style _all_ slides, add a `global:` section to the metadata.
-
-Here's how to make background amber for all slides:
+To style _all_ slides, add a `global: class:` to the frontmatter:
 
 ```
 ---
@@ -164,21 +154,49 @@ global:
 ---
 ```
 
-It is recommended to add this to the first slide; otherwise, subsequent global metadata will override the previous data.
+---
+class: bg-gradient-to-t from-blue-500 to-cyan-500
+---
+
+## Add two-stop gradient
+
+In addition to single-coloured background you can also use [gradients](https://tailwindcss.com/docs/gradient-color-stops):
+
+```
+---
+class: bg-gradient-to-t from-blue-500 to-cyan-500
+---
+```
 
 ---
-class: bg-gray-900 prose-invert
+class: bg-gradient-to-t from-pink-700 via-purple-700 to-indigo-700 prose-invert
+---
+
+## Add three-stop gradient
+
+For extra flexibility, there are also [three-stop gradient](https://tailwindcss.com/docs/gradient-color-stops#middle-color):
+
+```
+---
+class: bg-gradient-to-t from-pink-700 via-purple-700 to-indigo-700 prose-invert
+---
+```
+
+See [hypercolor.dev](https://hypercolor.dev) for more inspiraton.
+
+---
+class: bg-gray-800 prose-invert
 ---
 
 ## Go dark
 
-To style the slide with a dark background, add a darker version of the color with `bg-gray-900` or similar. 
+To style the slide with a dark background, add a darker version of the color with `bg-gray-800`, `bg-gray-900` etc.
 
-To invert the text color, use the `prose-invert` class. See more at Tailwind [typography plugin](https://tailwindcss.com/docs/typography-plugin).
+To invert the text color, use the `prose-invert` class.
 
 ```yaml
 ---
-class: dark:bg-gray-900 prose-invert
+class: dark:bg-gray-800 prose-invert
 ---
 ```
 
@@ -186,7 +204,7 @@ To make all the slides dark when the user is in dark mode, use the following glo
 ```yaml
 ---
 global:
-  class: dark:bg-gray-900 dark:prose-invert
+  class: dark:bg-gray-800 dark:prose-invert
 ---
 ```
 
@@ -226,9 +244,9 @@ And I am too
 title: Custom layouts
 ---
 
-## Add custom layouts
+## Add custom classes
 
-Adding many specific classes to slides is sometimes hard to memorize. To overcome this, add custom CSS classes to `slides.css` with Tailwind `@apply` directive and re-use them later.
+Adding numerous classes to each slide can be repetitive. To overcome this, add custom CSS classes to `index.html` and re-use them in any slide.
 
 Here is a custom `.center` class that centers elements on the slide:
 
@@ -238,7 +256,7 @@ Here is a custom `.center` class that centers elements on the slide:
 }
 ```
 
-Here is how to use it in slide metadata:
+Here is how to use it in frontmatter:
 
 ```
 ---
@@ -254,15 +272,15 @@ class: center bg-[lightblue]
 
 <br />
 
-# Change fonts
+# Change type
 
 ---
-title: Change fonts
+title: Change type
 ---
 
-## Change fonts
+## Change type
 
-Fachwerk Slides uses [IBM Plex Sans](https://fonts.google.com/specimen/IBM+Plex+Sans) for serifs and [Cousine](https://fonts.google.com/specimen/Cousine) for monospaced typography, but you can use any font available in Google Fonts. 
+Fachwerk Slides uses [IBM Plex Sans](https://fonts.google.com/specimen/IBM+Plex+Sans) for serifs and [Cousine](https://fonts.google.com/specimen/Cousine) for monospaced type, but you can use any font available in Google Fonts. 
 
 Here's how to change the default fonts to [Inter](https://fonts.google.com/specimen/Inter) and [Roboto Mono](https://fonts.google.com/specimen/Roboto+Mono) in `index.html`:
 
@@ -275,7 +293,8 @@ Here's how to change the default fonts to [Inter](https://fonts.google.com/speci
   tailwind.config = {
     theme: {
       fontFamily: {
-        sans: ["Inter", "sans-serif"], mono: ["Roboto Mono", "monospace"],
+        sans: ["Inter", "sans-serif"], 
+        mono: ["Roboto Mono", "monospace"],
       },
     },
   };
@@ -318,7 +337,7 @@ Fachwerk support using custom icons powered by [Icônes](https://icones.js.org).
 
 To customize the icon, use Tailwind classes.
 
-> Note that you need to specify both width and height, `w-24 h-24`.
+Nothe that you need to specify both width and height: `h-24 w-24`
 
 ```
 <Icon id="bx:cloud" class="w-24 h-24 text-gray-400 hover:scale-150 transition" />
