@@ -58,9 +58,9 @@ To separate slides, use `---` as a separator:
 
 ---
 
-## Slide metadata and menus
+## Slide frontmatter and title
 
-Slides can also have metadata or _frontmatter_. It is stored in [YAML format](https://dev.to/paulasantamaria/introduction-to-yaml-125f).
+Slides can also have <mark>frontmatter</mark>, a header section with various metadata. It is stored in [YAML](https://dev.to/paulasantamaria/introduction-to-yaml-125f) format.
 
 When adding `title:` metadata to pages, these pages appear in the menu. Click `≡` to toggle it.
 

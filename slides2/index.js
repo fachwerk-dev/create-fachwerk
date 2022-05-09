@@ -8,7 +8,8 @@ import {
   getCurrentInstance,
 } from "vue";
 import { Fachwerk, data } from "fachwerk";
-import { compileMarkdown, compileTemplate } from "fachwerk/internal";
+import { compileTemplate } from "fachwerk/internal";
+import { parse as compileMarkdown } from "marked";
 import { parse } from "@slidev/parser";
 import { useStorage, useMagicKeys } from "@vueuse/core";
 
@@ -33,9 +34,11 @@ const Compiler = {
     const Output = computed(() => {
       return {
         setup() {
+          //console.log(compileMarkdown(props.code));
           return props.setup;
         },
-        render: compileTemplate(compileMarkdown(props.code)).code,
+        render: compileTemplate(compileMarkdown(props.code, { breaks: true }))
+          .code,
       };
     });
     return () => h(Output.value);
@@ -165,9 +168,9 @@ export const App = {
         v-model="current"
         class="w-full h-full leading-6 text-gray-100 bg-gray-900 p-4 text-white font-mono border-none outline-none focus:outline-none"
       />
-        <div v-show="edit" class="absolute left-0 bottom-0 right-0 flex justify-between gap-4 text-xs pb-3 pt-8 px-4 bg-gradient-to-t via-gray-900 from-gray-900">
-          <div class="text-white/50 cursor-pointer" @click="reset">Reset</div>
-          <div class="text-white/50 cursor-pointer" @click="save">Save</div>
+        <div v-show="edit" class="absolute left-0 bottom-0 right-0 flex justify-end gap-4 text-sm pb-3 pt-8 px-4 bg-gradient-to-t via-gray-900 from-gray-900">
+        <div class="px-2 py-1 text-white/25 cursor-pointer" @click="reset">Reset</div>
+        <div class="px-2 py-1 bg-amber-500 text-white cursor-pointer rounded" @click="save">Save</div>
         </div>
       </div>
       <div>
@@ -223,9 +226,11 @@ export const App = {
         </template>
       </div>
     </div>
-    <div class="fixed right-3 bottom-3 flex text-xs text-black opacity-50">
-      <Icon id="bx:pencil" class="cursor-pointer" @click="edit = !edit" />
-      &emsp;
+    <div class="fixed bottom-3 left-3">
+      <Icon id="bx:x" v-if="edit" class="cursor-pointer text-white/50" @click="edit = !edit" />
+      <Icon id="bx:pencil" v-if="!edit" class="cursor-pointer text-black/50" @click="edit = !edit" />
+    </icon>
+    <div class="fixed right-3 bottom-3 flex text-xs text-black/50">
       <Icon id="bx:left-arrow-alt" class="cursor-pointer" @click="prev" />
       <Icon id="bx:right-arrow-alt" class="cursor-pointer" @click="next" />
     </div>

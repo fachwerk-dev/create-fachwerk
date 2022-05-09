@@ -25,6 +25,9 @@
       };
     </script>
     <style type="text/tailwindcss">
+      mark {
+        @apply bg-yellow-100 text-gray-800 px-2 rounded;
+      }
       button {
         @apply border-2 border-gray-700 px-4 py-1 lg:px-6 lg:py-3 rounded border-2 hover:brightness-200;
       }
@@ -44,7 +47,8 @@
           "@slidev/parser": "https://unpkg.com/@slidev/parser/dist/index.mjs",
           "vue-demi": "https://unpkg.com/vue-demi/lib/index.mjs",
           "@vueuse/shared": "https://unpkg.com/@vueuse/shared/index.mjs",
-          "@vueuse/core": "https://unpkg.com/@vueuse/core/index.mjs"
+          "@vueuse/core": "https://unpkg.com/@vueuse/core/index.mjs",
+          "marked": "https://unpkg.com/marked/lib/marked.esm.js"
         }
       }
     </script>
