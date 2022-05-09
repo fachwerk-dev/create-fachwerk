@@ -262,21 +262,24 @@ title: Change fonts
 
 ## Change fonts
 
-Fachwerk Slides uses [IBM Plex Sans](https://fonts.google.com/specimen/IBM+Plex+Sans) for serifs and [Cousine](https://fonts.google.com/specimen/Cousine) for monospaced typography, but you can use any font available in Google Fonts.
+Fachwerk Slides uses [IBM Plex Sans](https://fonts.google.com/specimen/IBM+Plex+Sans) for serifs and [Cousine](https://fonts.google.com/specimen/Cousine) for monospaced typography, but you can use any font available in Google Fonts. 
 
-Here's how to change the defaults to [Inter](https://fonts.google.com/specimen/Inter) and [Roboto Mono](https://fonts.google.com/specimen/Roboto+Mono) in `slides.js`:
+Here's how to change the default fonts to [Inter](https://fonts.google.com/specimen/Inter) and [Roboto Mono](https://fonts.google.com/specimen/Roboto+Mono) in `index.html`:
 
 ```
-export const fonts =
-  "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Mono&display=swap";
-
-export const theme = {
-  fontFamily: {
-    sans: ["Inter", "sans-serif"],
-    mono: ["Roboto Mono", "monospace"],
-  },
-}
-
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Mono&display=swap"
+  rel="stylesheet"
+/>
+<script>
+  tailwind.config = {
+    theme: {
+      fontFamily: {
+        sans: ["Inter", "sans-serif"], mono: ["Roboto Mono", "monospace"],
+      },
+    },
+  };
+</script>
 ```
 
 ---
@@ -313,21 +316,19 @@ Fachwerk support using custom icons powered by [Icônes](https://icones.js.org).
 
 ## Customize icons
 
-To customize the icon, use Tailwind classes:
+To customize the icon, use Tailwind classes.
+
+> Note that you need to specify both width and height, `w-24 h-24`.
 
 ```
-<Icon id="bx:cloud" class="w-24 h-24 text-gray-900 text-gray-400 hover:scale-150 transition" />
-
-<Icon id="bx:cloud-snow" class="w-24 h-24 text-gray-900 text-gray-600 hover:scale-150 transition" />
-
-<Icon id="bx:cloud-lightning" class="w-24 h-24 text-gray-900 text-gray-800 hover:scale-150 transition" />
+<Icon id="bx:cloud" class="w-24 h-24 text-gray-400 hover:scale-150 transition" />
+<Icon id="bx:cloud-snow" class="w-24 h-24 text-gray-600 hover:scale-150 transition" />
+<Icon id="bx:cloud-lightning" class="w-24 h-24 text-gray-800 hover:scale-150 transition" />
 ```
 
-<Icon id="bx:cloud" class="w-24 h-24 text-gray-900 text-gray-400 hover:scale-150 transition" />
-
-<Icon id="bx:cloud-snow" class="w-24 h-24 text-gray-900 text-gray-600 hover:scale-150 transition" />
-
-<Icon id="bx:cloud-lightning" class="w-24 h-24 text-gray-900 text-gray-800 hover:scale-150 transition" />
+<Icon id="bx:cloud" class="w-24 h-24 text-gray-400 hover:scale-150 transition" />
+<Icon id="bx:cloud-snow" class="w-24 h-24 text-gray-600 hover:scale-150 transition" />
+<Icon id="bx:cloud-lightning" class="w-24 h-24 text-gray-800 hover:scale-150 transition" />
 
 ---
 class: center bg-[lightblue]
