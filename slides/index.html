@@ -7,16 +7,36 @@
       href="https://unpkg.com/fachwerk/dist/fachwerk.css"
       rel="stylesheet"
     />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Replace with custom Google fonts here -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cousine&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          fontFamily: {
+            // Configure custom Google fonts here
+            sans: ["IBM Plex Sans", "sans-serif"],
+            mono: ["Cousine", "monospace"],
+          },
+        },
+      };
+    </script>
+    <style type="text/tailwindcss">
+      button {
+        @apply border-2 border-gray-700 px-4 py-1 lg:px-6 lg:py-3 rounded border-2 hover:brightness-200;
+      }
+      .center {
+        @apply grid place-content-center place-items-center text-center;
+      }
+      /* Add custom classes */
+    </style>
   </head>
   <body>
-    <div id="app"></div>
-    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
-    <script
-      async
-      src="https://unpkg.com/es-module-shims/dist/es-module-shims.js"
-    ></script>
     <script type="importmap">
       {
         "imports": {
@@ -27,218 +47,21 @@
           "@slidev/parser": "https://unpkg.com/@slidev/parser/dist/index.mjs",
           "vue-demi": "https://unpkg.com/vue-demi/lib/index.mjs",
           "@vueuse/shared": "https://unpkg.com/@vueuse/shared/index.mjs",
-          "@vueuse/core": "https://unpkg.com/@vueuse/core/index.mjs",
-          "hashlru": "https://esm.sh/hashlru",
-          "tailwind-merge": "https://unpkg.com/tailwind-merge/dist/index.mjs"
+          "@vueuse/core": "https://unpkg.com/@vueuse/core/index.mjs"
         }
       }
     </script>
     <script type="module">
-      import { createApp, ref } from "vue";
-      import { Fachwerk, data } from "fachwerk";
-      import { compileMarkdown } from "fachwerk/internal";
-      import { parse as parseSlides } from "@slidev/parser";
-      import { useStorage, onKeyStroke, onClickOutside } from "@vueuse/core";
-      import { twMerge } from "tailwind-merge";
+      import { createApp } from "vue";
+      import { App } from "./index.js";
+      const app = createApp(App);
 
-      import * as config from "./slides.js";
+      // Register custom data here
+      // Add custom components here
+      // Add custom loader here
 
-      const Icon = {
-        props: ["id"],
-        setup(props) {
-          const icon = ref("");
-          const [collection, name] = props.id.split(":");
-          fetch(`https://unpkg.com/@iconify/json/json/${collection}.json`)
-            .then((res) => res.json())
-            .then(({ icons }) => {
-              icon.value = icons[name].body;
-            });
-          return { icon };
-        },
-        template: `<svg class="w-5 h-5 inline-block align-middle text-gray-900" viewBox="0 0 24 24" v-html="icon" />`,
-      };
-
-      export async function createFachwerk({
-        setup = {},
-        components = {},
-        loader = null,
-        fonts = "https://fonts.googleapis.com/css2?family=Cousine&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap",
-        theme = {
-          fontFamily: {
-            sans: ["IBM Plex Sans", "sans-serif"],
-            mono: ["Cousine", "monospace"],
-          },
-        },
-      }) {
-        const fontsEl = document.createElement("link");
-        fontsEl.setAttribute("rel", "stylesheet");
-        fontsEl.setAttribute("href", fonts);
-        document.head.append(fontsEl);
-
-        tailwind.config = { theme };
-
-        // Add styles
-
-        const styles = await fetch("./slides.css").then((res) => res.text());
-
-        const styleEl = document.createElement("style");
-        styleEl.setAttribute("type", "text/tailwindcss");
-        styleEl.textContent = styles;
-        document.head.append(styleEl);
-
-        if (!loader) {
-          loader = fetch("./slides.md").then((res) => res.text());
-        }
-        const rawSlides = await loader;
-        let global = {};
-        const slides = parseSlides(rawSlides).slides.map((s) => {
-          if (s.frontmatter?.data) {
-            Object.entries(s.frontmatter.data).forEach(([key, value]) => {
-              data[key] = value;
-            });
-          }
-          if (s.frontmatter?.global) {
-            global = { ...global, ...s.frontmatter.global };
-          }
-          s.frontmatter.global = global;
-          return s;
-        });
-
-        const slidesTemplate = slides.map((s, i) => {
-          const classes = twMerge(
-            `
-            absolute
-            top-0
-            right-0
-            left-0
-            p-4
-            md:p-[5vw]
-            max-w-none
-            min-h-screen
-            prose
-            md:prose-lg
-            xl:prose-2xl
-            prose-p:max-w-[70ch]
-            md:prose-h1:text-6xl
-            md:prose-h1:tracking-tight
-            prose-code:before:content-none
-            prose-code:after:content-none
-            prose-code:px-1
-            prose-p:before:content-none
-            prose-p:after:content-none
-            prose-blockquote:border-l-4
-            prose-blockquote:border-yellow-400
-            prose-blockquote:pl-6
-            prose-blockquote:font-normal
-            prose-blockquote:not-italic
-            prose-blockquote:text-gray-600
-            2xl:prose-p:text-3xl
-            2xl:prose-p:leading-relaxed
-            2xl:prose-p:my-[2.5vw]
-            2xl:prose-h1:text-8xl
-            2xl:prose-h2:text-6xl
-            2xl:prose-h3:text-4xl
-            2xl:prose-h4:text-3xl
-            2xl:prose-h5:text-2xl
-            2xl:prose-code:text-2xl
-            2xl:prose-code:leading-[2.5em]
-            2xl:prose-pre:p-[2.5vw]
-            2xl:prose-pre:max-w-[120ch]
-            2xl:prose-li:text-3xl
-            `,
-            s.frontmatter?.global?.class,
-            s.frontmatter?.class
-          );
-          const mainSlide = `
-          <div
-            class="${classes}"
-            v-show="slide === ${i}"
-          >
-            ${compileMarkdown(s.content)}
-          </div>`;
-          const bgSlide = s.frontmatter?.bg
-            ? `
-            <div
-              class="
-                fixed inset-0
-                ${s.frontmatter?.bg.class}
-              "
-              v-show="slide === ${i}"
-            />
-          `
-            : "";
-          return bgSlide + mainSlide;
-        });
-
-        const template = `
-              ${slidesTemplate.join("\n\n")}
-              <div ref="menuRef" v-if="menu" class="not-prose fixed top-0 right-0 bottom-0 w-[80vw] md:w-[25vw] p-6 bg-white shadow">
-                <div class="overflow-auto leading-8">
-                  <div class="cursor-pointer text-gray-700 hover:text-gray-900" v-for="slide in slides.filter(s => s.frontmatter?.title)" @click="goto(slide.frontmatter.title); menu = false">
-                    {{ slide.frontmatter?.title }}
-                  </div>
-                </div>
-              </div>
-              <div class="text-lg md:text-2xl fixed right-3 bottom-3 flex text-md transition-opacity opacity-100 md:opacity-20 hover:md:opacity-100 bg-white md:bg-transparent rounded md:rounded-none shadow md:shadow-none">
-                <button ref="menuIgnoreRef" class="border-none px-2 outline-none" @click="menu = !menu">≡</button>
-                <button class="border-none px-3 outline-none" @click="prev">‹</button>
-                <button class="border-none px-3 outline-none" @click="next">›</button>
-              </div>
-              `;
-
-        const App = {
-          components,
-          setup() {
-            const menuRef = ref(null);
-            const menuIgnoreRef = ref(null);
-            const menu = ref(false);
-            const slide = useStorage("fachwerk_slide", 0);
-            const next = () => {
-              if (slide.value < slides.length - 1) slide.value++;
-            };
-            const prev = () => {
-              if (slide.value > 0) slide.value--;
-            };
-            const goto = (title) => {
-              const index = slides.findIndex(
-                (s) => s.frontmatter?.title === title
-              );
-              if (index > -1) {
-                slide.value = index;
-              }
-            };
-            onKeyStroke("ArrowLeft", prev);
-            onKeyStroke("ArrowRight", next);
-            onClickOutside(
-              menuRef,
-              () => {
-                menu.value = false;
-              },
-              { ignore: [menuIgnoreRef] }
-            );
-
-            return {
-              slides,
-              menuRef,
-              menuIgnoreRef,
-              menu,
-              slide,
-              next,
-              prev,
-              goto,
-              ...setup,
-            };
-          },
-          template,
-        };
-
-        const app = createApp(App);
-        app.use(Fachwerk);
-        app.component("Icon", Icon);
-        app.mount("#app");
-      }
-
-      createFachwerk(config);
+      app.mount("#app");
     </script>
+    <div id="app"></div>
   </body>
 </html>

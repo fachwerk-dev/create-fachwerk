@@ -1,17 +1,13 @@
 ---
 title: Frontpage
-class: bg-[lightblue] grid place-content-center place-items-center text-center
-# global:
-#   class: bg-[lightblue]
+class: center gap-8 bg-[lightblue]
 ---
 
 <div class="text-8xl text-gray-800">▦</div>
 
-<br />
-
 # Fachwerk Slides
 
-Press `‹` `›` to navigate
+Press `Shift` and <code><Icon id="bx:left-arrow-alt" /></code> <code><Icon id="bx:right-arrow-alt" /></code> to navigate
 
 ---
 title: Get started
@@ -23,24 +19,21 @@ Fachwerk Slides is an experimental distribution of the Fachwerk library. It comb
 
 ## Get started
 
-Run the following command and then choose `Slides (experimental)` as a template:
+Run the following command and then choose `Slides` as a template:
 
 ```
 npm init fachwerk@latest
 ```
 
- You can re-run this command for updating the library, and it does not touch your work.
+You can re-run this command for updating the library, and it does not touch your work.
 
 ---
-class: center bg-[lightblue]
+class: center gap-8 bg-[lightblue]
 ---
- 
-<Icon id="bx:slideshow" class="w-24 h-24" />
 
-<br />
+<Icon id="bx:slideshow" class="w-24 h-24 text-gray-900" />
 
 # Create slides
-
 
 ---
 title: Create slides
@@ -48,28 +41,27 @@ title: Create slides
 
 ## Create slides
 
-Start with `slides.md` file. 
+Start editing `slides.md` file or press <Icon id="bx:pencil" v-on:click="edit = true" /> button.
 
 To separate slides, use `---` as a separator:
 
-```md
+```
 # Frontpage
 
 ---
 
 # About
-
 ```
 
 ---
 
-## Slide metadata and menus
+## Slide frontmatter and title
 
-Slides can also have metadata or _frontmatter_. It is stored in [YAML format](https://dev.to/paulasantamaria/introduction-to-yaml-125f).
+Slides can also have **frontmatter**, a header section with various metadata. It is stored in [YAML](https://dev.to/paulasantamaria/introduction-to-yaml-125f) format.
 
-When adding `title:` metadata to pages, these pages appear in the menu. Click `≡` to toggle it.
+When adding `title:` metadata to pages, these pages appear in the menu. Click <Icon id="bx:menu" /> to toggle it.
 
-```md
+```
 ---
 title: Frontpage
 ---
@@ -86,8 +78,8 @@ title: About
 ---
 class: center bg-[lightblue]
 ---
- 
-<Icon id="bx:right-arrow-circle" class="w-24 h-24" />
+
+<Icon id="bx:right-arrow-circle" class="w-24 h-24 text-gray-900" />
 
 <br />
 
@@ -99,70 +91,112 @@ title: Add navigation
 
 ## Add navigation buttons
 
-By default, slide navigation is linear and can be controlled with `‹` `›` buttons on the screen or keyboard.
+You can provide on-page buttons to jump to a specific page.
 
-However, you can set non-linear navigation by providing buttons to jump to a specific page. You can use `prev()` and `next()` functions to jump between pages:
+There are `prev()` and `next()` functions to jump to previous or next page:
 
 ```
-<button v-on:click="next()">Goto next slide</button>
+<button v-on:click="next()" next slide <Icon id="bx:right-arrow-alt" /></button>
 ```
 
-<button v-on:click="next()">Goto next slide</button>
+<button v-on:click="next()">Goto next slide <Icon id="bx:right-arrow-alt" /></button>
 
 ---
 
-## Go to the next page
+## Go to any page
 
-You can also jump to a page with a specific title using `goto()` function:
+You can also jump to a page with a specific `title:` using `go()` function:
 
 ```
-<button v-on:click="next()">Go to next page</button>
+---
+title: Frontpage
+---
 
-<button v-on:click="goto('Style current slide')">Go to "Style the slide" page</button>
+# Frontpage
+
+---
+
+...in a later slide...
+
+<button v-on:click="go('Frontpage')"><Icon id="bx:arrow-to-left" /> Go to frontpage</button>
 ```
 
-<button v-on:click="next()">Go to next page</button>
-
-<button v-on:click="goto('Style current slide')">Go to "Style the slide" page</button>
-
+<button v-on:click="go('Frontpage')"><Icon id="bx:arrow-to-left" /> Go to frontpage</button>
 
 ---
 class: center bg-[lightblue]
 ---
- 
-<Icon id="bx:paint-roll" class="w-24 h-24" />
+
+<Icon id="bx:cloud" class="w-24 h-24 text-gray-900" />
+
+<br />
+
+# Use icons
+
+---
+title: Use icons
+---
+
+## Use icons
+
+Fachwerk support using custom icons powered by [Icônes](https://icones.js.org).
+
+1. First, pick an icon from a collection. We prefer [Boxicons](https://icones.js.org/collection/bx), but you can choose any collection.
+
+2. Then click on an icon and take note of the ID of the icon, such as `bx:cloud`.
+
+3. Finally, use the following markup in the slide:
+
+```
+<Icon id="bx:cloud" />
+```
+
+<Icon id="bx:cloud" />
+
+---
+
+## Customize icons
+
+To customize the icon, use Tailwind classes.
+
+Nothe that you need to specify both width and height: `h-24 w-24`
+
+```
+<Icon id="bx:cloud" class="w-24 h-24 text-gray-400 hover:scale-150 transition" />
+<Icon id="bx:cloud-snow" class="w-24 h-24 text-gray-600 hover:scale-150 transition" />
+<Icon id="bx:cloud-lightning" class="w-24 h-24 text-gray-800 hover:scale-150 transition" />
+```
+
+<Icon id="bx:cloud" class="w-24 h-24 text-gray-400 hover:scale-150 transition" />
+<Icon id="bx:cloud-snow" class="w-24 h-24 text-gray-600 hover:scale-150 transition" />
+<Icon id="bx:cloud-lightning" class="w-24 h-24 text-gray-800 hover:scale-150 transition" />
+
+---
+class: center bg-[lightblue]
+---
+
+<Icon id="bx:paint-roll" class="w-24 h-24 text-gray-900" />
 
 <br />
 
 # Style slides
 
 ---
-title: Add some style
-class: bg-amber-100
+title: Style slides
+class: bg-yellow-300
 ---
 
-## Style current slide
+## Add background color
 
-To style the _current_ slide, add `class:` to the metadata with Tailwind classes.
-
-Here's how to make the background light amber using [Tailwind color classes](https://tailwindcss.com/docs/customizing-colors):
-
+To style the _current_ slide, add `class:` to the frontmatter. Here's how to make the background yellow using [Tailwind color classes](https://tailwindcss.com/docs/background-color#setting-the-background-colors):
 
 ```
 ---
-class: bg-amber-200
+class: bg-yellow-300
 ---
 ```
 
----
-class: bg-amber-200
----
-
-## Style all slides
-
-To style _all_ slides, add a `global:` section to the metadata.
-
-Here's how to make background amber for all slides:
+To style _all_ slides, add a `global: class:` to the frontmatter:
 
 ```
 ---
@@ -171,37 +205,102 @@ global:
 ---
 ```
 
-It is recommended to add this to the first slide; otherwise, subsequent global metadata will override the previous data.
+---
+class: bg-gradient-to-t from-blue-500 to-cyan-500
+---
+
+## Add two-stop gradient
+
+In addition to single-coloured background you can also use [gradients](https://tailwindcss.com/docs/gradient-color-stops):
+
+```
+---
+class: bg-gradient-to-t from-blue-500 to-cyan-500
+---
+```
 
 ---
-class: bg-gray-900 prose-invert
+class: bg-gradient-to-t from-pink-700 via-purple-700 to-indigo-700 prose-invert
+---
+
+## Add three-stop gradient
+
+For extra flexibility, there are also [three-stop gradient](https://tailwindcss.com/docs/gradient-color-stops#middle-color):
+
+```
+---
+class: bg-gradient-to-t from-pink-700 via-purple-700 to-indigo-700 prose-invert
+---
+```
+
+See [hypercolor.dev](https://hypercolor.dev) for more inspiraton.
+
+---
+class: bg-gray-800 prose-invert
 ---
 
 ## Go dark
 
-To style the slide with a dark background, add a darker version of the color with `bg-gray-900` or similar. 
+To style the slide with a dark background, add a darker version of the color with `bg-gray-800`, `bg-gray-900` etc.
 
-To invert the text color, use the `prose-invert` class. See more at Tailwind [typography plugin](https://tailwindcss.com/docs/typography-plugin).
+To invert the text color, use the `prose-invert` class.
 
 ```yaml
 ---
-class: dark:bg-gray-900 prose-invert
+class: dark:bg-gray-800 prose-invert
 ---
 ```
 
 To make all the slides dark when the user is in dark mode, use the following global class:
+
 ```yaml
 ---
 global:
-  class: dark:bg-gray-900 dark:prose-invert
+  class: dark:bg-gray-800 dark:prose-invert
 ---
 ```
 
 ---
 class: center bg-[lightblue]
 ---
- 
-<Icon id="bx:layout" class="w-24 h-24" />
+
+<Icon id="bx:image-alt" class="w-24 h-24 text-gray-900" />
+
+<br />
+
+# Add images
+
+---
+title: Add images
+image: https://designstem.github.io/fachwerk/images/example.jpg
+class: backdrop-brightness-50 prose-invert
+---
+
+## Add image background
+
+To add a background image to an entire slide, use the `image:` in the frontmatter. When using longer texts on the slide, it is recommended invert the text color and darken the background for legibility:
+
+```
+---
+image: https://designstem.github.io/fachwerk/images/example.jpg
+class: backdrop-brightness-50 prose-invert
+---
+```
+
+---
+image: https://designstem.github.io/fachwerk/images/example.jpg
+class: prose-invert backdrop-blur-3xl backdrop-saturate-200 center
+---
+
+# When the back drops
+
+Learn more about [backdrop filters](https://tailwindcss.com/docs/backdrop-blur).
+
+---
+class: center bg-[lightblue]
+---
+
+<Icon id="bx:layout" class="w-24 h-24 text-gray-900" />
 
 <br />
 
@@ -230,22 +329,20 @@ class: grid place-content-center place-items-center text-center
 And I am too
 
 ---
-title: Custom layouts
----
 
-## Add custom layouts
+## Add custom classes
 
-Adding many specific classes to slides is sometimes hard to memorize. To overcome this, add custom CSS classes to `slides.css` with Tailwind `@apply` directive and re-use them later.
+Adding numerous classes to each slide can be repetitive. To overcome this, add custom CSS classes to `index.html` and re-use them in any slide.
 
 Here is a custom `.center` class that centers elements on the slide:
 
 ```
 .center {
-    @apply grid place-content-center place-items-center text-center;  
+    @apply grid place-content-center place-items-center text-center;
 }
 ```
 
-Here is how to use it in slide metadata:
+Here is how to use it in frontmatter:
 
 ```
 ---
@@ -256,144 +353,8 @@ class: center
 ---
 class: center bg-[lightblue]
 ---
- 
-<Icon id="bx:font-family" class="w-24 h-24" />
 
-<br />
-
-# Change fonts
-
----
-title: Change fonts
----
-
-## Change fonts
-
-Fachwerk Slides uses [IBM Plex Sans](https://fonts.google.com/specimen/IBM+Plex+Sans) for serifs and [Cousine](https://fonts.google.com/specimen/Cousine) for monospaced typography, but you can use any font available in Google Fonts.
-
-Here's how to change the defaults to [Inter](https://fonts.google.com/specimen/Inter) and [Roboto Mono](https://fonts.google.com/specimen/Roboto+Mono) in `slides.js`:
-
-```
-export const fonts =
-  "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Mono&display=swap";
-
-export const theme = {
-  fontFamily: {
-    sans: ["Inter", "sans-serif"],
-    mono: ["Roboto Mono", "monospace"],
-  },
-}
-
-```
-
----
-class: center bg-[lightblue]
----
-
-<Icon id="bx:cloud" class="w-24 h-24" />
-
-<br />
-
-# Use icons
-
----
-title: Use icons
----
-
-## Use icons
-
-Fachwerk support using custom icons powered by [Icônes](https://icones.js.org). 
-
-1. First, pick an icon from a collection. We prefer [Boxicons](https://icones.js.org/collection/bx), but you can choose any collection. 
-
-2. Then click on an icon and take note of the ID of the icon, such as `bx:cloud`.
-
-3. Finally, use the following markup in the slide:
-
-```
-<Icon id="bx:cloud" />
-```
-
-<Icon id="bx:cloud" />
-
----
-
-## Customize icons
-
-To customize the icon, use Tailwind classes:
-
-```
-<Icon id="bx:cloud" class="w-24 h-24 text-gray-400 hover:scale-150 transition" />
-
-<Icon id="bx:cloud-snow" class="w-24 h-24 text-gray-600 hover:scale-150 transition" />
-
-<Icon id="bx:cloud-lightning" class="w-24 h-24 text-gray-800 hover:scale-150 transition" />
-```
-
-<Icon id="bx:cloud" class="w-24 h-24 text-gray-400 hover:scale-150 transition" />
-
-<Icon id="bx:cloud-snow" class="w-24 h-24 text-gray-600 hover:scale-150 transition" />
-
-<Icon id="bx:cloud-lightning" class="w-24 h-24 text-gray-800 hover:scale-150 transition" />
-
----
-class: center bg-[lightblue]
----
- 
-<Icon id="bx:image-alt" class="w-24 h-24" />
-
-<br />
-
-# Add images
-
----
-title: Add images
-class: prose-invert bg-cover bg-[url(https://designstem.github.io/fachwerk/images/example.jpg)]
----
-
-## Add full image background
-
-To add a background image to an entire slide, use the following class in the metadata:
-
-```
----
-class: prose-invert bg-cover bg-[url(https://your-image-here.jpg)]
----
-```
-
-
----
-class: p-0 md:p-0 md:grid md:grid-cols-2
----
-
-<div class="p-4 md:p-[4vw]">
-
-## Add partial image background
-
-Here's how to create a responsive layout with a partial image background:
-
-```
----
-class: p-0 md:p-0 md:grid md:grid-cols-2
----
-<div class="p-4 md:p-[5vw]">
-
-# Hello world
-
-</div>
-
-<div class="bg-cover bg-[url(https://your-image-here.jpg)]" />
-```
-
-</div>
-
-<div class="bg-cover h-screen bg-[url(https://designstem.github.io/fachwerk/images/example.jpg)]" />
-
----
-class: center bg-[lightblue]
----
-
-<Icon id="bx:math" class="w-24 h-24" />
+<Icon id="bx:math" class="w-24 h-24 text-gray-900" />
 
 <br />
 
@@ -404,6 +365,8 @@ title: Add or subtract math
 class: center bg-gray-900 prose-invert
 ---
 
+## Jawohl, we got math
+
 <f-math>\begin{pmatrix} a & c & e \\\\ b & d & f \\\\ 0 & 0 & 1 \end{pmatrix}</f-math>
 
 See more at https://fachwerk.dev/components/f-math
@@ -412,7 +375,7 @@ See more at https://fachwerk.dev/components/f-math
 class: center bg-[lightblue]
 ---
 
-<Icon id="bx:slider-alt" class="w-24 h-24" />
+<Icon id="bx:slider-alt" class="w-24 h-24 text-gray-900" />
 
 <br />
 
@@ -420,10 +383,10 @@ class: center bg-[lightblue]
 
 ---
 title: Work with data
-data: 
-  names:
-    - Romy Schneider
-    - Klaus Kinski
+data:
+names:
+  - Romy Schneider
+  - Klaus Kinski
 ---
 
 ## Define data
@@ -432,7 +395,7 @@ Sometimes it is helpful to separate the markup and the data. For example, you ca
 
 ```
 ---
-data: 
+data:
   names:
     - Romy Schneider
     - Klaus Kinski
@@ -445,7 +408,6 @@ You can access the data with `data.names`:
 ❴❴ data.names ❵❵
 ```
 
-{{ data.names }}
 ---
 
 ## Display data
@@ -456,7 +418,7 @@ It is more useful to loop over the data to display it:
 <div class="grid gap-4">
   <div
     v-for="name in data.names"
-    class="p-4 bg-yellow-500 rounded"
+    class="p-4 bg-blue-500 rounded"
   >
     ❴❴ name ❵❵
   </div>
@@ -466,18 +428,18 @@ It is more useful to loop over the data to display it:
 <div class="flex gap-4">
   <div
     v-for="name in data.names"
-    class="p-4 bg-yellow-500 rounded"
+    class="px-8 py-4 bg-blue-500 text-white rounded-full"
   >
     {{ name }}
   </div>
 </div>
 
 ---
-data: 
+data:
   x: 50
 ---
 
-## Add reactive data
+## Make data reactive
 
 The data does not have to be static. It can also be dynamically modified or _reactive_.
 
@@ -485,118 +447,173 @@ Lets set a variable `data.x` and control it with a slider:
 
 ```
 ---
-data: 
+data:
   x: 50
 ---
 ```
+
 <pre v-pre>
 &lt;input type="range" v-model.number="data.x" />  {{ data.x }}
 </pre>
 
 <input type="range" v-model.number="data.x" /> {{ data.x }}
 
-
 <Info>When the variable's default value is 0, you can skip the frontmatter definition</Info>
 
 ---
+class: center bg-[lightblue]
+---
 
-## Add custom data
+<Icon id="bx:cog" class="w-24 h-24 text-gray-900" />
 
-When you need to do more complex data manipulation, you can define custom variables and functions in the `slides.js` file that will be available in Markdown:
+<br />
+
+# Add custom code
+
+---
+title: Add custom code
+---
+
+## Create custom data
+
+When you need to do more complex data manipulation, you can define custom variables and functions in Javascript.
+
+Create a JS file, for example `data.js` and add your code there:
 
 ```js
 import { ref, computed } from "vue";
-const x = ref(0);
-const y = computed(() => x.value * 10);
-const reset = () => x.value = 0
-export const setup = { customX, customY, customReset }
+export const fahrenheit = ref(-460);
+export const celsius = computed(() =>
+  Math.floor((5 / 9) * (fahrenheit.value - 32))
+);
+export const resetFahrenheit = () => {
+  fahrenheit.value = -460;
+};
 ```
 
-You can access custom data in `slides.md` as follows:
-
-<pre v-pre>
-&lt;f-slider v-model="customX" /> {{ customX }} {{ customY }}
-&lt;button v-on:click="customReset">Reset&lt/button> &lt;a v-on:click="customReset">Reset&lt;/a>
-</pre>
-
-<input type="range" v-model.number="customX" /> {{ customX }} {{ customY }} <a v-on:click="customReset">Reset</a>
-
----
-class: center bg-[lightblue]
 ---
 
-<Icon id="bx:category" class="w-16 h-16 md:w-24 md:h-24" />
+## Register custom data
 
-<br />
-
-# Add components
-
----
-title: Add components
----
-
-## Add custom component
-
-You can define custom components in `slides.js`. For example, here is a simple `Info` component:
+Next, you need to import and register custom data in index.html:
 
 ```js
-const Info = {
+import * as data from './data.js
+app.config.globalProperties = {...app.config.globalProperties, ...data}
+```
+
+---
+
+## Use custom data
+
+Here's how to use the custom data in Markdown:
+
+```
+<input type="range" v-model="fahrenheit" min="32" max="1000">
+
+Fahrenheit: ❴❴ fahrenheit ❵❵
+Celsius: ❴❴ celsius ❵❵
+
+<button v-on:click="resetFahrenheit">Reset</button>
+```
+
+<input type="range" v-model="fahrenheit" min="-460" max="1000">
+
+Fahrenheit: {{ fahrenheit }}
+Celsius: {{ celsius }}
+
+<a v-on:click="resetFahrenheit">Reset</a>
+
+---
+
+## Create component
+
+You can define custom components Javascript. For example, here is a `Info.js` component, similar to Vitepress [containers](https://vitepress.vuejs.org/guide/markdown.html#custom-containers):
+
+```js
+export const Info = {
   inheritAttrs: false,
+  props: { icon: { default: "bx:info-circle" } },
   template: `
-  <div class="grid grid-cols-[auto,1fr] gap-2">
-    <Icon id="tabler:info-circle" class="w-6 h-6 translate-y-1" />
-    <div v-bind="$attrs" class="text-gray-500"><slot /></div>
+  <div class="flex gap-2 md:gap-3">
+    <Icon :id="icon" class="text-gray-500 shrink-0" v-bind="$attrs" />
+    <div class="text-gray-500 -mt-1"><slot /></div>
   </div>
   `,
 };
-
-export const components = { Info }
 ```
 
 ---
 
-## Use custom component
+## Register component
+
+Next, you need to import and register the component in `index.html`:
+
+```js
+import { Info } from "./Info.js";
+app.component("Info", Info);
+```
+
+---
+
+## Use component
 
 Here's how to use the `Info` component in Markdown:
 
+```md
+<Info>Here is the default info box</Info>
+
+<Info icon="bx:train" class="text-red-500">Kraftwerk are a German...</Info>
 ```
-<Info>Here is a simple info box</Info>
+
+<Info>Here is the default info box</Info>
+
+<Info icon="bx:train" class="text-red-500">Kraftwerk are a German band formed in Düsseldorf in 1969 by Ralf Hütter and Florian Schneider. Widely considered innovators and pioneers of electronic music, Kraftwerk were among the first successful acts to popularize the genre.</Info>
+
+---
+
+## Customize type
+
+Fachwerk Slides uses [IBM Plex Sans](https://fonts.google.com/specimen/IBM+Plex+Sans) for serifs and [Cousine](https://fonts.google.com/specimen/Cousine) for monospaced type, but you can use any font available in Google Fonts.
+
+Here's how to change the default fonts to [Inter](https://fonts.google.com/specimen/Inter) and [Roboto Mono](https://fonts.google.com/specimen/Roboto+Mono) in `index.html`:
+
+```
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Mono&display=swap"
+  rel="stylesheet"
+/>
+<script>
+  tailwind.config = {
+    theme: {
+      fontFamily: {
+        sans: ["Inter", "sans-serif"],
+        mono: ["Roboto Mono", "monospace"],
+      },
+    },
+  };
+</script>
 ```
 
-<Info>Here is a simple info box</Info>
-
----
-class: center bg-[lightblue]
----
-
-<Icon id="bx:cog" class="w-24 h-24" />
-
-<br />
-
-# Customize loader
-
----
-title: Customize loader
 ---
 
 ## Customize loader
 
-By default, Fachwerk Slides loads the slide data using `fetch()` from `slides.md`. However, you can override the loader function in `slides.js` to load the Markdown files from anywhere.
+By default, Fachwerk Slides loads the slides data using `fetch()` from `./slides.md`. However, you can override the global loader function in `index.html` to fetch the Markdown files from anywhere.
 
-Here is an example of loading two Markdown files, `first.md` and `second.md`, and merging them:
+Here is an example of loading two Markdown files, `slides1.md` and `slides2.md`, and merging them:
 
 ```js
-const files = ["first.md", "second.md"]
+const files = ["slides1.md", "slides2.md"];
 
-export const loader = Promise.all(
+app.config.globalProperties.loader = Promise.all(
   files.map((file) => fetch(file).then((res) => res.text()))
-)
-.then((files) => files.join(""));
+).then((files) => files.join(""));
 ```
 
 ---
 title: Backpage
-class: bg-[lightblue] grid place-items-center 
+class: center bg-[lightblue]
 ---
 
 <f-svg centered>

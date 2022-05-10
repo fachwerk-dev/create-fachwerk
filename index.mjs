@@ -27,10 +27,10 @@ const choices = [
     value: "global",
   },
   {
-    title: "Slides (experimental)",
+    title: "Slides",
     description: "With Tailwind support",
     value: "slides",
-    protect: ["slides.md", "slides.js", "slides.css"],
+    protect: ["index.html"],
   },
 ];
 
