@@ -109,7 +109,7 @@ export function useLoader(key, loader) {
   const save = () => (saved.value = current.value);
   const reset = () =>
     loader().then((original) => {
-      saved.value = original;
+      saved.value = "";
       current.value = original;
     });
   loader().then((original) => {
@@ -125,11 +125,19 @@ export function useLoader(key, loader) {
 export function useSlides(key, content) {
   const slides = computed(() => parseSlides(content.value));
   const slideIndex = useStorage(key, 0);
+  watchEffect(() => {
+    if (slideIndex.value < 0) {
+      slideIndex.value = 0;
+    }
+    if (slideIndex.value > slides.value.length - 1) {
+      slideIndex.value = slides.value.length - 1;
+    }
+  });
   const next = () => {
-    if (slideIndex.value < slides.value.length - 1) slideIndex.value++;
+    slideIndex.value++;
   };
   const prev = () => {
-    if (slideIndex.value > 0) slideIndex.value--;
+    slideIndex.value--;
   };
   const go = (title) => {
     const index = slides.value.findIndex((s) => s.frontmatter?.title === title);
@@ -199,11 +207,11 @@ export const App = {
       <textarea
         ref="editor"
         v-model="current"
-        class="w-full h-full leading-6 text-gray-200 bg-gray-900 p-4 text-white font-mono border-none outline-none focus:outline-none"
+        class="w-full h-full leading-6 !text-gray-300 bg-gray-900 p-4 text-white font-mono border-none outline-none focus:outline-none"
       />
-        <div v-show="edit" class="absolute left-0 bottom-0 right-0 flex justify-end gap-4 text-sm pb-3 pt-8 px-4 bg-gradient-to-t via-gray-900 from-gray-900">
-        <div class="px-2 py-1 text-white/25 cursor-pointer" @click="reset">Reset</div>
-        <div class="px-2 py-1 bg-amber-500 text-white cursor-pointer rounded" @click="save">Save</div>
+        <div v-show="edit" class="absolute left-0 bottom-0 right-0 flex justify-end gap-4 text-sm pb-3 pt-6 px-4 bg-gradient-to-t via-gray-900/80 from-gray-900">
+          <div class="px-2 py-1 text-white/25 cursor-pointer" @click="reset">Reset</div>
+          <div class="px-2 py-1 bg-amber-500 text-white cursor-pointer rounded" @click="save">Save</div>
         </div>
       </div>
       <div>
@@ -255,8 +263,12 @@ export const App = {
       </div>
     </div>
     <div class="fixed bottom-3 left-3">
-      <Icon id="bx:x" v-if="edit" class="cursor-pointer text-white/50" @click="edit = !edit" />
-      <Icon id="bx:pencil" v-if="!edit" class="cursor-pointer text-black/50" @click="edit = !edit" />
+      <Icon
+        id="bx:pencil"
+        class="cursor-pointer "
+        :class="[edit ? 'text-amber-500': 'text-black/50']"
+        @click="edit = !edit"
+      />
     </icon>
     <div v-if="menu" class="not-prose fixed top-0 right-0 bottom-0 w-[80vw] md:w-[25vw] p-6 bg-white shadow">
       <div class="overflow-auto leading-8">
@@ -270,7 +282,7 @@ export const App = {
       </div>
     </div>
     <div class="fixed right-3 bottom-3 flex text-xs gap-1">
-      <Icon id="bx:menu" class="cursor-pointer text-black/25 hover:text-black/50" @click="menu = !menu" />
+      <Icon id="bx:menu" @click="menu = !menu" class="cursor-pointer" :class="[menu ? 'text-amber-500 hover:text-amber-600' : 'text-black/25 hover:text-black/50']" />
       &ensp;
       <Icon id="bx:left-arrow-alt" class="cursor-pointer text-black/25 hover:text-black/50" @click="prev" />
       <Icon id="bx:right-arrow-alt" class="cursor-pointer text-black/25 hover:text-black/50" @click="next" />

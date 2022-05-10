@@ -7,7 +7,7 @@ class: bg-[lightblue] center
 
 <br />
 
-# Fachwerk Slides
+# Fachwerk Slides??
 
 Press `Shift` and <code><Icon id="bx:left-arrow-alt" /></code> <code><Icon id="bx:right-arrow-alt" /></code> to navigate
 
@@ -60,7 +60,7 @@ To separate slides, use `---` as a separator:
 
 ## Slide frontmatter and title
 
-Slides can also have <mark>frontmatter</mark>, a header section with various metadata. It is stored in [YAML](https://dev.to/paulasantamaria/introduction-to-yaml-125f) format.
+Slides can also have **frontmatter**, a header section with various metadata. It is stored in [YAML](https://dev.to/paulasantamaria/introduction-to-yaml-125f) format.
 
 When adding `title:` metadata to pages, these pages appear in the menu. Click `≡` to toggle it.
 
