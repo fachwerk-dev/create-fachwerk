@@ -214,7 +214,12 @@ export const App = {
         </div>
       </div>
       <div>
-        <template v-for="slide in slides">
+        <div class="relative" v-for="slide in slides">
+          <div
+            v-show="slide.index === slideIndex && slide.frontmatter?.image"
+            class="-z-10 fixed inset-0 bg-cover"
+            :style="{backgroundImage: 'url(' + slide.frontmatter?.image + ')'}"
+          />
           <div
             v-show="slide.index === slideIndex"
             class="
@@ -258,7 +263,7 @@ export const App = {
           >
             <Compiler :code="slide.content" />
           </div>
-        </template>
+        </div>
       </div>
     </div>
     <div class="fixed bottom-3 left-3">

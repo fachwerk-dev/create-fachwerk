@@ -127,6 +127,53 @@ title: Frontpage
 
 <button v-on:click="go('Frontpage')"><Icon id="bx:arrow-to-left" /> Go to frontpage</button>
 
+---
+class: center bg-[lightblue]
+---
+
+<Icon id="bx:cloud" class="w-24 h-24 text-gray-900" />
+
+<br />
+
+# Use icons
+
+---
+title: Use icons
+---
+
+## Use icons
+
+Fachwerk support using custom icons powered by [Icônes](https://icones.js.org). 
+
+1. First, pick an icon from a collection. We prefer [Boxicons](https://icones.js.org/collection/bx), but you can choose any collection. 
+
+2. Then click on an icon and take note of the ID of the icon, such as `bx:cloud`.
+
+3. Finally, use the following markup in the slide:
+
+```
+<Icon id="bx:cloud" />
+```
+
+<Icon id="bx:cloud" />
+
+---
+
+## Customize icons
+
+To customize the icon, use Tailwind classes.
+
+Nothe that you need to specify both width and height: `h-24 w-24`
+
+```
+<Icon id="bx:cloud" class="w-24 h-24 text-gray-400 hover:scale-150 transition" />
+<Icon id="bx:cloud-snow" class="w-24 h-24 text-gray-600 hover:scale-150 transition" />
+<Icon id="bx:cloud-lightning" class="w-24 h-24 text-gray-800 hover:scale-150 transition" />
+```
+
+<Icon id="bx:cloud" class="w-24 h-24 text-gray-400 hover:scale-150 transition" />
+<Icon id="bx:cloud-snow" class="w-24 h-24 text-gray-600 hover:scale-150 transition" />
+<Icon id="bx:cloud-lightning" class="w-24 h-24 text-gray-800 hover:scale-150 transition" />
 
 ---
 class: center bg-[lightblue]
@@ -221,6 +268,42 @@ global:
 class: center bg-[lightblue]
 ---
  
+<Icon id="bx:image-alt" class="w-24 h-24 text-gray-900" />
+
+<br />
+
+# Add images
+
+---
+title: Add images
+image: https://designstem.github.io/fachwerk/images/example.jpg
+class: backdrop-brightness-50 prose-invert
+---
+
+## Add image background
+
+To add a background image to an entire slide, use the `image:` in the frontmatter. When using longer texts on the slide, it is recommended invert the text color and darken the background for legibility:
+
+```
+---
+image: https://designstem.github.io/fachwerk/images/example.jpg
+class: backdrop-brightness-50 prose-invert
+---
+```
+
+---
+image: https://designstem.github.io/fachwerk/images/example.jpg
+class: prose-invert backdrop-blur-3xl backdrop-saturate-200 center
+---
+
+# When the back drops
+
+Learn more about [backdrop filters](https://tailwindcss.com/docs/backdrop-blur).
+
+---
+class: center bg-[lightblue]
+---
+ 
 <Icon id="bx:layout" class="w-24 h-24 text-gray-900" />
 
 <br />
@@ -270,107 +353,6 @@ Here is how to use it in frontmatter:
 class: center
 ---
 ```
-
----
-class: center bg-[lightblue]
----
-
-<Icon id="bx:cloud" class="w-24 h-24 text-gray-900" />
-
-<br />
-
-# Use icons
-
----
-title: Use icons
----
-
-## Use icons
-
-Fachwerk support using custom icons powered by [Icônes](https://icones.js.org). 
-
-1. First, pick an icon from a collection. We prefer [Boxicons](https://icones.js.org/collection/bx), but you can choose any collection. 
-
-2. Then click on an icon and take note of the ID of the icon, such as `bx:cloud`.
-
-3. Finally, use the following markup in the slide:
-
-```
-<Icon id="bx:cloud" />
-```
-
-<Icon id="bx:cloud" />
-
----
-
-## Customize icons
-
-To customize the icon, use Tailwind classes.
-
-Nothe that you need to specify both width and height: `h-24 w-24`
-
-```
-<Icon id="bx:cloud" class="w-24 h-24 text-gray-400 hover:scale-150 transition" />
-<Icon id="bx:cloud-snow" class="w-24 h-24 text-gray-600 hover:scale-150 transition" />
-<Icon id="bx:cloud-lightning" class="w-24 h-24 text-gray-800 hover:scale-150 transition" />
-```
-
-<Icon id="bx:cloud" class="w-24 h-24 text-gray-400 hover:scale-150 transition" />
-<Icon id="bx:cloud-snow" class="w-24 h-24 text-gray-600 hover:scale-150 transition" />
-<Icon id="bx:cloud-lightning" class="w-24 h-24 text-gray-800 hover:scale-150 transition" />
-
----
-class: center bg-[lightblue]
----
- 
-<Icon id="bx:image-alt" class="w-24 h-24 text-gray-900" />
-
-<br />
-
-# Add images
-
----
-title: Add images
-class: prose-invert bg-cover bg-[url(https://designstem.github.io/fachwerk/images/example.jpg)]
----
-
-## Add full image background
-
-To add a background image to an entire slide, use the following class in the metadata:
-
-```
----
-class: prose-invert bg-cover bg-[url(https://your-image-here.jpg)]
----
-```
-
-
----
-class: p-0 md:p-0 md:grid md:grid-cols-2
----
-
-<div class="p-4 md:p-[4vw]">
-
-## Add partial image background
-
-Here's how to create a responsive layout with a partial image background:
-
-```
----
-class: p-0 md:p-0 md:grid md:grid-cols-2
----
-<div class="p-4 md:p-[5vw]">
-
-# Hello world
-
-</div>
-
-<div class="bg-cover bg-[url(https://your-image-here.jpg)]" />
-```
-
-</div>
-
-<div class="bg-cover h-screen bg-[url(https://designstem.github.io/fachwerk/images/example.jpg)]" />
 
 ---
 class: center bg-[lightblue]
@@ -441,7 +423,7 @@ It is more useful to loop over the data to display it:
 <div class="grid gap-4">
   <div
     v-for="name in data.names"
-    class="p-4 bg-indigo-500 rounded"
+    class="p-4 bg-blue-500 rounded"
   >
     ❴❴ name ❵❵
   </div>
@@ -451,7 +433,7 @@ It is more useful to loop over the data to display it:
 <div class="flex gap-4">
   <div
     v-for="name in data.names"
-    class="px-8 py-4 bg-pink-500 text-white rounded-full"
+    class="px-8 py-4 bg-blue-500 text-white rounded-full"
   >
     {{ name }}
   </div>
