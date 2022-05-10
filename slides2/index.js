@@ -8,8 +8,7 @@ import {
   getCurrentInstance,
 } from "vue";
 import { Fachwerk, data } from "fachwerk";
-import { compileTemplate } from "fachwerk/internal";
-import { parse as compileMarkdown } from "marked";
+import { compileTemplate, compileMarkdown } from "fachwerk/internal";
 import { parse } from "@slidev/parser";
 import { useStorage, useMagicKeys } from "@vueuse/core";
 
@@ -37,8 +36,7 @@ const Compiler = {
           const app = getCurrentInstance().appContext.app;
           return { ...app.config.globalProperties };
         },
-        render: compileTemplate(compileMarkdown(props.code, { breaks: true }))
-          .code,
+        render: compileTemplate(compileMarkdown(props.code)).code,
       };
     });
     return () => h(Output.value);

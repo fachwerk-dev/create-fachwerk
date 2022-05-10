@@ -30,12 +30,10 @@ npm init fachwerk@latest
  You can re-run this command for updating the library, and it does not touch your work.
 
 ---
-class: center bg-[lightblue]
+class: center gap-8 bg-[lightblue]
 ---
  
-<Icon id="bx:slideshow" class="w-24 h-24 text-gray-900 text-gray-900" />
-
-<br />
+<Icon id="bx:slideshow" class="w-24 h-24 text-gray-900" />
 
 # Create slides
 
@@ -52,7 +50,9 @@ To separate slides, use `---` as a separator:
 
 ```
 # Frontpage
+
 ---
+
 # About
 ```
 
