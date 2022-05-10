@@ -164,8 +164,8 @@ export const App = {
     );
 
     const edit = useStorage("slides_edit", false);
+    const menu = ref(false);
 
-    console.log(app.config.globalProperties.loader);
     app.use(Fachwerk);
     app.component("Icon", Icon);
     app.component("Info", Info);
@@ -190,6 +190,7 @@ export const App = {
       next,
       prev,
       edit,
+      menu,
     };
   },
   template: `
@@ -257,7 +258,20 @@ export const App = {
       <Icon id="bx:x" v-if="edit" class="cursor-pointer text-white/50" @click="edit = !edit" />
       <Icon id="bx:pencil" v-if="!edit" class="cursor-pointer text-black/50" @click="edit = !edit" />
     </icon>
+    <div v-if="menu" class="not-prose fixed top-0 right-0 bottom-0 w-[80vw] md:w-[25vw] p-6 bg-white shadow">
+      <div class="overflow-auto leading-8">
+        <div
+          v-for="slide in slides.filter(s => s.frontmatter?.title)"
+          @click="go(slide.frontmatter.title); menu = false"
+          class="cursor-pointer text-gray-700 hover:text-gray-900"
+        >
+          {{ slide.frontmatter?.title }}
+        </div>
+      </div>
+    </div>
     <div class="fixed right-3 bottom-3 flex text-xs gap-1">
+      <Icon id="bx:menu" class="cursor-pointer text-black/25 hover:text-black/50" @click="menu = !menu" />
+      &ensp;
       <Icon id="bx:left-arrow-alt" class="cursor-pointer text-black/25 hover:text-black/50" @click="prev" />
       <Icon id="bx:right-arrow-alt" class="cursor-pointer text-black/25 hover:text-black/50" @click="next" />
     </div>

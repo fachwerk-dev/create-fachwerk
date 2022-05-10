@@ -130,7 +130,7 @@ class: center bg-[lightblue]
 # Style slides
 
 ---
-title: Add some style
+title: Style slides
 class: bg-yellow-300
 ---
 
@@ -240,8 +240,6 @@ class: grid place-content-center place-items-center text-center
 
 And I am too
 
----
-title: Custom layouts
 ---
 
 ## Add custom classes
@@ -484,8 +482,10 @@ class: center bg-[lightblue]
 
 <br />
 
-# Add customization
+# Add custom code
 
+---
+title: Add custom code
 ---
 
 ## Create custom data
@@ -538,8 +538,6 @@ Fahrenheit: {{ fahrenheit }} Celsius: {{ celsius }}
 <a v-on:click="resetFahrenheit">Reset</a>
 
 ---
-title: Add components
----
 
 ## Create component
 
@@ -584,8 +582,6 @@ Here's how to use the `Info` component in Markdown:
 <Info icon="bx:train" class="text-red-500">Kraftwerk are a German band formed in Düsseldorf in 1969 by Ralf Hütter and Florian Schneider. Widely considered innovators and pioneers of electronic music, Kraftwerk were among the first successful acts to popularize the genre.</Info>
 
 ---
-title: Customize type
----
 
 ## Customize type
 
@@ -610,8 +606,6 @@ Here's how to change the default fonts to [Inter](https://fonts.google.com/speci
 </script>
 ```
 
----
-title: Customize loader
 ---
 
 ## Customize loader
