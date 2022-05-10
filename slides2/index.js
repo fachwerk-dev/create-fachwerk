@@ -75,7 +75,7 @@ function parseSlides(code) {
         global = { ...global, ...s.frontmatter.global };
       }
       s.frontmatter.global = global;
-      s.content = compileMarkdown(s.content);
+      //s.content = compileMarkdown(s.content);
       return s;
     });
   } catch (e) {
@@ -124,18 +124,19 @@ export function useSlides(key, content) {
   const slides = computed(() => parseSlides(content.value));
   const slideIndex = useStorage(key, 0);
   watchEffect(() => {
-    if (slideIndex.value < 0) {
-      slideIndex.value = 0;
-    }
     if (slides.value.length > 1 && slideIndex.value > slides.value.length - 1) {
       slideIndex.value = slides.value.length - 1;
     }
   });
   const next = () => {
-    slideIndex.value++;
+    if (slideIndex.value < slides.value.length - 1) {
+      slideIndex.value++;
+    }
   };
   const prev = () => {
-    slideIndex.value--;
+    if (slideIndex.value > 0) {
+      slideIndex.value--;
+    }
   };
   const go = (title) => {
     const index = slides.value.findIndex((s) => s.frontmatter?.title === title);

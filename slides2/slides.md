@@ -68,10 +68,13 @@ When adding `title:` metadata to pages, these pages appear in the menu. Click <I
 ---
 title: Frontpage
 ---
+
 # Frontpage
+
 ---
 title: About
 ---
+
 # About
 ```
 
@@ -112,7 +115,13 @@ You can also jump to a page with a specific `title:` using `go()` function:
 ---
 title: Frontpage
 ---
+
+# Frontpage
+
+---
+
 ...in a later slide...
+
 <button v-on:click="go('Frontpage')"><Icon id="bx:arrow-to-left" /> Go to frontpage</button>
 ```
 
@@ -378,7 +387,7 @@ title: Add or subtract math
 class: center bg-gray-900 prose-invert
 ---
 
-## Welcome to the Matrix
+## Jawohl, we got math
 
 <f-math>\begin{pmatrix} a & c & e \\\\ b & d & f \\\\ 0 & 0 & 1 \end{pmatrix}</f-math>
 
@@ -432,7 +441,7 @@ It is more useful to loop over the data to display it:
 <div class="grid gap-4">
   <div
     v-for="name in data.names"
-    class="p-4 bg-yellow-500 rounded"
+    class="p-4 bg-indigo-500 rounded"
   >
     ❴❴ name ❵❵
   </div>
@@ -442,7 +451,7 @@ It is more useful to loop over the data to display it:
 <div class="flex gap-4">
   <div
     v-for="name in data.names"
-    class="p-4 bg-yellow-500 rounded"
+    class="px-8 py-4 bg-pink-500 text-white rounded-full"
   >
     {{ name }}
   </div>
@@ -526,14 +535,16 @@ Here's how to use the custom data in Markdown:
 ```
 <input type="range" v-model="fahrenheit" min="32" max="1000">
 
-Fahrenheit: ❴❴ fahrenheit ❵❵ Celsius: ❴❴ celsius ❵❵
+Fahrenheit: ❴❴ fahrenheit ❵❵
+Celsius: ❴❴ celsius ❵❵
 
 <button v-on:click="resetFahrenheit">Reset</button>
 ```
 
 <input type="range" v-model="fahrenheit" min="-460" max="1000">
 
-Fahrenheit: {{ fahrenheit }} Celsius: {{ celsius }}
+Fahrenheit: {{ fahrenheit }} 
+Celsius: {{ celsius }}
 
 <a v-on:click="resetFahrenheit">Reset</a>
 
