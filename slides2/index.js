@@ -56,6 +56,14 @@ export const Info = {
   `,
 };
 
+export const fahrenheit = ref(-460);
+export const celsius = computed(() =>
+  Math.floor((5 / 9) * (fahrenheit.value - 32))
+);
+export const resetFahrenheit = () => {
+  fahrenheit.value = -460;
+};
+
 function parseSlides(code) {
   let global = {};
   try {
@@ -140,7 +148,12 @@ export function useSlides(key, content) {
 export const App = {
   components: { Compiler, Icon },
   setup() {
-    const loader = () => fetch("./slides.md").then((res) => res.text());
+    const app = getCurrentInstance().appContext.app;
+
+    const loader =
+      app.config.globalProperties.loader ||
+      (() => fetch("./slides.md").then((res) => res.text()));
+
     const { current, save, reset } = useLoader("slides_code", loader);
 
     const editor = useEditor();
@@ -152,13 +165,20 @@ export const App = {
 
     const edit = useStorage("slides_edit", false);
 
-    const app = getCurrentInstance().appContext.app;
+    console.log(app.config.globalProperties.loader);
     app.use(Fachwerk);
     app.component("Icon", Icon);
     app.component("Info", Info);
-    app.config.globalProperties.prev = prev;
-    app.config.globalProperties.next = next;
-    app.config.globalProperties.go = go;
+
+    app.config.globalProperties = {
+      ...app.config.globalProperties,
+      prev,
+      next,
+      go,
+      fahrenheit,
+      celsius,
+      resetFahrenheit,
+    };
 
     return {
       editor,
@@ -178,7 +198,7 @@ export const App = {
       <textarea
         ref="editor"
         v-model="current"
-        class="w-full h-full leading-6 text-gray-100 bg-gray-900 p-4 text-white font-mono border-none outline-none focus:outline-none"
+        class="w-full h-full leading-6 text-gray-200 bg-gray-900 p-4 text-white font-mono border-none outline-none focus:outline-none"
       />
         <div v-show="edit" class="absolute left-0 bottom-0 right-0 flex justify-end gap-4 text-sm pb-3 pt-8 px-4 bg-gradient-to-t via-gray-900 from-gray-900">
         <div class="px-2 py-1 text-white/25 cursor-pointer" @click="reset">Reset</div>

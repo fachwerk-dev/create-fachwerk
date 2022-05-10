@@ -267,43 +267,6 @@ class: center
 ---
 class: center bg-[lightblue]
 ---
- 
-<Icon id="bx:font-family" class="w-24 h-24 text-gray-900" />
-
-<br />
-
-# Change type
-
----
-title: Change type
----
-
-## Change type
-
-Fachwerk Slides uses [IBM Plex Sans](https://fonts.google.com/specimen/IBM+Plex+Sans) for serifs and [Cousine](https://fonts.google.com/specimen/Cousine) for monospaced type, but you can use any font available in Google Fonts. 
-
-Here's how to change the default fonts to [Inter](https://fonts.google.com/specimen/Inter) and [Roboto Mono](https://fonts.google.com/specimen/Roboto+Mono) in `index.html`:
-
-```
-<link
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Mono&display=swap"
-  rel="stylesheet"
-/>
-<script>
-  tailwind.config = {
-    theme: {
-      fontFamily: {
-        sans: ["Inter", "sans-serif"], 
-        mono: ["Roboto Mono", "monospace"],
-      },
-    },
-  };
-</script>
-```
-
----
-class: center bg-[lightblue]
----
 
 <Icon id="bx:cloud" class="w-24 h-24 text-gray-900" />
 
@@ -417,6 +380,8 @@ title: Add or subtract math
 class: center bg-gray-900 prose-invert
 ---
 
+## Welcome to the Matrix
+
 <f-math>\begin{pmatrix} a & c & e \\\\ b & d & f \\\\ 0 & 0 & 1 \end{pmatrix}</f-math>
 
 See more at https://fachwerk.dev/components/f-math
@@ -490,7 +455,7 @@ data:
   x: 50
 ---
 
-## Add reactive data
+## Make data reactive
 
 The data does not have to be static. It can also be dynamically modified or _reactive_.
 
@@ -512,47 +477,65 @@ data:
 <Info>When the variable's default value is 0, you can skip the frontmatter definition</Info>
 
 ---
-
-## Add custom data
-
-When you need to do more complex data manipulation, you can define custom variables and functions in Javascript.
-
-Create a JS file, say `slides.js` and add your code there:
-
-```js
-import { ref, computed } from "vue";
-export const myX = ref(100);
-export const myY = computed(() => myX.value * 10);
-export const myReset = () => {
-  myX.value = 0;
-};
-```
-
-Next import the variables in `index.html` and assign them to Vue app instance:
-
-```js
-import * as slides from './slides.js
-app.config.globalProperties = {...app.config.globalProperties, ...slides}
-```
-
-You can access custom data in `slides.md` as follows:
-
-<pre v-pre>
-&lt;f-slider v-model="customX" /> {{ customX }} {{ customY }}
-&lt;button v-on:click="customReset">Reset&lt/button> &lt;a v-on:click="customReset">Reset&lt;/a>
-</pre>
-
-<input type="range" v-model="x"> {{ x }} {{ y }} <button v-on:click="reset">Reset</button>
-
----
 class: center bg-[lightblue]
 ---
 
-<Icon id="bx:category" class="w-16 h-16 md:w-24 md:h-24" />
+<Icon id="bx:cog" class="w-24 h-24 text-gray-900" />
 
 <br />
 
-# Add components
+# Add customization
+
+---
+
+## Create custom data
+
+When you need to do more complex data manipulation, you can define custom variables and functions in Javascript.
+
+Create a JS file, for example `data.js` and add your code there:
+
+```js
+import { ref, computed } from "vue";
+export const fahrenheit = ref(-460);
+export const celsius = computed(() =>
+  Math.floor((5 / 9) * (fahrenheit.value - 32))
+);
+export const resetFahrenheit = () => {
+  fahrenheit.value = -460;
+};
+```
+
+---
+
+## Register custom data
+
+Next, you need to import and register custom data in index.html:
+
+
+```js
+import * as data from './data.js
+app.config.globalProperties = {...app.config.globalProperties, ...data}
+```
+
+---
+
+## Use custom data
+
+Here's how to use the custom data in Markdown:
+
+```
+<input type="range" v-model="fahrenheit" min="32" max="1000">
+
+Fahrenheit: ❴❴ fahrenheit ❵❵ Celsius: ❴❴ celsius ❵❵
+
+<button v-on:click="resetFahrenheit">Reset</button>
+```
+
+<input type="range" v-model="fahrenheit" min="-460" max="1000">
+
+Fahrenheit: {{ fahrenheit }} Celsius: {{ celsius }}
+
+<a v-on:click="resetFahrenheit">Reset</a>
 
 ---
 title: Add components
@@ -601,14 +584,31 @@ Here's how to use the `Info` component in Markdown:
 <Info icon="bx:train" class="text-red-500">Kraftwerk are a German band formed in Düsseldorf in 1969 by Ralf Hütter and Florian Schneider. Widely considered innovators and pioneers of electronic music, Kraftwerk were among the first successful acts to popularize the genre.</Info>
 
 ---
-class: center bg-[lightblue]
+title: Customize type
 ---
 
-<Icon id="bx:cog" class="w-24 h-24 text-gray-900" />
+## Customize type
 
-<br />
+Fachwerk Slides uses [IBM Plex Sans](https://fonts.google.com/specimen/IBM+Plex+Sans) for serifs and [Cousine](https://fonts.google.com/specimen/Cousine) for monospaced type, but you can use any font available in Google Fonts. 
 
-# Customize loader
+Here's how to change the default fonts to [Inter](https://fonts.google.com/specimen/Inter) and [Roboto Mono](https://fonts.google.com/specimen/Roboto+Mono) in `index.html`:
+
+```
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Mono&display=swap"
+  rel="stylesheet"
+/>
+<script>
+  tailwind.config = {
+    theme: {
+      fontFamily: {
+        sans: ["Inter", "sans-serif"], 
+        mono: ["Roboto Mono", "monospace"],
+      },
+    },
+  };
+</script>
+```
 
 ---
 title: Customize loader
@@ -616,17 +616,16 @@ title: Customize loader
 
 ## Customize loader
 
-By default, Fachwerk Slides loads the slide data using `fetch()` from `slides.md`. However, you can override the loader function in `slides.js` to load the Markdown files from anywhere.
+By default, Fachwerk Slides loads the slides data using `fetch()` from `./slides.md`. However, you can override the global loader function in `index.html` to fetch the Markdown files from anywhere.
 
-Here is an example of loading two Markdown files, `first.md` and `second.md`, and merging them:
+Here is an example of loading two Markdown files, `slides1.md` and `slides2.md`, and merging them:
 
 ```js
-const files = ["first.md", "second.md"]
+const files = ["slides1.md", "slides2.md"]
 
-export const loader = Promise.all(
+app.config.globalProperties.loader = Promise.all(
   files.map((file) => fetch(file).then((res) => res.text()))
-)
-.then((files) => files.join(""));
+).then((files) => files.join(""));
 ```
 
 ---

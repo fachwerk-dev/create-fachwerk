@@ -25,6 +25,9 @@
       };
     </script>
     <style type="text/tailwindcss">
+      pre p {
+        margin: 0 !important;
+      }
       mark {
         @apply bg-yellow-100 text-gray-800 px-2 rounded;
       }
@@ -57,18 +60,9 @@
       import { App } from "./index.js";
       const app = createApp(App);
 
-      // Add custom variables and functions:
-
-      // import * as slides from "./slides.js";
-      // app.config.globalProperties = {
-      //   ...app.config.globalProperties,
-      //   ...utils,
-      // };
-
-      // Add custom components:
-
-      // import { MyComponent } from "./MyComponent.js";
-      // app.component("MyComponent", MyComponent);
+      // Register custom data
+      // Add custom components
+      // Add custom loader
 
       app.mount("#app");
     </script>
