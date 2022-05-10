@@ -129,7 +129,7 @@ export function useSlides(key, content) {
     if (slideIndex.value < 0) {
       slideIndex.value = 0;
     }
-    if (slideIndex.value > slides.value.length - 1) {
+    if (slides.value.length > 1 && slideIndex.value > slides.value.length - 1) {
       slideIndex.value = slides.value.length - 1;
     }
   });
@@ -266,7 +266,7 @@ export const App = {
       <Icon
         id="bx:pencil"
         class="cursor-pointer "
-        :class="[edit ? 'text-amber-500': 'text-black/50']"
+        :class="[edit ? 'text-amber-500': 'text-black/25']"
         @click="edit = !edit"
       />
     </icon>
@@ -281,7 +281,7 @@ export const App = {
         </div>
       </div>
     </div>
-    <div class="fixed right-3 bottom-3 flex text-xs gap-1">
+    <div class="fixed right-3 bottom-3 pt-1 px-2 flex text-md bg-white md:bg-transparent rounded md:rounded-none shadow md:shadow-none">
       <Icon id="bx:menu" @click="menu = !menu" class="cursor-pointer" :class="[menu ? 'text-amber-500 hover:text-amber-600' : 'text-black/25 hover:text-black/50']" />
       &ensp;
       <Icon id="bx:left-arrow-alt" class="cursor-pointer text-black/25 hover:text-black/50" @click="prev" />
