@@ -7,7 +7,7 @@ class: center gap-8 bg-[lightblue]
 
 # Fachwerk Slides
 
-Press `Shift` and <code><Icon id="bx:left-arrow-alt" /></code> <code><Icon id="bx:right-arrow-alt" /></code> to navigate
+Press `Shift` and <code><Icon icon="bx:left-arrow-alt" /></code> <code><Icon icon="bx:right-arrow-alt" /></code> to navigate
 
 ---
 title: Get started
@@ -31,7 +31,7 @@ You can re-run this command for updating the library, and it does not touch your
 class: center gap-8 bg-[lightblue]
 ---
 
-<Icon id="bx:slideshow" class="w-24 h-24 text-gray-900" />
+<Icon icon="bx:slideshow" class="w-24 h-24 text-gray-900" />
 
 # Create slides
 
@@ -41,7 +41,7 @@ title: Create slides
 
 ## Create slides
 
-Start editing `slides.md` file or press <Icon id="bx:pencil" v-on:click="edit = true" /> button.
+Start editing `slides.md` file or press <Icon icon="bx:pencil" v-on:click="edit = true" /> button.
 
 To separate slides, use `---` as a separator:
 
@@ -59,7 +59,7 @@ To separate slides, use `---` as a separator:
 
 Slides can also have **frontmatter**, a header section with various metadata. It is stored in [YAML](https://dev.to/paulasantamaria/introduction-to-yaml-125f) format.
 
-When adding `title:` metadata to pages, these pages appear in the menu. Click <Icon id="bx:menu" /> to toggle it.
+When adding `title:` metadata to pages, these pages appear in the menu. Click <Icon icon="bx:menu" /> to toggle it.
 
 ```
 ---
@@ -79,7 +79,7 @@ title: About
 class: center bg-[lightblue]
 ---
 
-<Icon id="bx:right-arrow-circle" class="w-24 h-24 text-gray-900" />
+<Icon icon="bx:right-arrow-circle" class="w-24 h-24 text-gray-900" />
 
 <br />
 
@@ -96,10 +96,10 @@ You can provide on-page buttons to jump to a specific page.
 There are `prev()` and `next()` functions to jump to previous or next page:
 
 ```
-<button v-on:click="next()" next slide <Icon id="bx:right-arrow-alt" /></button>
+<button v-on:click="next()" next slide <Icon icon="bx:right-arrow-alt" /></button>
 ```
 
-<button v-on:click="next()">Goto next slide <Icon id="bx:right-arrow-alt" /></button>
+<button v-on:click="next()">Goto next slide <Icon icon="bx:right-arrow-alt" /></button>
 
 ---
 
@@ -118,16 +118,16 @@ title: Frontpage
 
 ...in a later slide...
 
-<button v-on:click="go('Frontpage')"><Icon id="bx:arrow-to-left" /> Go to frontpage</button>
+<button v-on:click="go('Frontpage')"><Icon icon="bx:arrow-to-left" /> Go to frontpage</button>
 ```
 
-<button v-on:click="go('Frontpage')"><Icon id="bx:arrow-to-left" /> Go to frontpage</button>
+<button v-on:click="go('Frontpage')"><Icon icon="bx:arrow-to-left" /> Go to frontpage</button>
 
 ---
 class: center bg-[lightblue]
 ---
 
-<Icon id="bx:cloud" class="w-24 h-24 text-gray-900" />
+<Icon icon="bx:cloud" class="w-24 h-24 text-gray-900" />
 
 <br />
 
@@ -148,11 +148,16 @@ Fachwerk support using custom icons powered by [Icônes](https://icones.js.org).
 3. Finally, use the following markup in the slide:
 
 ```
-<Icon id="bx:cloud" />
+<Icon icon="bx:cloud" />
 ```
 
-<Icon id="bx:cloud" />
+<Icon icon="bx:cloud" />
 
+When using icons from another collection, say [Radix Icons](https://icones.js.org/collection/radix-icons) add it to the icons config in `index.html`:
+
+```
+app.config.globalProperties.icons = ["bx","radix-icons"]
+```
 ---
 
 ## Customize icons
@@ -162,20 +167,20 @@ To customize the icon, use Tailwind classes.
 Nothe that you need to specify both width and height: `h-24 w-24`
 
 ```
-<Icon id="bx:cloud" class="w-24 h-24 text-gray-400 hover:scale-150 transition" />
-<Icon id="bx:cloud-snow" class="w-24 h-24 text-gray-600 hover:scale-150 transition" />
-<Icon id="bx:cloud-lightning" class="w-24 h-24 text-gray-800 hover:scale-150 transition" />
+<Icon icon="bx:cloud" class="w-24 h-24 text-gray-400 hover:scale-150 transition" />
+<Icon icon="bx:cloud-snow" class="w-24 h-24 text-gray-600 hover:scale-150 transition" />
+<Icon icon="bx:cloud-lightning" class="w-24 h-24 text-gray-800 hover:scale-150 transition" />
 ```
 
-<Icon id="bx:cloud" class="w-24 h-24 text-gray-400 hover:scale-150 transition" />
-<Icon id="bx:cloud-snow" class="w-24 h-24 text-gray-600 hover:scale-150 transition" />
-<Icon id="bx:cloud-lightning" class="w-24 h-24 text-gray-800 hover:scale-150 transition" />
+<Icon icon="bx:cloud" class="w-24 h-24 text-gray-400 hover:scale-150 transition" />
+<Icon icon="bx:cloud-snow" class="w-24 h-24 text-gray-600 hover:scale-150 transition" />
+<Icon icon="bx:cloud-lightning" class="w-24 h-24 text-gray-800 hover:scale-150 transition" />
 
 ---
 class: center bg-[lightblue]
 ---
 
-<Icon id="bx:paint-roll" class="w-24 h-24 text-gray-900" />
+<Icon icon="bx:paint-roll" class="w-24 h-24 text-gray-900" />
 
 <br />
 
@@ -264,7 +269,7 @@ global:
 class: center bg-[lightblue]
 ---
 
-<Icon id="bx:image-alt" class="w-24 h-24 text-gray-900" />
+<Icon icon="bx:image-alt" class="w-24 h-24 text-gray-900" />
 
 <br />
 
@@ -307,7 +312,7 @@ class: backdrop-brightness-50 backdrop-blur-3xl backdrop-saturate-200 prose-inve
 class: center bg-[lightblue]
 ---
 
-<Icon id="bx:layout" class="w-24 h-24 text-gray-900" />
+<Icon icon="bx:layout" class="w-24 h-24 text-gray-900" />
 
 <br />
 
@@ -361,7 +366,7 @@ class: center
 class: center bg-[lightblue]
 ---
 
-<Icon id="bx:math" class="w-24 h-24 text-gray-900" />
+<Icon icon="bx:math" class="w-24 h-24 text-gray-900" />
 
 <br />
 
@@ -382,7 +387,7 @@ See more at https://fachwerk.dev/components/f-math
 class: center bg-[lightblue]
 ---
 
-<Icon id="bx:slider-alt" class="w-24 h-24 text-gray-900" />
+<Icon icon="bx:slider-alt" class="w-24 h-24 text-gray-900" />
 
 <br />
 
@@ -471,7 +476,7 @@ data:
 class: center bg-[lightblue]
 ---
 
-<Icon id="bx:cog" class="w-24 h-24 text-gray-900" />
+<Icon icon="bx:cog" class="w-24 h-24 text-gray-900" />
 
 <br />
 
@@ -543,7 +548,7 @@ export const Info = {
   props: { icon: { default: "bx:info-circle" } },
   template: `
   <div class="flex gap-2 md:gap-3">
-    <Icon :id="icon" class="text-gray-500 shrink-0" v-bind="$attrs" />
+    <Icon :icon="icon" class="text-gray-500 shrink-0" v-bind="$attrs" />
     <div class="text-gray-500 -mt-1"><slot /></div>
   </div>
   `,

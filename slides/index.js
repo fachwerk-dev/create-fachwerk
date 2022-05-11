@@ -13,11 +13,11 @@ import { parse } from "@slidev/parser";
 import { useStorage, useMagicKeys } from "@vueuse/core";
 
 export const Icon = {
-  props: ["id"],
+  props: ["icon"],
   setup(props) {
     const icon = ref("");
     const icons = useStorage("slides_icons", {});
-    const [collection, name] = props.id.split(":");
+    const [collection, name] = props.icon.split(":");
     icon.value = icons.value?.[collection]?.[name];
     return { icon };
   },
@@ -45,7 +45,7 @@ export const Info = {
   props: { icon: { default: "bx:info-circle" } },
   template: `
   <div class="flex gap-2 md:gap-3">
-    <Icon :id="icon" class=" md:w-6 md:h-6 xl:w-8 xl:h-8 text-gray-400 shrink-0" v-bind="$attrs" />
+    <Icon :icon="icon" class=" md:w-6 md:h-6 xl:w-8 xl:h-8 text-gray-400 shrink-0" v-bind="$attrs" />
     <div class="text-gray-400 -mt-1"><slot /></div>
   </div>
   `,
@@ -194,7 +194,7 @@ export const App = {
     const edit = useStorage("slides_edit", false);
     const menu = ref(false);
 
-    const collections = app.config.globalProperties.icons || ["bx", "bi"];
+    const collections = app.config.globalProperties.icons || ["bx"];
     useIcons("slides_icons", collections);
 
     app.use(Fachwerk);
@@ -292,7 +292,7 @@ export const App = {
     </div>
     <div class="fixed bottom-3 left-3">
       <Icon
-        id="bx:pencil"
+        icon="bx:pencil"
         class="cursor-pointer "
         :class="[edit ? 'text-amber-500': 'text-black/25']"
         @click="edit = !edit"
@@ -310,10 +310,10 @@ export const App = {
       </div>
     </div>
     <div class="fixed right-3 bottom-3 pt-1 px-2 flex text-md bg-white md:bg-transparent rounded md:rounded-none shadow md:shadow-none">
-      <Icon id="bx:menu" @click="menu = !menu" class="cursor-pointer" :class="[menu ? 'text-amber-500 hover:text-amber-600' : 'text-black/25 hover:text-black/50']" />
+      <Icon icon="bx:menu" @click="menu = !menu" class="cursor-pointer" :class="[menu ? 'text-amber-500 hover:text-amber-600' : 'text-black/25 hover:text-black/50']" />
       &ensp;
-      <Icon id="bx:left-arrow-alt" class="cursor-pointer text-black/25 hover:text-black/50" @click="prev" />
-      <Icon id="bx:right-arrow-alt" class="cursor-pointer text-black/25 hover:text-black/50" @click="next" />
+      <Icon icon="bx:left-arrow-alt" class="cursor-pointer text-black/25 hover:text-black/50" @click="prev" />
+      <Icon icon="bx:right-arrow-alt" class="cursor-pointer text-black/25 hover:text-black/50" @click="next" />
     </div>
   `,
 };
