@@ -16,12 +16,9 @@ export const Icon = {
   props: ["id"],
   setup(props) {
     const icon = ref("");
+    const icons = useStorage("slides_icons", {});
     const [collection, name] = props.id.split(":");
-    fetch(`https://unpkg.com/@iconify/json/json/${collection}.json`)
-      .then((res) => res.json())
-      .then(({ icons }) => {
-        icon.value = icons[name].body;
-      });
+    icon.value = icons.value?.[collection]?.[name];
     return { icon };
   },
   template: `<svg class="w-5 h-5 inline-block align-middle" viewBox="0 0 24 24" v-html="icon" />`,
@@ -186,6 +183,23 @@ export const App = {
       celsius,
       resetFahrenheit,
     };
+
+    const icons = useStorage("slides_icons", {});
+
+    const collections = app.config.globalProperties.icons || ["bi", "bx"];
+
+    collections.forEach((collection) => {
+      fetch(`https://unpkg.com/@iconify/json/json/${collection}.json`)
+        .then((res) => res.json())
+        .then(({ icons: fetchedIcons }) => {
+          icons.value = {
+            ...icons.value,
+            [collection]: Object.fromEntries(
+              Object.entries(fetchedIcons).map(([key, { body }]) => [key, body])
+            ),
+          };
+        });
+    });
 
     return {
       editor,

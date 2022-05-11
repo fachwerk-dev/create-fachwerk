@@ -3,7 +3,7 @@ title: Frontpage
 class: center gap-8 bg-[lightblue]
 ---
 
-<div class="text-8xl text-gray-800">▦</div>
+<div class="text-6xl md:text-8xl text-gray-800">▦</div>
 
 # Fachwerk Slides
 
@@ -273,28 +273,35 @@ class: center bg-[lightblue]
 ---
 title: Add images
 image: https://designstem.github.io/fachwerk/images/example.jpg
-class: backdrop-brightness-50 prose-invert
+class: bg-black/25 prose-invert
 ---
 
 ## Add image background
 
-To add a background image to an entire slide, use the `image:` in the frontmatter. When using longer texts on the slide, it is recommended invert the text color and darken the background for legibility:
+To add a background image to an entire slide, use the `image:` in the frontmatter. When using longer texts on the slide, it is recommended invert the text color and add the dark overlay over the background for legibility:
 
 ```
 ---
 image: https://designstem.github.io/fachwerk/images/example.jpg
-class: backdrop-brightness-50 prose-invert
+class: bg-black/25 prose-invert
 ---
 ```
 
 ---
 image: https://designstem.github.io/fachwerk/images/example.jpg
-class: prose-invert backdrop-blur-3xl backdrop-saturate-200 center
+class: backdrop-brightness-50 backdrop-blur-3xl backdrop-saturate-200 prose-invert 
 ---
 
-# When the back drops
+## Add backdrop filters
 
-Learn more about [backdrop filters](https://tailwindcss.com/docs/backdrop-blur).
+Instead of overlay, you can also use [backdrop filters](https://tailwindcss.com/docs/backdrop-blur) to decrease a background brightness and add the whole suite of effects while at it.
+
+```
+---
+image: https://designstem.github.io/fachwerk/images/example.jpg
+class: backdrop-brightness-50 backdrop-blur-3xl backdrop-saturate-200 prose-invert 
+---
+```
 
 ---
 class: center bg-[lightblue]
