@@ -184,21 +184,29 @@ export const App = {
       resetFahrenheit,
     };
 
+    // Get icons
+
     const icons = useStorage("slides_icons", {});
+    const collections = app.config.globalProperties.icons || ["bx", "bi"];
 
-    const collections = app.config.globalProperties.icons || ["bi", "bx"];
+    const getIcons = (icons) =>
+      Object.fromEntries(
+        Object.entries(icons).map(([key, { body }]) => [key, body])
+      );
 
-    collections.forEach((collection) => {
-      fetch(`https://unpkg.com/@iconify/json/json/${collection}.json`)
-        .then((res) => res.json())
-        .then(({ icons: fetchedIcons }) => {
-          icons.value = {
-            ...icons.value,
-            [collection]: Object.fromEntries(
-              Object.entries(fetchedIcons).map(([key, { body }]) => [key, body])
-            ),
-          };
-        });
+    Promise.all(
+      collections.map((collection) =>
+        fetch(`https://unpkg.com/@iconify/json/json/${collection}.json`).then(
+          (res) => res.json()
+        )
+      )
+    ).then((fetchedCollections) => {
+      icons.value = Object.fromEntries(
+        collections.map((collection, i) => [
+          collection,
+          getIcons(fetchedCollections[i].icons),
+        ])
+      );
     });
 
     return {
