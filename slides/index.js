@@ -149,6 +149,30 @@ export function useSlides(key, content) {
   return { slides, slideIndex, prev, next, go };
 }
 
+function useIcons(key, collections) {
+  const icons = useStorage(key, {});
+
+  const getIcons = (icons) =>
+    Object.fromEntries(
+      Object.entries(icons).map(([key, { body }]) => [key, body])
+    );
+
+  Promise.all(
+    collections.map((collection) =>
+      fetch(`https://unpkg.com/@iconify/json/json/${collection}.json`).then(
+        (res) => res.json()
+      )
+    )
+  ).then((fetchedCollections) => {
+    icons.value = Object.fromEntries(
+      collections.map((collection, i) => [
+        collection,
+        getIcons(fetchedCollections[i].icons),
+      ])
+    );
+  });
+}
+
 export const App = {
   components: { Compiler, Icon },
   setup() {
@@ -170,6 +194,9 @@ export const App = {
     const edit = useStorage("slides_edit", false);
     const menu = ref(false);
 
+    const collections = app.config.globalProperties.icons || ["bx", "bi"];
+    useIcons("slides_icons", collections);
+
     app.use(Fachwerk);
     app.component("Icon", Icon);
     app.component("Info", Info);
@@ -183,31 +210,6 @@ export const App = {
       celsius,
       resetFahrenheit,
     };
-
-    // Get icons
-
-    const icons = useStorage("slides_icons", {});
-    const collections = app.config.globalProperties.icons || ["bx", "bi"];
-
-    const getIcons = (icons) =>
-      Object.fromEntries(
-        Object.entries(icons).map(([key, { body }]) => [key, body])
-      );
-
-    Promise.all(
-      collections.map((collection) =>
-        fetch(`https://unpkg.com/@iconify/json/json/${collection}.json`).then(
-          (res) => res.json()
-        )
-      )
-    ).then((fetchedCollections) => {
-      icons.value = Object.fromEntries(
-        collections.map((collection, i) => [
-          collection,
-          getIcons(fetchedCollections[i].icons),
-        ])
-      );
-    });
 
     return {
       editor,
