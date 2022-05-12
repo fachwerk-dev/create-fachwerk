@@ -247,7 +247,7 @@ export const App = {
           <div
             v-show="slide.index === slideIndex"
             class="
-              p-12
+              p-[5vw]
               max-w-none
               min-h-screen
               prose
