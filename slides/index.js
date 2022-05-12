@@ -225,7 +225,7 @@ export const App = {
     };
   },
   template: `
-    <div class="grid grid-cols-1" :class="[edit ? 'grid-cols-[1fr_minmax(0,2fr)]' : 'grid-cols-1']">
+    <div class="grid grid-cols-1" :class="[edit ? 'md:grid-cols-[1fr_minmax(0,2fr)]' : '']">
       <div v-show="edit" class="relative h-screen sticky top-0">
       <textarea
         ref="editor"
