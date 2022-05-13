@@ -421,6 +421,11 @@ You can access the data with `data.names`:
 ```
 
 ---
+data:
+  names:
+    - Romy Schneider
+    - Klaus Kinski
+---
 
 ## Display data
 
