@@ -2,7 +2,7 @@
   "name": "fachwerk-vitepress",
   "private": true,
   "scripts": {
-    "dev": "vitepress dev docs --open",
+    "dev": "vitepress dev docs",
     "build": "vitepress build docs",
     "preview": "vitepress serve docs --port 4000"
   },
