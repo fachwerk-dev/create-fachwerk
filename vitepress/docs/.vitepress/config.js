@@ -1,19 +1,12 @@
 import { defineConfig } from "vitepress";
 
 export default defineConfig({
+  title: `Fachwerk + Vitepress`,
   vue: { reactivityTransform: true },
   markdown: { html: true, breaks: true },
   themeConfig: {
     sidebar: {
-      "/": [
-        {
-          text: "Pages",
-          children: [
-            { text: "Local data", link: "/" },
-            { text: "Global data", link: "/index2" },
-          ],
-        },
-      ],
+      "/": [{ text: "index.md", link: "/" }],
     },
   },
 });
