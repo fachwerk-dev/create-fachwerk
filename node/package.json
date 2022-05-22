@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@resvg/resvg-js": "^2.0.1",
     "fachwerk": "^0.0.2"
   }
 }
