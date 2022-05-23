@@ -1,5 +1,7 @@
 {
   "dependencies": {
-    "fachwerk": "^0.0.2"
+    "@resvg/resvg-js": "^2.0.1",
+    "fachwerk": "^0.0.28-beta.11",
+    "vue": "^3.2.35"
   }
 }
