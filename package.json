@@ -1,6 +1,6 @@
 {
   "name": "create-fachwerk",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "bin": "./index.mjs",
   "dependencies": {
     "prompts": "^2.4.2",
