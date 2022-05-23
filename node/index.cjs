@@ -1,3 +1,3 @@
-const { hsl } = require("fachwerk");
+const { circlepoints } = require("fachwerk");
 
-console.log(hsl(100));
+console.log(circlepoints(24, 50));
