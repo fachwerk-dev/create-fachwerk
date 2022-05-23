@@ -1,14 +1,13 @@
 import {
-  ref,
-  h,
+  compile,
   computed,
-  onMounted,
-  watch,
-  watchEffect,
   getCurrentInstance,
+  h,
+  onMounted,
+  ref,
+  watchEffect,
 } from "vue";
-import { Fachwerk, data } from "fachwerk";
-import { compileTemplate, compileMarkdown } from "fachwerk/internal";
+import { Fachwerk, data, compileMarkdown } from "fachwerk";
 import { parse } from "@slidev/parser";
 import { useStorage, useMagicKeys } from "@vueuse/core";
 
@@ -23,6 +22,22 @@ export const Icon = {
   },
   template: `<svg class="w-5 h-5 inline-block align-middle" viewBox="0 0 24 24" v-html="icon" />`,
 };
+
+function compileTemplate(source) {
+  const errors = [];
+  let code = undefined;
+  try {
+    const compiledCode = compile(source, {
+      onError: (err) => {
+        errors.push(err);
+      },
+    });
+    code = compiledCode || (() => null);
+  } catch (e) {
+    errors.push(e);
+  }
+  return { code, errors };
+}
 
 const Compiler = {
   props: ["code"],
