@@ -3,7 +3,7 @@ title: Frontpage
 class: center gap-8 bg-[lightblue]
 ---
 
-<div class="text-6xl md:text-8xl text-gray-800">▦</div>
+<div class="text-6xl md:text-8xl text-gray-800" v-motion-roll-right>▦</div>
 
 # Fachwerk Slides
 

@@ -10,6 +10,7 @@ import {
 import { Fachwerk, data, compileMarkdown } from "fachwerk";
 import { parse } from "@slidev/parser";
 import { useStorage, useMagicKeys } from "@vueuse/core";
+import { MotionPlugin } from "@vueuse/motion";
 
 export const Icon = {
   props: ["icon"],
@@ -212,6 +213,7 @@ export const App = {
     const collections = app.config.globalProperties.icons || ["bx"];
     useIcons("slides_icons", collections);
 
+    app.use(MotionPlugin);
     app.use(Fachwerk);
     app.component("Icon", Icon);
     app.component("Info", Info);
