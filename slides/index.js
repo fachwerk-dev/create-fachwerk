@@ -11,6 +11,37 @@ import { Fachwerk, data, compileMarkdown } from "fachwerk";
 import { parse } from "@slidev/parser";
 import { useStorage, useMagicKeys } from "@vueuse/core";
 
+export const ImageRight = {
+  props: ["frontmatter"],
+  template: `
+  <div class="grid grid-cols-2">
+    <div
+      class="bg-cover"
+      :style="{backgroundImage: 'url(' + frontmatter?.image + ')'}"
+    />
+    <div class="h-screen">
+      <slot />
+    </div>
+  </div>
+  `,
+};
+
+export const Default = {
+  props: ["frontmatter"],
+  template: `
+    <div class="relative">
+      <div
+        v-show="frontmatter?.image"
+        class="absolute inset-0 bg-cover -z-10"
+        :style="{backgroundImage: 'url(' + frontmatter?.image + ')'}"
+      />
+      <div class="h-screen">
+        <slot />
+      </div>
+    </div>
+  `,
+};
+
 export const Icon = {
   props: ["icon"],
   setup(props) {
@@ -74,6 +105,41 @@ export const resetFahrenheit = () => {
   fahrenheit.value = -460;
 };
 
+const proseClasses = `
+  prose
+  prose:body:text-gray-800
+  md:prose-lg
+  xl:prose-2xl
+  prose-p:max-w-[70ch]
+  md:prose-h1:text-6xl
+  md:prose-h1:tracking-tight
+  prose-code:before:content-none
+  prose-code:after:content-none
+  prose-code:px-1
+  prose-code:rounded
+  prose-p:before:content-none
+  prose-p:after:content-none
+  prose-blockquote:border-l-4
+  prose-blockquote:border-yellow-400
+  prose-blockquote:pl-6
+  prose-blockquote:font-normal
+  prose-blockquote:not-italic
+  prose-blockquote:text-gray-600
+  2xl:prose-p:text-3xl
+  2xl:prose-p:leading-relaxed
+  2xl:prose-p:my-[2.5vw]
+  2xl:prose-h1:text-8xl
+  2xl:prose-h2:text-6xl
+  2xl:prose-h3:text-4xl
+  2xl:prose-h4:text-3xl
+  2xl:prose-h5:text-2xl
+  2xl:prose-code:text-2xl
+  2xl:prose-code:leading-[2.5em]
+  2xl:prose-pre:p-[2.5vw]
+  2xl:prose-pre:max-w-[120ch]
+  2xl:prose-li:text-3xl
+`;
+
 function parseSlides(code) {
   let global = {};
   try {
@@ -83,6 +149,11 @@ function parseSlides(code) {
           data[key] = value;
         });
       }
+      const classes = s.frontmatter.classes || "";
+
+      // @TODO
+      s.frontmatter.classes = [proseClasses, classes].join(" ");
+
       if (s.frontmatter?.global) {
         global = { ...global, ...s.frontmatter.global };
       }
@@ -215,6 +286,7 @@ export const App = {
     app.use(Fachwerk);
     app.component("Icon", Icon);
     app.component("Info", Info);
+    app.component("Default", Default);
 
     app.config.globalProperties = {
       ...app.config.globalProperties,
@@ -253,55 +325,55 @@ export const App = {
         </div>
       </div>
       <div>
-        <div class="relative" v-for="slide in slides">
-          <div
-            v-show="slide.index === slideIndex && slide.frontmatter?.image"
-            class="-z-10 fixed inset-0 bg-cover"
-            :style="{backgroundImage: 'url(' + slide.frontmatter?.image + ')'}"
-          />
-          <div
+        <div v-for="slide in slides">
+          <component
+            :is="slide.frontmatter.layout || 'Default'"
+            :frontmatter="slide.frontmatter"
             v-show="slide.index === slideIndex"
-            class="
-              p-[5vw]
-              max-w-none
-              min-h-screen
-              prose
-              prose:body:text-gray-800
-              md:prose-lg
-              xl:prose-2xl
-              prose-p:max-w-[70ch]
-              md:prose-h1:text-6xl
-              md:prose-h1:tracking-tight
-              prose-code:before:content-none
-              prose-code:after:content-none
-              prose-code:px-1
-              prose-code:rounded
-              prose-p:before:content-none
-              prose-p:after:content-none
-              prose-blockquote:border-l-4
-              prose-blockquote:border-yellow-400
-              prose-blockquote:pl-6
-              prose-blockquote:font-normal
-              prose-blockquote:not-italic
-              prose-blockquote:text-gray-600
-              2xl:prose-p:text-3xl
-              2xl:prose-p:leading-relaxed
-              2xl:prose-p:my-[2.5vw]
-              2xl:prose-h1:text-8xl
-              2xl:prose-h2:text-6xl
-              2xl:prose-h3:text-4xl
-              2xl:prose-h4:text-3xl
-              2xl:prose-h5:text-2xl
-              2xl:prose-code:text-2xl
-              2xl:prose-code:leading-[2.5em]
-              2xl:prose-pre:p-[2.5vw]
-              2xl:prose-pre:max-w-[120ch]
-              2xl:prose-li:text-3xl
-            "
-            :class="[slide.frontmatter?.global.class,slide.frontmatter?.class]"
           >
-            <Compiler :code="slide.content" />
-          </div>
+            <div
+              class="
+                p-[5vw]
+                max-w-none
+                h-full
+                prose
+                prose:body:text-gray-800
+                md:prose-lg
+                xl:prose-2xl
+                prose-p:max-w-[70ch]
+                md:prose-h1:text-6xl
+                md:prose-h1:tracking-tight
+                prose-code:before:content-none
+                prose-code:after:content-none
+                prose-code:px-1
+                prose-code:rounded
+                prose-p:before:content-none
+                prose-p:after:content-none
+                prose-blockquote:border-l-4
+                prose-blockquote:border-yellow-400
+                prose-blockquote:pl-6
+                prose-blockquote:font-normal
+                prose-blockquote:not-italic
+                prose-blockquote:text-gray-600
+                2xl:prose-p:text-3xl
+                2xl:prose-p:leading-relaxed
+                2xl:prose-p:my-[2.5vw]
+                2xl:prose-h1:text-8xl
+                2xl:prose-h2:text-6xl
+                2xl:prose-h3:text-4xl
+                2xl:prose-h4:text-3xl
+                2xl:prose-h5:text-2xl
+                2xl:prose-code:text-2xl
+                2xl:prose-code:leading-[2.5em]
+                2xl:prose-pre:p-[2.5vw]
+                2xl:prose-pre:max-w-[120ch]
+                2xl:prose-li:text-3xl
+              "
+              :class="[slide.frontmatter?.global.class,slide.frontmatter?.class]"
+            >
+              <Compiler :code="slide.content" />\
+            </div>
+          </component>
         </div>
       </div>
     </div>

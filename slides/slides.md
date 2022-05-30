@@ -277,6 +277,7 @@ class: center bg-[lightblue]
 
 ---
 title: Add images
+layout: Image
 image: https://designstem.github.io/fachwerk/images/example.jpg
 class: bg-black/25 prose-invert
 ---
