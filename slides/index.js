@@ -10,21 +10,7 @@ import {
 import { Fachwerk, data, compileMarkdown } from "fachwerk";
 import { parse } from "@slidev/parser";
 import { useStorage, useMagicKeys } from "@vueuse/core";
-
-export const ImageRight = {
-  props: ["frontmatter"],
-  template: `
-  <div class="grid grid-cols-2">
-    <div
-      class="bg-cover"
-      :style="{backgroundImage: 'url(' + frontmatter?.image + ')'}"
-    />
-    <div class="h-screen">
-      <slot />
-    </div>
-  </div>
-  `,
-};
+import { twMerge } from "tailwind-merge";
 
 export const Default = {
   props: ["frontmatter"],
@@ -35,7 +21,7 @@ export const Default = {
         class="absolute inset-0 bg-cover -z-10"
         :style="{backgroundImage: 'url(' + frontmatter?.image + ')'}"
       />
-      <div class="h-screen">
+      <div class="h-screen p-[5vw]" :class="frontmatter.class">
         <slot />
       </div>
     </div>
@@ -106,6 +92,7 @@ export const resetFahrenheit = () => {
 };
 
 const proseClasses = `
+  max-w-none
   prose
   prose:body:text-gray-800
   md:prose-lg
@@ -143,22 +130,26 @@ const proseClasses = `
 function parseSlides(code) {
   let global = {};
   try {
-    return parse(code).slides.map((s) => {
+    const parsedSlides = parse(code).slides;
+    parsedSlides.forEach((s) => {
+      if (s.frontmatter?.global) {
+        global = { ...global, ...s.frontmatter.global };
+      }
+    });
+    return parsedSlides.map((s) => {
       if (s.frontmatter?.data) {
         Object.entries(s.frontmatter.data).forEach(([key, value]) => {
           data[key] = value;
         });
       }
-      const classes = s.frontmatter.classes || "";
-
-      // @TODO
-      s.frontmatter.classes = [proseClasses, classes].join(" ");
-
-      if (s.frontmatter?.global) {
-        global = { ...global, ...s.frontmatter.global };
-      }
       s.frontmatter.global = global;
-      //s.content = compileMarkdown(s.content);
+      s.frontmatter.class = twMerge(
+        [
+          proseClasses,
+          s.frontmatter.class || "",
+          s.frontmatter.global?.class || "",
+        ].join(" ")
+      );
       return s;
     });
   } catch (e) {
@@ -331,48 +322,7 @@ export const App = {
             :frontmatter="slide.frontmatter"
             v-show="slide.index === slideIndex"
           >
-            <div
-              class="
-                p-[5vw]
-                max-w-none
-                h-full
-                prose
-                prose:body:text-gray-800
-                md:prose-lg
-                xl:prose-2xl
-                prose-p:max-w-[70ch]
-                md:prose-h1:text-6xl
-                md:prose-h1:tracking-tight
-                prose-code:before:content-none
-                prose-code:after:content-none
-                prose-code:px-1
-                prose-code:rounded
-                prose-p:before:content-none
-                prose-p:after:content-none
-                prose-blockquote:border-l-4
-                prose-blockquote:border-yellow-400
-                prose-blockquote:pl-6
-                prose-blockquote:font-normal
-                prose-blockquote:not-italic
-                prose-blockquote:text-gray-600
-                2xl:prose-p:text-3xl
-                2xl:prose-p:leading-relaxed
-                2xl:prose-p:my-[2.5vw]
-                2xl:prose-h1:text-8xl
-                2xl:prose-h2:text-6xl
-                2xl:prose-h3:text-4xl
-                2xl:prose-h4:text-3xl
-                2xl:prose-h5:text-2xl
-                2xl:prose-code:text-2xl
-                2xl:prose-code:leading-[2.5em]
-                2xl:prose-pre:p-[2.5vw]
-                2xl:prose-pre:max-w-[120ch]
-                2xl:prose-li:text-3xl
-              "
-              :class="[slide.frontmatter?.global.class,slide.frontmatter?.class]"
-            >
-              <Compiler :code="slide.content" />\
-            </div>
+            <Compiler :code="slide.content" />
           </component>
         </div>
       </div>
