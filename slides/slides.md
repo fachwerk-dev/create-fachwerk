@@ -7,7 +7,7 @@ class: center gap-8 bg-[lightblue]
 
 # Fachwerk Slides
 
-Press `Shift` and <code><Icon icon="bx:left-arrow-alt" /></code> <code><Icon icon="bx:right-arrow-alt" /></code> to navigate
+Press `Shift` and <code>&larr; &rarr;</code> to navigate
 
 ---
 title: Get started
@@ -285,6 +285,8 @@ class: bg-black/25 prose-invert
 
 To add a background image to an entire slide, use the `image:` in the frontmatter. When using longer texts on the slide, it is recommended invert the text color and add the dark overlay over the background for legibility:
 
+To add a background image to an entire slide, use the `image:` in the frontmatter. When using longer texts on the slide, it is recommended invert the text color and add the dark overlay over the background for legibility:
+
 ```
 ---
 image: https://designstem.github.io/fachwerk/images/example.jpg
@@ -377,7 +379,7 @@ title: Add or subtract math
 class: center bg-gray-900 prose-invert
 ---
 
-## Jawohl, we got math
+## Here is some math
 
 <f-math>\begin{pmatrix} a & c & e \\\\ b & d & f \\\\ 0 & 0 & 1 \end{pmatrix}</f-math>
 
