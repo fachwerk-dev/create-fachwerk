@@ -8,11 +8,11 @@
   },
   "dependencies": {
     "fachwerk": "^0.0.28-beta.14",
-    "vue": "^3.2.33"
+    "vue": "^3.2.37"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.3",
-    "vite": "^2.9.9",
-    "vite-plugin-md": "^0.13.1"
+    "vite": "^2.9.14",
+    "vite-plugin-md": "^0.18.1"
   }
 }
