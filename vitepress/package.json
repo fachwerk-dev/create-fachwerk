@@ -8,6 +8,6 @@
   },
   "dependencies": {
     "fachwerk": "^0.0.28-beta.14",
-    "vitepress": "^0.22.3"
+    "vitepress": "^1.0.0-alpha.4"
   }
 }
