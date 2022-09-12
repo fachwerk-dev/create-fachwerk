@@ -7,10 +7,12 @@ import {
   ref,
   watchEffect,
 } from "vue";
-import { Fachwerk, data, compileMarkdown } from "fachwerk";
+import { Fachwerk, data } from "fachwerk/vue";
 import { parse } from "@slidev/parser";
 import { useStorage, useMagicKeys } from "@vueuse/core";
 import { twMerge } from "tailwind-merge";
+import MarkdownIt from "markdown-it";
+import MarkdownItExternalLinks from "markdown-it-external-links";
 
 export const Default = {
   props: ["frontmatter"],
@@ -39,6 +41,17 @@ export const Icon = {
   },
   template: `<svg class="w-5 h-5 inline-block align-middle" viewBox="0 0 24 24" v-html="icon" />`,
 };
+
+function compileMarkdown(source) {
+  const md = new MarkdownIt({ linkify: true, html: true, breaks: true }).use(
+    MarkdownItExternalLinks,
+    {
+      externalClassName: null,
+      externalTarget: "_blank",
+    }
+  );
+  return md.render(source);
+}
 
 function compileTemplate(source) {
   const errors = [];
@@ -83,14 +96,6 @@ export const Info = {
   `,
 };
 
-export const fahrenheit = ref(-460);
-export const celsius = computed(() =>
-  Math.floor((5 / 9) * (fahrenheit.value - 32))
-);
-export const resetFahrenheit = () => {
-  fahrenheit.value = -460;
-};
-
 const proseClasses = `
   max-w-none
   prose
@@ -100,9 +105,12 @@ const proseClasses = `
   prose-p:max-w-[70ch]
   md:prose-h1:text-6xl
   md:prose-h1:tracking-tight
+  prose-pre:bg-gray-800
+  prose-code:bg-gray-100
   prose-code:before:content-none
   prose-code:after:content-none
-  prose-code:px-1
+  prose-code:px-2
+  prose-code:py-1
   prose-code:rounded
   prose-p:before:content-none
   prose-p:after:content-none
@@ -284,9 +292,6 @@ export const App = {
       prev,
       next,
       go,
-      fahrenheit,
-      celsius,
-      resetFahrenheit,
     };
 
     return {

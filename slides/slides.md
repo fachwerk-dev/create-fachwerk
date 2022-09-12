@@ -7,7 +7,7 @@ class: center gap-8 bg-[lightblue]
 
 # Fachwerk Slides
 
-Press `Shift` and <code>&larr; &rarr;</code> to navigate
+Press `Shift` and <code>&larr;</code> <code>&rarr;</code> to navigate
 
 ---
 title: Get started

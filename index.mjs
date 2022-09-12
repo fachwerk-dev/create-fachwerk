@@ -17,14 +17,9 @@ const choices = [
     value: "vitepress",
   },
   {
-    title: "Javascript ESM",
-    description: "Singe JS file with ESM",
-    value: "esm",
-  },
-  {
-    title: "Javascript global",
-    description: "Single JS file with globals",
-    value: "global",
+    title: "Vanilla JS",
+    description: "Single JS file without frameworks",
+    value: "vanilla",
   },
   {
     title: "Slides",

@@ -3,10 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://unpkg.com/fachwerk/dist/fachwerk.css"
-      rel="stylesheet"
-    />
+    <link href="https://unpkg.com/fachwerk/dist/vue.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -33,6 +30,13 @@
       .center {
         @apply grid place-content-center place-items-center text-center;
       }
+      code {
+        @apply bg-gray-200;
+      }
+      pre,
+      pre code {
+        @apply !bg-gray-900;
+      }
       /* Add custom classes */
     </style>
   </head>
@@ -45,15 +49,16 @@
       {
         "imports": {
           "vue": "https://unpkg.com/vue/dist/vue.esm-browser.prod.js",
-          "fachwerk": "https://unpkg.com/fachwerk/dist/fachwerk.mjs",
-          "fachwerk/internal": "https://unpkg.com/fachwerk/dist/internal.mjs",
-          "js-yaml": "https://unpkg.com/js-yaml/dist/js-yaml.mjs",
-          "@slidev/parser": "https://unpkg.com/@slidev/parser/dist/index.mjs",
-          "vue-demi": "https://unpkg.com/vue-demi/lib/index.mjs",
-          "@vueuse/shared": "https://unpkg.com/@vueuse/shared/index.mjs",
-          "@vueuse/core": "https://unpkg.com/@vueuse/core/index.mjs",
-          "tailwind-merge": "https://unpkg.com/tailwind-merge/dist/index.mjs",
-          "hashlru": "https://esm.sh/hashlru"
+          "fachwerk/vue": "https://unpkg.com/fachwerk/dist/vue.mjs",
+          "js-yaml": "https://unpkg.com/js-yaml@4.1.0/dist/js-yaml.mjs",
+          "@slidev/parser": "https://unpkg.com/@slidev/parser@0.36.4/dist/index.mjs",
+          "vue-demi": "https://unpkg.com/vue-demi@0.13.11/lib/index.mjs",
+          "@vueuse/shared": "https://unpkg.com/@vueuse/shared@9.2.0/index.mjs",
+          "@vueuse/core": "https://unpkg.com/@vueuse/core@9.2.0/index.mjs",
+          "tailwind-merge": "https://unpkg.com/tailwind-merge@1.6.0/dist/tailwind-merge.mjs",
+          "hashlru": "https://esm.sh/hashlru@2.3.0",
+          "markdown-it": "https://esm.sh/markdown-it@13.0.1",
+          "markdown-it-external-links": "https://esm.sh/markdown-it-external-links@0.0.6"
         }
       }
     </script>
@@ -62,7 +67,14 @@
       import { App } from "./index.js";
       const app = createApp(App);
 
-      // Register custom data here
+      // Custom functions
+
+      import * as custom from "./custom.js";
+      app.config.globalProperties = {
+        ...app.config.globalProperties,
+        ...custom,
+      };
+
       // Add custom components here
       // Add custom loader here
 
