@@ -3,11 +3,9 @@ title: Frontpage
 class: center gap-8 bg-[lightblue]
 ---
 
-<div class="text-6xl md:text-8xl text-gray-800">▦</div>
+# ▦ Fachwerk Slides
 
-# Fachwerk Slides
-
-Press `Shift` and <code>&larr;</code> <code>&rarr;</code> to navigate
+Press `Shift` and `←` `→` to navigate
 
 ---
 title: Get started
