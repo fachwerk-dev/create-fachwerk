@@ -1,0 +1,14 @@
+<script type="module">
+  import * as f from "https://unpkg.com/fachwerk/dist/fachwerk.mjs";
+  const r = 100;
+  const points = f.circlepoints(32, r);
+  parent.postMessage(
+    {
+      pluginMessage: {
+        message: "create",
+        points,
+      },
+    },
+    "*"
+  );
+</script>
