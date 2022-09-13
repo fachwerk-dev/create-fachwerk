@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/p5"></script>
+    <script src="https://unpkg.com/fachwerk/dist/fachwerk.js"></script>
+    <script>
+      // Generate a SVG path using Fachwerk
+
+      const r = 100;
+      const d = f.circlepoints(32, r).map((point) => f.circlepath(r, point));
+      const path = new Path2D(d);
+
+      let ctx = null;
+
+      function setup() {
+        // Set up canvas
+
+        const canvas = createCanvas(500, 500);
+        ctx = canvas.drawingContext;
+
+        // Set up stroke
+
+        stroke("lightblue");
+        strokeWeight(2);
+      }
+
+      function draw() {
+        // Draw a path
+
+        translate(250, 250);
+        ctx.stroke(path);
+      }
+    </script>
+  </head>
+  <body></body>
+</html>
