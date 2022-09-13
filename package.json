@@ -1,6 +1,6 @@
 {
   "name": "create-fachwerk",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "bin": "./index.mjs",
   "scripts": {
     "bump": "bumpp --commit \"chore: v%s\""
