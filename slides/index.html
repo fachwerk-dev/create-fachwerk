@@ -30,12 +30,17 @@
       .center {
         @apply grid place-content-center place-items-center text-center;
       }
-      code {
-        @apply bg-gray-200;
+      code,
+      .prose-invert code {
+        @apply bg-gray-200 text-gray-200;
       }
       pre,
-      pre code {
+      pre code,
+      .prose-invert code {
         @apply !bg-gray-900;
+      }
+      pre code {
+        @apply !p-0;
       }
       /* Add custom classes */
     </style>
@@ -67,16 +72,26 @@
       import { App } from "./index.js";
       const app = createApp(App);
 
+      // Custom icons
+
+      app.config.globalProperties.icons = ["bx", "radix-icons"];
+
       // Custom functions
 
-      import * as custom from "./custom.js";
+      import * as functions from "./custom/functions.js";
       app.config.globalProperties = {
         ...app.config.globalProperties,
-        ...custom,
+        ...functions,
       };
 
-      // Add custom components here
-      // Add custom loader here
+      // Custom components
+
+      import Info from "./custom/Info.js";
+      app.component("Info", Info);
+
+      // Custom loader
+
+      // app.config.globalProperties.loader = ...
 
       app.mount("#app");
     </script>

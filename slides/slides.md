@@ -5,7 +5,7 @@ class: center gap-8 bg-[lightblue]
 
 # ▦ Fachwerk Slides
 
-Press `Shift` and `←` `→` to navigate
+Press `Shift` and <code><Icon icon="bx:left-arrow-alt" /></code> <code><Icon icon="bx:right-arrow-alt" /></code> to navigate
 
 ---
 title: Get started
@@ -13,7 +13,7 @@ title: Get started
 
 ## About
 
-Fachwerk Slides is an experimental distribution of the Fachwerk library. It combines [Fachwerk](https://fachwerk.dev/) components and utilities, [Tailwind Play CDN](https://tailwindcss.com/docs/installation/play-cdn) styling and [Slidev presentation format](https://sli.dev/guide/syntax.html) (based on Markdown). All this is packaged just into an HTML, JS, CSS, and MD file, and no build tools are needed for slide authoring.
+Fachwerk Slides is an experiment on top of Fachwerk library. It combines [Fachwerk](https://fachwerk.dev/) utility functions and Vue components, [Tailwind Play CDN](https://tailwindcss.com/docs/installation/play-cdn) styling and [Slidev presentation format](https://sli.dev/guide/syntax.html) (based on Markdown). All this is packaged just into the `html` `js` `css` and `md` files, and no build tools are needed for slide authoring.
 
 ## Get started
 
@@ -23,7 +23,7 @@ Run the following command and then choose `Slides` as a template:
 npm init fachwerk@latest
 ```
 
-You can re-run this command for updating the library, and it does not touch your work.
+<Info>You can re-run this command for updating the library, and it does not touch your work.</Info>
 
 ---
 class: center gap-8 bg-[lightblue]
@@ -39,7 +39,7 @@ title: Create slides
 
 ## Create slides
 
-Start editing `slides.md` file or press <Icon icon="bx:pencil" v-on:click="edit = true" /> button.
+Start editing `slides.md` file or press <code><Icon icon="bx:pencil" /></code> button.
 
 To separate slides, use `---` as a separator:
 
@@ -57,7 +57,7 @@ To separate slides, use `---` as a separator:
 
 Slides can also have **frontmatter**, a header section with various metadata. It is stored in [YAML](https://dev.to/paulasantamaria/introduction-to-yaml-125f) format.
 
-When adding `title:` metadata to pages, these pages appear in the menu. Click <Icon icon="bx:menu" /> to toggle it.
+When adding `title:` metadata to pages, these pages appear in the menu. Click <code><Icon icon="bx:menu" /></code> button to toggle it.
 
 ```
 ---
@@ -435,7 +435,7 @@ It is more useful to loop over the data to display it:
 <div class="grid gap-4">
   <div
     v-for="name in data.names"
-    class="p-4 bg-blue-500 rounded"
+    class="p-4 bg-pink-500 rounded"
   >
     ❴❴ name ❵❵
   </div>
@@ -445,7 +445,7 @@ It is more useful to loop over the data to display it:
 <div class="flex gap-4">
   <div
     v-for="name in data.names"
-    class="px-8 py-4 bg-blue-500 text-white rounded-full"
+    class="px-8 py-4 bg-pink-500 text-white rounded-full"
   >
     {{ name }}
   </div>
@@ -491,11 +491,11 @@ class: center bg-[lightblue]
 title: Add custom code
 ---
 
-## Create custom data
+## Create custom functions
 
-When you need to do more complex data manipulation, you can define custom variables and functions in Javascript.
+When you need to do more complex data manipulation, you can define custom functions and reactive variables in Javascript.
 
-Create a JS file, for example `data.js` and add your code there:
+Create a JS file, for example `custom/functions.js` and add your code there:
 
 ```js
 import { ref, computed } from "vue";
@@ -515,7 +515,7 @@ export const resetFahrenheit = () => {
 Next, you need to import and register custom data in index.html:
 
 ```js
-import * as data from './data.js
+import * as data from './custom/functions.js'
 app.config.globalProperties = {...app.config.globalProperties, ...data}
 ```
 
@@ -545,10 +545,10 @@ Celsius: {{ celsius }}
 
 ## Create component
 
-You can define custom components Javascript. For example, here is a `Info.js` component, similar to Vitepress [containers](https://vitepress.vuejs.org/guide/markdown.html#custom-containers):
+You can define custom components Javascript. For example, here is a `custom/Info.js` component, similar to Vitepress [containers](https://vitepress.vuejs.org/guide/markdown.html#custom-containers):
 
 ```js
-export const Info = {
+const Info = {
   inheritAttrs: false,
   props: { icon: { default: "bx:info-circle" } },
   template: `
@@ -558,6 +558,8 @@ export const Info = {
   </div>
   `,
 };
+
+export default Info;
 ```
 
 ---
@@ -567,7 +569,7 @@ export const Info = {
 Next, you need to import and register the component in `index.html`:
 
 ```js
-import { Info } from "./Info.js";
+import Info from "./Info.js";
 app.component("Info", Info);
 ```
 
@@ -633,10 +635,10 @@ title: Backpage
 class: center bg-[lightblue]
 ---
 
-<f-svg centered>
+<f-svg centered width="400" height="400">
   <path
-    :d="circlepoints(16,50)
-      .map(point => circlepath(50,point))
+    :d="circlepoints(16,100)
+      .map(point => circlepath(100,point))
       .join(' ')
     "
     fill="none"
