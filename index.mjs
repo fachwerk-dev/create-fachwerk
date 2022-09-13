@@ -7,25 +7,53 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const choices = [
   {
-    title: "Vite",
-    description: "ViteJS with Fachwerk plugin",
+    title: "Vanilla JS",
+    description: "Fachwerk without frameworks",
+    value: "vanilla",
+    //prettier-ignore
+    message: data => chalk.gray(`\nSuccessfully installed ${chalk.cyan(data.sourceDir)} template.\n\nNow go to ${chalk.green(data.targetDir)} directory, and open the ${chalk.greenBright('index.html')} file in the browser\n`),
+  },
+  {
+    title: "Vue",
+    description: "Vue and Vite with Fachwerk",
     value: "vite",
+    //prettier-ignore
+    message: data => chalk.gray(`\nSuccessfully installed ${chalk.cyan(data.sourceDir)} template. Now run:\n\n${chalk.green(`cd ${data.targetDir}\nnpm run dev\n`)}`),
   },
   {
     title: "Vitepress",
-    description: "Vitepress with Fachwerk plugin",
+    description: "Vitepress with Fachwerk",
     value: "vitepress",
-  },
-  {
-    title: "Vanilla JS",
-    description: "Single JS file without frameworks",
-    value: "vanilla",
+    //prettier-ignore
+    message: data => chalk.gray(`\nSuccessfully installed ${chalk.cyan(data.sourceDir)} template. Now run:\n\n${chalk.green(`cd ${data.targetDir}\nnpm run dev\n`)}`),
   },
   {
     title: "Slides",
-    description: "With Tailwind support",
+    description: "Vue slides with Tailwind",
     value: "slides",
     protect: ["index.html"],
+    //prettier-ignore
+    message: data => chalk.gray(`\nSuccessfully installed ${chalk.cyan(data.sourceDir)} template.\n\nNow go to ${chalk.green(data.targetDir)} directory, and open the ${chalk.greenBright('index.html')} file in the browser\n`),
+  },
+  {
+    title: "Node",
+    description: "NodeJS with Fachwerk",
+    value: "node",
+    //prettier-ignore
+    message: data => chalk.gray(`\nSuccessfully installed ${chalk.cyan(data.sourceDir)} template. Now run:\n\n${chalk.green(`cd ${data.targetDir}\nnode filename.mjs\n`)}`),
+  },
+  {
+    title: "Deno",
+    description: "Deno with Fachwerk",
+    value: "deno",
+    message: (data) =>
+      chalk.gray(
+        `\nSuccessfully installed ${chalk.cyan(
+          data.sourceDir
+        )} template. Now run:\n\n${chalk.green(
+          `cd ${data.targetDir}\ndeno run -A filename.js\n`
+        )}`
+      ),
   },
 ];
 
@@ -59,30 +87,7 @@ try {
   };
 
   await fs.copy(source, target, { filter });
-
-  let npm = !["esm", "global", "slides"].includes(sourceDir);
-  if (npm) {
-    await cd(targetDir);
-    await $`npm install`;
-  }
-
-  console.log(
-    npm
-      ? chalk.gray(
-          `\nSuccessfully installed ${chalk.cyan(
-            sourceDir
-          )} template. Now run:\n\n${chalk.green(
-            `cd ${targetDir}\nnpm run dev\n`
-          )}`
-        )
-      : chalk.gray(
-          `\nSuccessfully installed ${chalk.cyan(
-            sourceDir
-          )} template.\n\nNow open the ${chalk.green(
-            `${targetDir}`
-          )} directory in the browser and start editing.\n`
-        )
-  );
+  console.log(choice.message({ sourceDir, targetDir }));
 } catch (err) {
   console.error(err);
 }
