@@ -7,5 +7,4 @@ export default defineConfig({
     vue({ reactivityTransform: true, include: [/\.vue$/, /\.md$/] }),
     markdown(),
   ],
-  server: { hmr: { overlay: false } },
 });
