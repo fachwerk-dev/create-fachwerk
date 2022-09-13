@@ -1,6 +1,5 @@
-import * as f from "fachwerk";
-import { writeFile } from "fs/promises";
-import { Resvg } from "@resvg/resvg-js";
+import * as f from "https://unpkg.com/fachwerk/dist/fachwerk.mjs";
+import { render } from "https://deno.land/x/resvg_wasm/mod.ts";
 
 const svg = `
 <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
@@ -17,5 +16,5 @@ const svg = `
 </svg>
 `;
 
-const png = new Resvg(svg).render().asPng();
-await writeFile("./example1.png", png);
+const png = await render(svg);
+await Deno.writeFile("example1.png", png);
