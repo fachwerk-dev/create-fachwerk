@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+
+  <script src="https://unpkg.com/petite-vue" defer init></script>
+  <script src="https://unpkg.com/fachwerk/dist/fachwerk.js"></script>
+
+  <body v-scope="{f, r: 100}">
+    <input type="range" v-model="r" />
+    {{ r }}
+    <br />
+    <svg width="500" height="500">
+      <path
+        :d="f.circlepoints(32, r).map((point) => f.circlepath(r, point))"
+        id="path"
+        fill="none"
+        stroke="lightblue"
+        stroke-width="2"
+        :transform="f.translate(250,250)"
+      />
+    </svg>
+  </body>
+
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 32px;
+    }
+  </style>
+</html>
