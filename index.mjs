@@ -42,6 +42,13 @@ const choices = [
     message: data => chalk.gray(`\nSuccessfully installed ${chalk.cyan(data.sourceDir)} template.\n\nNow go to ${chalk.green(data.targetDir)} directory, and open the ${chalk.greenBright('index.html')} file in the browser\n`),
   },
   {
+    title: "Figma",
+    description: "Create a Figma plugin with Fachwerk",
+    value: "figma",
+    //prettier-ignore
+    message: data => chalk.gray(`\nSuccessfully installed ${chalk.cyan(data.sourceDir)} template.\n\nOpen the ${chalk.green(data.targetDir)} folder in Figma\n`),
+  },
+  {
     title: "Node",
     description: "NodeJS with Fachwerk",
     value: "node",
