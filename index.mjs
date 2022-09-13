@@ -28,6 +28,13 @@ const choices = [
     message: data => chalk.gray(`\nSuccessfully installed ${chalk.cyan(data.sourceDir)} template. Now run:\n\n${chalk.green(`cd ${data.targetDir}\nnpm run dev\n`)}`),
   },
   {
+    title: "Petite Vue",
+    description: "Lightweight Vue with Fachwerk",
+    value: "petite-vue",
+    //prettier-ignore
+    message: data => chalk.gray(`\nSuccessfully installed ${chalk.cyan(data.sourceDir)} template.\n\nNow go to ${chalk.green(data.targetDir)} directory, and open the ${chalk.greenBright('index.html')} file in the browser\n`),
+  },
+  {
     title: "Slides",
     description: "Vue slides with Tailwind",
     value: "slides",
