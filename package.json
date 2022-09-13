@@ -2,6 +2,9 @@
   "name": "create-fachwerk",
   "version": "0.0.15",
   "bin": "./index.mjs",
+  "scripts": {
+    "bump": "bumpp --commit \"chore: v%s\""
+  },
   "dependencies": {
     "prompts": "^2.4.2",
     "zx": "^4.3.0"
