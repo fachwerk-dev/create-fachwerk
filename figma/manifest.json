@@ -1,6 +1,5 @@
 {
-  "name": "fachwerk",
-  "id": "1151592107885909419",
+  "name": "fachwerk-figma",
   "api": "1.0.0",
   "main": "code.js",
   "editorType": ["figma"],

@@ -1,12 +1,18 @@
 <script type="module">
   import * as f from "https://unpkg.com/fachwerk/dist/fachwerk.mjs";
+
+  // Generate circle coordinates
+
   const r = 100;
-  const points = f.circlepoints(32, r);
+  const circles = f.circlepoints(32, r);
+
+  // Post a message with circle coordinates
+
   parent.postMessage(
     {
       pluginMessage: {
-        message: "create",
-        points,
+        message: "circles",
+        circles,
       },
     },
     "*"
