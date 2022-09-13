@@ -1,5 +1,5 @@
 import { createApp } from "vue";
-import { Fachwerk } from "fachwerk";
+import { Fachwerk } from "fachwerk/vue";
 import "fachwerk/fachwerk.css";
 import "./style.css";
 

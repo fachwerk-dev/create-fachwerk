@@ -1,5 +1,5 @@
 import DefaultTheme from "vitepress/theme";
-import { Fachwerk } from "fachwerk";
+import { Fachwerk } from "fachwerk/vue";
 
 export default {
   ...DefaultTheme,
