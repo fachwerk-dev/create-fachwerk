@@ -35,10 +35,9 @@ const choices = [
     message: data => chalk.gray(`\nSuccessfully installed ${chalk.cyan(data.sourceDir)} template.\n\nNow go to ${chalk.green(data.targetDir)} directory, and open the ${chalk.greenBright('index.html')} file in the browser\n`),
   },
   {
-    title: "Slides",
-    description: "Vue slides with Tailwind",
-    value: "slides",
-    protect: ["index.html"],
+    title: "P5",
+    description: "Post-Processing with Fachwerk",
+    value: "p5",
     //prettier-ignore
     message: data => chalk.gray(`\nSuccessfully installed ${chalk.cyan(data.sourceDir)} template.\n\nNow go to ${chalk.green(data.targetDir)} directory, and open the ${chalk.greenBright('index.html')} file in the browser\n`),
   },
@@ -61,6 +60,14 @@ const choices = [
           `cd ${data.targetDir}\ndeno run -A filename.js\n`
         )}`
       ),
+  },
+  {
+    title: "Vue slides",
+    description: "[Experimental]",
+    value: "slides",
+    protect: ["index.html"],
+    //prettier-ignore
+    message: data => chalk.gray(`\nSuccessfully installed ${chalk.cyan(data.sourceDir)} template.\n\nNow go to ${chalk.green(data.targetDir)} directory, and open the ${chalk.greenBright('index.html')} file in the browser\n`),
   },
 ];
 
